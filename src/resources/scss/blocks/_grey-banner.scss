@@ -1,0 +1,101 @@
+.grey-banner{
+    border-radius: 10px;
+    background: #525968;
+}
+
+.grey-banner__grid{
+    align-items: center;
+    justify-content: space-between;
+    @include for-size(tablet){
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.grey-banner__container{
+    background: url("/images/grey-banner-background.png") center center/cover no-repeat;
+
+    padding: 41px 55px 54px 49px;
+
+    & h2 , & p{
+        color: #FFFFFF;
+    }
+
+    @include for-size(phablet){
+        padding: 30px;
+    }
+}
+
+.grey-banner__title{
+    margin-bottom: 6px;
+
+    @include for-size(tablet){
+        margin-bottom: 6px;
+    }
+}
+
+.grey-banner__decoration-dots{
+    background: url("/images/svg/grey-banner-decoration-dots.svg") center center/contain no-repeat;
+    flex: 0 0 auto;
+
+    width: 150px;
+    height: 57px;
+
+    @include for-size(tablet){
+        display: none;
+    }
+}
+
+.grey-banner__primary{
+    max-width: 646px;
+
+    @include for-size(tablet){
+        max-width: 100%;
+    }
+}
+
+.grey-banner__secondary{
+    @include for-size(tablet){
+        max-width: 100%;
+
+        margin-top: 20px;
+    }
+}
+
+.grey-banner__text{
+    font-size: 15px;
+
+    margin-bottom: 0;
+}
+
+.grey-banner__phone{
+    white-space: nowrap;
+
+    color: #FFFFFF;
+}
+
+.grey-banner__phones{
+    max-width: 240px;
+
+    padding-left: 19px;
+
+    margin: 0 20px;
+
+    &:before{
+        width: 2px; 
+    }
+
+    & a{
+        color: #FFF;
+
+        font-size: 24px;
+    
+        font-weight: 600;
+        line-height: 150%; /* 36px */
+        letter-spacing: 0.24px;
+    }
+
+    @include for-size(tablet){
+        margin: 0;  
+    }
+}

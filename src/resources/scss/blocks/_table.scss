@@ -1,0 +1,122 @@
+
+
+.table__wrapper{
+    overflow: auto;
+}
+
+table{
+    border-spacing: 0;
+
+    border-radius: 10px;
+}
+
+.table__head-cell{
+    padding: 0 20px;
+
+    padding-top: 17px;
+    padding-bottom: 16px;
+
+    background: #F3F3F3;
+
+    color: #363434;
+
+    font-size: 18px;
+
+    font-weight: 500;
+    line-height: 140%; /* 25.2px */
+    letter-spacing: 0.18px;
+
+    &_year{
+        white-space: nowrap;
+    }
+}
+
+.table__head{
+    & .table__head-cell{
+        &:first-child{
+            border-top-left-radius: 10px;
+        }
+    
+        &:last-child{
+            border-top-right-radius: 10px;
+        }       
+    }
+}
+
+.table__cell{
+    // padding: 27px 0;
+    padding: 27px 20px;
+    
+    border-bottom: 1px solid #C5C5C5;
+
+    &:first-child{
+        border-left: 1px solid #C5C5C5;
+    }
+
+    &:last-child{
+        border-right: 1px solid #C5C5C5;
+    }
+
+    &_year{
+        font-size: 20px;
+
+        font-weight: 400;
+    }
+
+    &_number{
+        font-size: 20px;
+
+        font-weight: 400;
+    }
+    
+}
+
+.table__head-cell, .table__cell{
+    &_number{
+        padding-left: 37px; 
+        padding-right: 37px;
+    }
+
+    &_year{
+        padding-left: 49px;
+        padding-right: 30px
+    }
+
+    &_name{
+        padding-left: 30px;
+        padding-right: 22px;
+
+        text-align:left;
+    }
+}
+
+.table__row{
+    &:first-child{
+        & .table__cell{
+            border-top: 1px solid #C5C5C5;
+        }
+    }
+
+    &+&_head{
+        & .table__head-cell{
+            border-bottom: 1px solid #C5C5C5;
+        }
+    }
+
+    &:last-child{
+        & .table__cell:first-child{
+            border-bottom-left-radius: 10px;
+        }
+        & .table__cell:last-child{
+            border-bottom-right-radius: 10px;
+        }
+    }
+}
+
+.table__cell_name__text{
+    margin-bottom: 0;
+}
+
+.table_padding tr{
+  border: 1px solid #e0e0e0;
+}

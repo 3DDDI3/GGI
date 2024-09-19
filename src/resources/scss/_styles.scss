@@ -1,0 +1,286 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+    color:inherit;
+}
+
+html, body{
+    overflow-x: hidden;
+}
+
+body{
+    font-family: 'Jost', sans-serif;
+    touch-action: manipulation;
+}
+
+* , *:after , *:before{
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+ul{
+    display: block;
+
+    &:not(.clear-list) > li{
+    
+        position: relative;
+    
+        padding-left: 72px;
+    
+        &+li{
+            margin-top: 27px;
+        }
+
+        &>ol, &>ul{
+            margin-top: 27px;
+        } 
+    
+        &:before{
+            content: "";
+            
+            position: absolute;
+            top: 0;
+            left: 0px;
+    
+            width: 56px;
+            height: 28px;
+    
+            background: url("/images/svg/list-marker.svg") center center/contain no-repeat;
+        }
+    }
+}
+
+ul li{
+    list-style: none;
+}
+
+ol li {
+    list-style-type: decimal ;
+}
+
+
+button{
+    background: none;
+    border: none;
+}
+
+svg{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+
+
+button{
+    cursor: pointer;
+
+    padding: 0;
+}
+
+.container{
+    max-width: 1060px;
+
+    width: 100%;
+
+    padding: 0 30px;
+    margin: 0 auto;
+
+    &_1400{
+        max-width: 1460px;
+    }
+
+    &_fluid{
+        max-width: 1860px;
+    }
+
+    @include for-size(mobile-s){
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+._flex{
+    display: flex;
+
+    &._align_center{
+        align-items: center;
+    }
+
+    &._align_end{
+        align-items: flex-end;
+    }
+
+    &._justify_end{
+        justify-content: flex-end;
+    }
+
+    &._center{
+        justify-content: center;
+    }
+
+    &._space_between{
+        justify-content: space-between;
+    }
+}
+
+.tablet_none{
+    @include for-size(tablet){
+        display: none;
+    }
+}
+
+._block{
+    display: block;
+}
+
+.fade-enter-to{
+    animation-name: fadein;
+    animation-duration: .5s;
+}
+
+.fade-leave-to{
+    animation-name: fadeout;
+    animation-duration: .5s;
+}
+
+.blue-blur{
+    background: #00ADEF;
+
+    border-radius: 50%;
+}
+
+hr , .dividing-line{
+    margin: 38px 0;
+
+    height: 1px;
+    width: 100%;
+
+    background: #E0E0E0;
+}
+
+.input{
+    border-radius: 5px;
+    border: 1px solid #C5C5C5;
+    background: #FFF;
+    color: #5B5B5B;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: 120%; /* 19.2px */
+    letter-spacing: 0.16px;
+
+    padding: 14px 25px 17px;
+}
+
+.select{
+    background-color: #FFF;
+    background-image: url(/images/svg/select-arrow.svg);
+    background-repeat: no-repeat,repeat;
+    background-position: right 20px top 50%;
+    background-size: 10px;
+
+    padding: 14px 35px 17px 25px;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%; /* 19.2px */
+    letter-spacing: 0.16px;
+
+    border-radius: 5px;
+    border: 1px solid #C5C5C5;
+
+    outline: none;
+
+    cursor: pointer;
+    transition: border-color .15s ease,box-shadow .1s ease;
+    -webkit-appearance: none;
+    
+}
+
+.tab-box{
+    display: none;
+}
+
+.tab-box-active{
+    display: block;
+}
+
+.tab{
+    font-size: 30px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    opacity: 0.3;
+
+    &.tab-active{
+        opacity: 1;
+    }
+
+
+    &+&{
+        margin-left: 30px;
+    }
+
+    @include for-size(mobile){
+        font-size: 23px;
+    }
+}
+
+strong , b{
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

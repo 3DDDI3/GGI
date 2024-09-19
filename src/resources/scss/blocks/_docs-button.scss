@@ -1,0 +1,16 @@
+.docs-button{
+    border-radius: 10px;
+    background: #F3F3F3;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 24px 11px 27px;
+}
+
+.docs-button__primary{
+    margin-right: 12px;
+
+    flex: 0 0 auto;
+}

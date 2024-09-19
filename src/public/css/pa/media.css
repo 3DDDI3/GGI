@@ -1,0 +1,187 @@
+@media (max-width: 1401px) {
+  .main-container {
+    padding: 30px 40px;
+  }
+
+  .main__form {
+    width: 100%;
+  }
+
+  .sidebar,
+  .nav {
+    width: 85px;
+  }
+
+  .nav:hover {
+    width: 300px;
+  }
+
+  .nav__list {
+    padding: 0;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .nav__img {
+    width: 50px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav__item {
+    padding: 10px 20px;
+  }
+
+  .grid-container {
+    display: flex;
+  }
+
+  .main__list-person {
+    flex-direction: column;
+  }
+
+  .main__item-person {
+    width: 100%;
+  }
+
+  .main__item-mainInfo {
+    flex-direction: column;
+  }
+
+  .main__input {
+    width: 100%;
+  }
+
+  .main__list-files {
+    flex-direction: column;
+  }
+
+  .main__title {
+    font-size: 35px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 950px) {
+  .wrapp-title {
+    gap: 20px;
+    flex-direction: column-reverse;
+  }
+
+  .main__title {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 25px 30px;
+  }
+  .main__title {
+    text-align: center;
+  }
+  .initials {
+    flex-direction: column;
+  }
+
+  .main__list-diploma {
+    flex-direction: column;
+  }
+}
+@media (max-width: 568px) {
+  .logo {
+    margin-bottom: 0;
+  }
+  .main__form {
+    padding-left: 15px;
+  }
+  .sidebar,
+  .nav {
+    width: 50px;
+  }
+
+  .mainInfo {
+    padding: 20px 10px;
+    margin-bottom: 20px;
+  }
+  .wrapp-title,
+  .mainInfo,
+  .abit {
+    margin-bottom: 20px;
+  }
+
+  .wrapp-svg,
+  .nav__img {
+    width: 30px;
+  }
+
+  .nav-svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .main__form {
+    width: 100%;
+  }
+
+  .main-container {
+    padding: 10px 15px;
+  }
+
+  .nav__item {
+    padding: 13px 10px;
+  }
+
+  .nav__link {
+    gap: 10px;
+  }
+
+  .nav__text {
+    margin: 0;
+  }
+
+  .main__title {
+    font-size: 30px;
+    line-height: 32px;
+    margin-bottom: 25px;
+  }
+
+  .achievement__heding {
+    font-size: 25px;
+  }
+
+  .achievement__subtitle {
+    font-size: 23px;
+  }
+
+  .input-file span {
+  }
+
+  .main__item-scientist {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main__item-scientist:nth-child(1) .main__input {
+    width: 100%;
+  }
+
+  .main__item-plan {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .achievement-item__input {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 25px 0;
+  }
+
+  .achievement .input-file-list {
+    flex-direction: column;
+  }
+}

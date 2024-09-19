@@ -1,0 +1,113 @@
+.auth{
+    border-radius: 10px;
+    background: #F3F3F3;
+}
+
+.auth__container{
+    padding:  48px 45px;
+
+    height: 100%;
+
+    @include for-size(mobile){
+        padding: 25px 20px;
+    }
+}
+
+.auth__tabs{
+    margin-bottom: 16px;
+
+  //  justify-content: space-between;
+}
+
+.auth__primary{
+    display: none;
+
+    &_active{
+        display: block;
+    }
+}
+
+.auth__forgot-password-box{
+    display: none;
+
+    &_active{
+        display: block;
+    }
+}
+
+.auth__notice{
+    color: #5B5B5B;
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    
+    font-weight: 400;
+    line-height: 120%; /* 12px */
+    letter-spacing: 0.1px;
+
+    margin-top: 9px;
+
+}
+
+.auth__block{
+    margin-bottom: 28px;
+}
+
+.auth__forgot-password-button{
+    color: #5B5B5B;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+
+    font-weight: 600;
+    line-height: 120%; /* 16.8px */
+    letter-spacing: 0.14px;
+
+    margin-top: 25px;
+}
+
+.auth__primary-button{
+    display: flex;
+
+    color: #5B5B5B;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+
+    font-weight: 600;
+    line-height: 120%; /* 16.8px */
+    letter-spacing: 0.14px;
+
+    margin-top: 25px;
+
+    & > *{
+        display: block;
+
+        flex: 0 0 auto;
+    }
+
+    & > svg{
+        margin-right: 10px;
+    }
+}
+
+.auth__input{
+    width: 100%;
+}
+
+.auth__submit{
+    display: block;
+
+    min-width: 243px;
+
+    @include for-size(mobile-s){
+        min-width: auto;
+    }
+}
+
+.auth__forgot-password-button{
+    display: block;
+}
+
+.auth__captcha{
+    & > img{
+        margin-right:10px;
+    }
+}

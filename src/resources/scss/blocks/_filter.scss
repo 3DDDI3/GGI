@@ -1,0 +1,35 @@
+.filter{
+    border-radius: 10px;
+    background: #F3F3F3;
+}
+
+.filter__container{
+    padding: 20px;
+}
+
+.filter__grid{
+    display: flex;
+    justify-content: space-between;
+
+    &>*+*{
+        margin-left: 20px;
+    }
+
+    @include for-size(phablet){
+        flex-direction: column;
+
+        &>*+*{
+            margin-top: 20px;
+            margin-left: 0;
+        }
+    }
+}
+
+.filter__select{
+    flex: 1 0 auto;
+}
+
+.filter__button{
+    padding-left: 65px;
+    padding-right: 65px;
+}

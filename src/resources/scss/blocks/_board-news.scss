@@ -1,0 +1,136 @@
+.board-news{
+    background: #FFF;
+    box-shadow: 0px 15px 50px 0px rgba(0, 0, 0, 0.10);
+
+    max-width: 100%;
+    width: 100%;
+
+    color: #363434;
+}
+
+.board-news__container{
+    padding: 16px 50px 19px;
+
+    max-width: 100%;
+    width: 100%;
+
+    flex-direction: column;
+    
+    box-sizing: border-box;
+
+    @include for-size(laptop){
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    @include for-size(tablet){
+        padding: 50px 0 37px;
+
+        flex-direction: row;
+        box-sizing: content-box;
+    }
+}
+
+.board-news__item{
+    flex: 0;
+
+    &+&{
+        border-top: 1px solid #E0E0E0;
+    }
+
+    @include for-size(tablet){
+        flex: 0 0 auto;
+
+        padding-left: 22px;
+        padding-right: 22px;
+
+        &+&{
+            border-top: none;
+        }
+    
+    }
+}
+
+.board-news__item-container{
+    padding: 50px 0;
+    
+    @include for-size(tablet){
+        padding: 0;
+    }
+}
+
+.board-news__date{
+    color: #363434;
+    line-height: 95%; /* 38px */
+}
+
+.board-news__head{
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 13px;
+
+    & .board-news__arrow{
+        @include for-size(tablet){
+            display: none;
+        }
+    }
+}
+
+.board-news__day{
+    font-size: 40px;
+    font-weight: 600;
+
+    margin-right: 14px;
+
+    display: inline-block;
+}
+
+.board-news__year{
+    font-size: 17px;
+    font-weight: 400;
+
+    opacity: 0.5;
+
+    display: inline-block;
+}
+
+.board-news__title{
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 120%; /* 26.4px */
+
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.board-news__text{
+    color: #5B5B5B;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+}
+
+.board-news__navigation{
+    display: none;
+
+    @include for-size(tablet){
+        display: flex;
+
+        color: #00ADEF;
+
+        margin: 0 22px 37px; 
+
+        & svg path{
+            fill: #00ADEF;
+        }
+
+        & .board-news__link{
+            color: #00ADEF;
+        }
+    }
+}
+
+

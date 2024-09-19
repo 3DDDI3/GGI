@@ -1,0 +1,47 @@
+.dictionary-list{
+    margin-bottom: 29px;
+
+    &_boxed{
+        margin-bottom: 0;
+    }
+}
+
+.dictionary-list__title{
+    color: #5B5B5B;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+}
+
+.dictionary-list__value{
+    &:not(a){
+        color: #363434;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 140%; /* 30.8px */
+        letter-spacing: 0.22px;
+    }
+}
+
+.dictionary-list_boxed{
+    & .dictionary-list__value{
+        font-size: 18px;
+    }
+
+    & .dictionary-list__item{
+        margin-top: 18px;
+
+
+        @include for-size(mobile-s){
+            padding-left: 0px;  
+            &:before{
+                content: none;
+            }
+        }
+        
+    }
+
+} 
+

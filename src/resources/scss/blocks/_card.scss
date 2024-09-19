@@ -1,0 +1,117 @@
+.card__items-grid{
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: -22px;
+    margin-left: -17px;
+
+    & .card{
+        margin-top: 22px;
+        margin-left: 17px;
+    }
+
+}
+
+.card{
+    border-radius: 10px;
+    border: 1px solid #C5C5C5;
+    background: #FFF;
+
+  //  max-width: 340px;
+}
+
+.card__container{
+    padding: 40px 50px;
+
+    height: 100%;
+
+    @include for-size(phablet){
+        padding: 30px;
+    }
+}
+
+.card__grid{
+    min-height: 100%;
+}
+
+.card__top{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding-bottom: 27px;
+
+    border-bottom: 1px solid #C5C5C5;
+
+    min-height: 180px;
+}
+
+.card__bottom{
+    padding-top: 26px;
+}
+
+.card__type{
+   margin-bottom: 10px;
+
+   color: #29B3FF;
+    
+   font-size: 15px;
+   font-weight: 500;
+   line-height: 120%; /* 18px */
+   letter-spacing: 0.6px;
+}
+
+.card__title{
+    color: #363434;
+
+    font-size: 22px;
+
+    font-weight: 600;
+    line-height: 130%; /* 28.6px */
+    letter-spacing: 0.22px;
+}
+
+.card__subtitle{
+    color: #5B5B5B;
+
+    font-size: 15px;
+ 
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+}
+
+.card__dictionary{
+    &+&{
+        margin-top: 17px;
+    }
+}
+
+.card__dictionary-title{
+    color: #5B5B5B;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+}
+
+.card__dictionary-value{
+    &_phone{
+        color: #363434;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 140%; /* 28px */
+        letter-spacing: 0.2px;
+    }
+    &_email{
+       color: #363434;
+
+       font-size: 16px;
+
+       font-weight: 400;
+       line-height: 140%; /* 22.4px */
+       letter-spacing: 0.16px;
+       text-decoration-line: underline;
+    }
+}

@@ -1,0 +1,12 @@
+export const SPHERES_LOAD = 'SPHERES_LOAD';
+
+export const QUESTIONS_LOAD = 'QUESTIONS_LOAD';
+
+export const QUIZ_ADD = 'QUIZ_ADD';
+export const GET_QUIZ_RESULT = 'GET_QUIZ_RESULT';
+
+export const LOADER_DISPLAY_ON = 'LOADER_DISPLAY_ON';
+export const LOADER_DISPLAY_OFF = 'LOADER_DISPLAY_OFF';
+
+export const ERROR_DISPLAY_ON = 'ERROR_DISPLAY_ON';
+export const ERROR_DISPLAY_OFF = 'ERROR_DISPLAY_OFF';

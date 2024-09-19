@@ -1,0 +1,153 @@
+.board-portfolio{
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px);
+
+    width: 100%;
+}
+
+.board-portfolio__container{
+    padding: 30px 50px;
+
+    width: 100%;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    @include for-size(laptop){
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    @include for-size(tablet){
+        padding: 22px 0 29px;
+
+        flex-direction: row;
+        box-sizing: content-box;
+    }
+}
+
+.board-portfolio__item-container{
+    padding: 40px 0;
+
+    @include for-size(tablet){
+        padding: 0;
+    }
+}
+
+.board-portfolio__item{
+    flex: 0;
+
+    &+&{
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @include for-size(tablet){
+        flex: 0 0 auto;
+
+        padding-left: 22px;
+        padding-right: 22px;
+
+        &+&{
+            border-top: none;
+        }
+        
+    }
+}
+
+.board-portfolio__grid{
+    color: #FFFFFF;
+
+    @include for-size(tablet){
+        flex-direction: column;
+    }
+}
+
+.board-portfolio__picture{
+    flex: 0 0 auto;
+
+    border-radius: 10px;
+
+    margin-right: 31px;
+
+    @include for-size(laptop){
+        max-width: 40%;
+    }
+
+    @include for-size(tablet){
+        max-width: 100%;
+
+        margin-right: 0;
+        margin-bottom: 23px;
+    }
+}
+
+.board-portfolio__img{
+    object-fit: cover;
+
+    display: flex;
+
+    @include for-size(tablet){
+        width: 100%;
+    }
+}
+
+.board-portfolio__title{
+    color: #FFF;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 120%; 
+
+    margin-bottom: 17px;
+
+    @include for-size(tablet){
+        margin-bottom: 12px;
+    }
+}
+
+.board-portfolio__customer-area{
+    font-family: 'Manrope', sans-serif;
+    color: #FFF;
+
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+
+    font-size: 15px;
+}
+
+.board-portfolio__customer-title{
+    font-weight: 600;
+}
+
+.board-portfolio__customer-name{
+    font-weight: 400;
+
+    opacity: 0.8;
+}
+
+
+.board-portfolio__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.board-portfolio__navigation{
+    display: none;
+
+    @include for-size(tablet){
+        display: flex;
+
+        color: #00ADEF;
+
+        margin: 0 22px 43px; 
+
+        & svg path{
+            fill: #00ADEF;
+        }
+
+        & .board-portfolio__link{
+            color: #00ADEF;
+        }
+    }
+}

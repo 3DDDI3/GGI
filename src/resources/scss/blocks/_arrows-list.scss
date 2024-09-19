@@ -1,0 +1,42 @@
+.arrows-list{
+    border-bottom: 1px solid #E0E0E0;
+    
+    margin-bottom: 25px;
+}
+
+.arrows-list__item{
+    border-top: 1px solid #E0E0E0;
+
+    position: relative;
+}
+
+.arrows-list__container{
+    padding-top: 37px;
+    padding-bottom: 41px;
+}
+
+.arrows-list__title{
+    display: block;
+
+    color: #363434;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 120%;
+
+    text-align: left;
+    
+    &:after{
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.arrows-list__arrow{
+    flex: 0 0 auto;
+}

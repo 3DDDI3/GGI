@@ -1,0 +1,148 @@
+.navigation{
+    @include for-size(laptop-l){
+        width: 100%;
+
+        padding: 0 20px 20px;
+
+ //       overflow: auto;
+    }
+}
+
+
+.navigation__list{
+    display: flex;
+
+    font-family: 'Manrope', sans-serif;
+
+    @include for-size(laptop-l){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.navigation__item{
+    position: relative;
+
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-left: 0;
+
+    &:before{
+        content: none;
+    }
+
+    &+&{
+       margin-left: 36px; 
+
+       @include for-size(desktop-s){
+           margin-left: 30px;
+       }
+
+       @include for-size(laptop-l){
+           margin-left: 0;
+       }
+    }
+
+    &_with_group{
+        & .navigation__arrow{
+            content: "";
+    
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            
+            width: 9px;
+            height: 9px;
+ //           background: url("/images/svg/arrow-navigate.svg") center center/contain no-repeat;
+
+            transition: .7s transform;
+        }
+
+        &_active .navigation__group{
+            display: block;
+        }
+
+        &:hover .navigation__link-wrapper {
+            &:after{
+                transform: translateY(-50%) rotate(-180deg);
+
+                @include for-size(laptop-l){
+                    transform: none;
+                }
+            }
+        }
+
+        &_active .navigation__arrow{
+            transform: translateY(-50%) rotate(-180deg) !important;
+        }
+
+    }
+
+    @include for-size(laptop-l){
+        font-size: 25px;
+
+        margin-top: 20px;
+    }
+}
+
+.navigation__group{
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 8.5px);
+    transform: translate(-50%, calc(100% + 15px));
+
+    min-width: 400px;
+
+    z-index: 20;
+
+    padding: 15px 20px;
+
+    display: none;
+
+    @include for-size(laptop-l){
+        position: static;
+        transform: none;
+
+        opacity: 1 !important;
+    }
+
+    @include for-size(tablet){
+        min-width: auto;
+    }
+
+}
+
+.navigation__link-wrapper{
+    position: relative; 
+
+    padding-right: 17px;
+
+    width: fit-content; 
+}
+
+.navigation__link{
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-left: 0;
+
+    
+
+    @include for-size(laptop-l){
+        font-size: 25px;
+    }
+
+    &:after{
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        z-index: 1;
+    }
+}

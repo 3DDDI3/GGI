@@ -1,0 +1,212 @@
+.banner{
+    border-radius: 10px;
+    border: 3px solid #00ADEF;
+    background: #FFF;
+
+    overflow: hidden;
+
+    position: relative;
+
+    &_graduate{
+        .banner__button{
+            margin-bottom: 0;
+
+            padding-right: 42px;
+            padding-left: 42px;
+        }
+
+        .banner__container{
+            max-width: 715px;
+        }
+
+        .banner__picture{
+            width: calc(100% - 715px);
+            height: 100%;
+
+            & img{
+                width: 100%;
+            }
+        }
+    }
+}
+
+.banner__container{
+    position: relative;
+    z-index: 2;
+
+    padding: 38px 0 46px 49px;
+
+    border-radius: 10px 0 0 10px;
+
+    background: #FFFFFF;
+
+    max-width: 770px;
+
+    &:after{
+        content: "";
+
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+
+        height: 100%;
+        width: 46px;
+
+        background: #FFFFFF;
+
+        transform: translateX(50%) skew(13deg);
+    }
+
+    @include for-size(tablet){
+        max-width: 100%;
+
+        padding: 38px 35px 50px;
+    }
+
+    @include for-size(mobile-s){
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.banner__grid{
+    align-items: flex-end;
+
+    @include for-size(tablet){
+        flex-direction: column;
+        align-items: stretch;
+
+        position: relative;
+
+        &:after{
+            content: "";
+    
+            position: absolute;
+            top: 0;
+            right: 0;
+    
+            width: 50px;
+            height: 28px;
+    
+            background: url("/images/svg/decoration-dots.svg") center center/contain no-repeat;
+    
+        }
+    }
+}
+
+.banner__logo{
+    flex: 0 0 auto;
+
+    display: flex;
+
+    margin-right: 23px;
+
+    @include for-size(tablet){
+        margin-right: 0;
+        margin-bottom: 28px;
+    }
+}
+
+.banner__text{
+    position: relative;
+    flex: 0 0 auto;
+    
+    margin-right: 60px;
+
+    &:after{
+        content: "";
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        width: 50px;
+        height: 28px;
+
+        background: url("/images/svg/decoration-dots.svg") center center/contain no-repeat;
+
+        @include for-size(tablet){
+            content: none;
+        }
+    }
+
+    @include for-size(tablet){
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+}
+
+.banner__subtitle{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 95%;
+    color: #00ADEF;
+
+    text-align: right;
+
+    @include for-size(tablet){
+        text-align: left;
+    }
+}
+
+.banner__title{
+    font-size: 42px;
+    line-height: 100%;
+
+    &_48{
+        font-size: 48px;
+    }
+
+    @include for-size(tablet){
+        font-size: 32px;
+    }
+}
+
+.banner__date{
+    margin-bottom: 4px;
+
+    @include for-size(tablet){
+        margin-bottom: 24px;
+    }
+}
+
+.banner__button{
+    margin-bottom: -10px;
+
+    @include for-size(tablet){
+        margin-bottom: 0;
+    }
+}
+
+.banner__day{
+    color: #29B3FF;
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 95%;
+}
+
+.banner__time{
+    color: #363434;
+    font-size: 17px;    
+    font-weight: 400;
+    line-height: 95%; 
+}
+
+.banner__picture{
+    position: absolute;
+    top: 0;
+    right: 0;
+ 
+
+    & img{
+ //       display: flex;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @include for-size(tablet){
+        display: none;
+    }
+}
+

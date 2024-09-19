@@ -1,0 +1,38 @@
+.page_magazine__sidebar {
+    
+    word-break: break-word;
+
+    border-radius: 10px;
+    background: #F3F3F3;
+    width: 300px;
+    
+    padding: 30px 40px;
+    margin-right: 50px;
+
+    .trait-list__item a {
+          &:hover {
+            color: inherit;
+        }
+    }
+
+    .page_magazine__trait-list{
+        *+* {
+            margin-top: 20px;
+        }
+    }
+
+    @media (max-width: $tablet-smaller-boundary) {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+}
+
+.page_magazine__grid {
+    $tablet-smaller-boundary: 980px;
+
+    @media (max-width: $tablet-smaller-boundary) {
+        flex-direction: column;
+
+    }
+}

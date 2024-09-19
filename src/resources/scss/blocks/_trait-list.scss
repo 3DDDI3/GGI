@@ -1,0 +1,55 @@
+.trait-list{
+    margin-bottom: 15px;
+}
+
+.trait-list__title{
+    color: #363434;
+
+    font-size: 30px;
+
+    font-weight: 500;
+    line-height: 140%; /* 42px */
+    letter-spacing: 0.3px;
+
+    margin-bottom: 23px;
+
+    &_bold{
+        font-weight: 600;
+        font-size: 36px;
+    }
+}
+
+.trait-list__item{
+    padding-left: 44px;
+
+    position: relative;
+
+    color: #5B5B5B;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: 0.16px;
+
+    &:before{
+        content: "";
+
+        position: absolute;
+        top: 9px;
+        left: 0;
+
+        background-image: none;
+
+        height: 2px;
+        width: 26px;
+
+        background: #29B3FF;
+    }
+}
+
+.trait-list_graduate{
+    & .trait-list__item + .trait-list__item{
+        margin-top: 21px;
+    }
+}

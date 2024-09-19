@@ -1,0 +1,37 @@
+.transparent-button{
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+
+    font-family: 'Manrope', sans-serif;
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px 20px
+}
+
+.transparent-button__left{
+    display: block;
+
+    flex: 0 0 auto;
+
+    margin-right: 12px;
+}
+
+.transparent-button__right{
+    display: block;
+
+    flex: 0 0 auto;
+}
+
+.transparent-button__text{
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #FFFFFF;
+}
+
+.transparent-button__icon{
+    display: flex;
+    align-items: center;
+}

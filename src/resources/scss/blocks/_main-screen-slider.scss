@@ -1,0 +1,290 @@
+.main-screen-slider{
+    position: relative;
+    
+    color: #FFFFFF;
+
+    height: 100vh;
+    min-height: 850px;
+
+    touch-action: manipulation !important;
+
+    @include for-size(desktop-s){
+        min-height: 800px;
+    }
+
+    @include for-size(phablet){
+        min-height: 667px;
+    }
+}
+
+.main-screen-slider__dark-film{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.6499999761581421;
+    background: #14151E;
+}
+
+.main-screen-slider__banner-picture{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-screen-slider__banner-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-screen-slider__container{
+    height: 100%;
+
+    padding-top: 168px;
+
+    position: relative;
+}
+
+.main-screen-slider__grid{
+    height: 100%;
+}
+
+.main-screen-slider__slide{
+    height: 100vh !important;
+    min-height: 850px; 
+
+    transition: .5s;
+
+    &.swiper-slide-active{
+        z-index: 5;
+    }
+
+    @include for-size(desktop-s){
+        min-height: 800px;
+    }
+
+    @include for-size(phablet){
+        min-height: 667px;
+    }
+}
+
+.main-screen-slider__border-text{
+    font-size: max(100px, 12vh);
+    font-weight: 600;
+    line-height: 68%;
+    letter-spacing: 16px;
+
+    writing-mode: vertical-rl;
+
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px;
+
+    text-transform: uppercase;
+
+    opacity: 0.3;
+
+    @include for-size(desktop-s){
+        font-size: max(85px, 10vh);
+    }
+}
+
+.main-screen-slider__date{
+    font-family: 'Manrope';
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.28px;
+
+    opacity: 0.6;
+
+    margin-bottom: 17px;
+}
+
+.main-screen-slider__title{
+    color: #FFFFFF;
+
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 95%;
+    letter-spacing: -0.6px;
+
+    margin-bottom: 100px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+            line-clamp: 5; 
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+
+    overflow: hidden;
+
+    @include for-size(desktop-s){
+        font-size: 55px;
+    }
+
+    @include for-size(laptop){
+        font-size: 50px;
+    }
+
+    @include for-size(phablet){
+        font-size: 40px;
+    }
+}
+
+.main-screen-slider__subtitle{
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.44px;
+
+    color: #FFFFFF;
+
+    margin-bottom: 48px;
+
+    @include for-size(phablet){
+        font-size: 20px;
+    }
+}
+
+.main-screen-slider__primary{
+    padding-bottom: 32px;
+
+    @include for-size(laptop-s){
+        display: none;
+    }
+}
+
+.main-screen-slider__secondary{
+    padding: 0 30px 83px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    // max-width: 53%;
+
+    @include for-size(tablet){
+        max-width: 100%;
+
+        padding: 0 0 105px;
+    }
+
+}
+
+.main-screen-slider__tertiary{
+    display: flex;
+    align-items: flex-end;
+
+    max-width: 48%;
+
+    padding-bottom: 48px;
+}
+
+.main-screen-slider__content{
+    position: relative;
+
+    max-width: 80%;
+
+    @include for-size(laptop-s){
+        max-width: 100%;
+    }
+}
+
+.main-screen-slider__pagination-container{
+    width: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: flex-end;
+
+    @include for-size(tablet){
+        display: none;
+    }
+    
+}
+
+
+.main-screen-slider__content-blue-blur{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    filter: blur(60px);
+
+    width: 102px;
+    height: 102px;
+}
+
+.main-screen-slider__content-body{
+    position: relative;
+
+    z-index: 2;
+}
+
+.main-screen-slider__pagination{
+    display: flex;
+    flex-direction: column;
+
+
+    & .swiper-pagination-bullet{
+        width: 7px;
+        height: 7px;
+
+        opacity: 0.5;
+
+        border-radius: 50%;
+
+        background: #FFFFFF;
+
+        margin-bottom: 15px;
+
+        cursor: pointer;
+        
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    & .swiper-pagination-bullet-active{
+        background: #51CFFF;
+
+        opacity: 1;
+    }
+}
+
+.main-screen-slider__navigation{
+    display: none;
+
+    @include for-size(tablet){
+        display: flex;
+
+        position: absolute;
+        left: 50%;
+        bottom: 43px;
+        z-index: 1;
+
+        transform: translate(-50%);
+
+        width: 100%;
+
+        padding: 0 30px;
+    }
+}
+
+.main-screen-slider__photos-slider{
+    @include for-size(tablet){
+        display: none;
+    }
+}
+
+

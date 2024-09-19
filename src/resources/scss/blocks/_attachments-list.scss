@@ -1,0 +1,24 @@
+.attachments-list{
+    margin-top: 20px;
+}
+
+.attachments-list__container{
+    padding-top: 40px;
+
+    border-top: 1px solid #E0E0E0;
+}
+
+.attachments-list__item{
+     &+&{
+        margin-top: 17px;
+     }
+}
+
+.attachments-list__text{
+    color: #363434;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 140%; /* 30.8px */
+    letter-spacing: 0.22px;
+}
+
