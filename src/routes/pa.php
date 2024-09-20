@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(PersonalAccountController::class)
-    // ->middleware('auth:sanctum', 'acount')
+    ->middleware('auth:pa')
     ->group(function () {
         Route::get('/', 'index');
-        Route::get('/signin', 'signin')->name('login')->withoutMiddleware('auth:sanctum', 'acount');
+        Route::get('/signin', 'signin')->name('login')->withoutMiddleware('auth:pa');
     });

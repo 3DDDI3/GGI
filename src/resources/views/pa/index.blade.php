@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <button class="header__btn user-btn">
-                    <img src="{{ asset('images/pa/user-img.png') }}" alt="аватарка пользователя" />Алексей
+                    <img src="/storage/{{ $acount->icon }}" alt="аватарка пользователя" />{{ $acount->firstName }}
                 </button>
 
                 <button id="logOut" class="header__btn exit-btn">
@@ -130,48 +130,55 @@
                             </li>
                             <li class="main__item initials">
                                 <div id="image-container" class="image-container">
-                                    <input type="file" id="file-input" accept="image/*" />
-                                    <img id="image-preview" class="image-preview" src="" alt="Image Preview" />
+                                    <input type="file" name="icon" id="file-input" accept="image/*" />
+                                    <img id="image-preview" class="image-preview" src="/storage/{{ $acount->icon }}"
+                                        style="{{ !empty($acount->icon) ? 'display: block' : '' }}" alt="Image Preview" />
                                 </div>
                                 <ul class="main__list-person">
                                     <li class="main__item-person">
-                                        <input class="main__input" type="text" name="lastName" placeholder="Фамилия"
-                                            aria-label="Фамилия" />
+                                        <input class="main__input" type="text" value="{{ $acount->lastName }}"
+                                            name="lastName" placeholder="Фамилия" aria-label="Фамилия" />
                                     </li>
                                     <li class="main__item-person">
-                                        <input class="main__input" type="text" name="firstName" placeholder="Имя"
-                                            aria-label="Имя" />
+                                        <input class="main__input" type="text" value="{{ $acount->firstName }}"
+                                            name="firstName" placeholder="Имя" aria-label="Имя" />
                                     </li>
                                     <li class="main__item-person">
-                                        <input class="main__input" type="text" name="middleName"
-                                            placeholder="Отчество" aria-label="Отчество" />
+                                        <input class="main__input" type="text" value="{{ $acount->secondName }}"
+                                            name="secondName" placeholder="Отчество" aria-label="Отчество" />
                                     </li>
                                     <li class="main__item-person">
-                                        <input class="main__input" type="email" name="email"
-                                            pattern=".+@example\.com" placeholder="E-mail" aria-label="E-mail" />
+                                        <input class="main__input" type="email" value="{{ $acount->email }}"
+                                            name="email" pattern=".+@example\.com" placeholder="E-mail"
+                                            aria-label="E-mail" />
                                     </li>
                                 </ul>
                             </li>
+
                             <li class="main__item mainInfo">
                                 <h3 class="main__subtitle">Основная информация</h3>
                                 <ul class="main__list-mainInfo">
                                     <li class="main__item-mainInfo">
                                         <label for="input" class="main__label main__input">
-                                            <input class="main__input-date" type="date" id="input" />
-                                            <span class="label-placeholder">Дата рождения<span
+                                            <input class="main__input-date" type="date" id="input"
+                                                style="{{ !empty($acount->birthday) ? 'color:#5b5b5b' : '' }}"
+                                                value="{{ $acount->birthday->format('Y-m-d') }}" />
+                                            <span style="{{ !empty($acount->birthday) ? 'color:transparent' : '' }}"
+                                                class="label-placeholder">Дата рождения<span
                                                     class="label-span"></span></span>
                                         </label>
                                         <input type="text" class="main__input" name="studyPlace"
-                                            placeholder="Место учебы" aria-label="Место учебы" />
+                                            placeholder="Место учебы" value="{{ $acount->study_place }}"
+                                            aria-label="Место учебы" />
                                     </li>
                                     <li class="main__item-mainInfo">
-                                        <input type="text" class="main__input" name="specialty"
-                                            placeholder="Специальность" aria-label="Специальность" />
+                                        <input type="text" class="main__input" value="{{ $acount->specialty }}"
+                                            name="specialty" placeholder="Специальность" aria-label="Специальность" />
                                     </li>
                                 </ul>
                             </li>
                             <li class="main__item document-uploads abit" id="abit">
-                                <ul class="main__list-files grid-container">
+                                {{-- <ul class="main__list-files grid-container">
                                     <li class="main__item-files first-item">
                                         <h3 class="main__subtitle">
                                             Диплом
@@ -218,7 +225,7 @@
                                         </label>
                                         <ul id="report-files" class="input-file-list"></ul>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="main__item document-uploads">
                                 <ul class="main__list-files grid-container">
@@ -239,11 +246,19 @@
                                             </div>
                                         </h3>
                                         <label class="input-file">
-                                            <input type="file" id="passport" name="file[]" multiple
+                                            <input type="file" id="passport" name="passport" multiple
                                                 aria-label="Выбрать файл паспорта" />
                                             <span>Выбрать файл</span>
                                         </label>
-                                        <ul id="passport-files" class="input-file-list"></ul>
+                                        <ul id="passport-files" class="input-file-list">
+                                            @if (!empty($acount->passport))
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $acount->passport }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        </ul>
                                     </li>
                                     <li class="main__item-files second-item">
                                         <h3 class="main__subtitle">
@@ -262,11 +277,19 @@
                                             </div>
                                         </h3>
                                         <label class="input-file">
-                                            <input type="file" id="snils" name="file[]" multiple
+                                            <input type="file" id="snils" name="snils" multiple
                                                 aria-label="Выбрать файл СНИЛС" />
                                             <span>Выбрать файл</span>
                                         </label>
-                                        <ul id="snils-files" class="input-file-list"></ul>
+                                        <ul id="snils-files" class="input-file-list">
+                                            @if (!empty($acount->snils))
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $acount->snils }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        </ul>
                                     </li>
                                     <li class="main__item-files third-item">
                                         <h3 class="main__subtitle">
@@ -285,11 +308,19 @@
                                             </div>
                                         </h3>
                                         <label class="input-file">
-                                            <input type="file" id="inn" name="file[]" multiple
+                                            <input type="file" id="inn" name="inn" multiple
                                                 aria-label="Выбрать файл ИНН" />
                                             <span>Выбрать файл</span>
                                         </label>
-                                        <ul id="inn-files" class="input-file-list"></ul>
+                                        <ul id="inn-files" class="input-file-list">
+                                            @if (!empty($acount->inn))
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $acount->inn }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
@@ -703,6 +734,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('/lib/jquery.min.js') }}"></script>
     <script defer src="{{ asset('js/pa/script.js') }}"></script>
 @endsection

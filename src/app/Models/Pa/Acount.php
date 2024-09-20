@@ -23,5 +23,12 @@ class Acount extends Authenticatable
         'specialty',
         'study_place',
         'icon',
+        'passport',
+        'inn',
+        'snils',
+    ];
+
+    protected $casts = [
+        'birthday' => 'datetime',
     ];
 }

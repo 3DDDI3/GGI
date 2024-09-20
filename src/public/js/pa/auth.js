@@ -90,8 +90,6 @@ $(function () {
       };
       axios.post('/api/auth/login', data)
         .then(response => {
-          console.log(response);
-          // return;
           window.location.href = `/pa/`;
         })
         .catch(response => {
@@ -102,6 +100,5 @@ $(function () {
         });
     });
   });
-
 
 });

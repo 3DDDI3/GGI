@@ -91,11 +91,11 @@ document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
 
         // let list = document.querySelector(".input-file-list");
         let list = this.parentNode.nextElementSibling;
-        console.log(
-          this.parentNode.nextElementSibling,
-          "this.parenNode.nextElementSibling"
-        );
-        console.log(this.parentNode, "this.parenNode");
+        // console.log(
+        //   this.parentNode.nextElementSibling,
+        //   "this.parenNode.nextElementSibling"
+        // );
+        // console.log(this.parentNode, "this.parenNode");
 
         let removeLink = document.createElement("a");
         removeLink.href = "#";
@@ -209,37 +209,136 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   yesBtn.addEventListener("click", () => {
-    alert("Вы вышли из аккаунта");
-    popup.classList.remove("visible");
+
+    axios.post('/api/auth/logout')
+      .then(response => {
+        window.location.href = `${window.location.origin}`;
+      });
   });
 
   noBtn.addEventListener("click", () => {
-    alert("Вы не вышли из аккаунта");
+    // alert("Вы не вышли из аккаунта");
     popup.classList.remove("visible");
   });
 });
 
 $(function () {
 
-  let firstName = $(".main__list-person input[name='lastName']"),
-    secondName = $(".main__list-person input[name='firstName']"),
-    lastName = $(".main__list-person input[name='middlename']"),
+  let firstName = $(".main__list-person input[name='firstName']"),
+    secondName = $(".main__list-person input[name='secondName']"),
+    lastName = $(".main__list-person input[name='lastName']"),
     email = $(".main__list-person input[name='email']");
 
-  /**
-   * Обработка контактной информации пользователя
-   */
-  $(".main__item.initials").focusout(function (e) {
-    e.preventDefault();
-    $.ajax({
-      type: "method",
-      url: "url",
-      data: "data",
-      dataType: "dataType",
-      success: function (response) {
+  let focusedBlock = undefined;
 
+  $(".main__item.initials").on("click", function () {
+    focusedBlock = $(this);
+  });
+
+  $(".main__item.mainInfo").on("click", function () {
+    focusedBlock = $(this);
+  });
+
+  $(".document-uploads").on("click", function () {
+    focusedBlock = $(this);
+  });
+
+  $(document).on("mouseup", function (e) {
+    if ($(focusedBlock).has(e.target).length === 0
+      && $(".main__list").has(e.target).length === 0
+      && $(e.target).parents(".swal2-shown").length === 0) {
+
+      let url, data = undefined;
+
+      switch ($(focusedBlock).prop("class")) {
+        case "main__item initials":
+          url = "/api/pa/users/personal_data/edit";
+          data = {
+            lastName: lastName.val(),
+            firstName: firstName.val(),
+            secondName: secondName.val(),
+            email: email.val(),
+          };
+          break;
+
+        case "main__item mainInfo":
+          url = "/api/pa/users/main_info/edit";
+          data = {
+            birthday: $(".main__input-date").val(),
+            study_place: $("input[name='studyPlace']").val(),
+            specialty: $("input[name='specialty']").val(),
+          }
+          break;
+
+        case "document-uploads":
+
+          break;
+
+        default:
+          break;
       }
+
+      axios.defaults.withXSRFToken = true;
+
+      axios.put(`${window.location.origin}${url}`, data)
+        .then(response => {
+        })
+        .catch(response => {
+          Swal.fire({
+            icon: "error",
+            title: response.response.data.message,
+          });
+        });
+    }
+  });
+
+  $(".main__item-files input[type='file']").on("change", function () {
+    let formData = new FormData();
+
+    Array.from(this.files).forEach(file => {
+      formData.append($(this).prop("name"), file)
+    });
+
+    axios.post("/api/pa/users/files/upload", formData).then(response => {
+
     });
   });
-  
+
+  $(".input-file-list-remove").on("click", function () {
+
+    let path = $(this).parents(".input-file-list-item").find(".input-file-list-name").text();
+    let name = $(this).parents(".main__item-files").find("input[type='file']").prop("name");
+
+    let data = {
+      path: path,
+      name: name,
+    };
+
+    axios.delete("/api/pa/users/files/delete", { data: data })
+      .then(response => {
+        Swal.fire({
+          icon: "success",
+          title: response.data.message,
+        });
+      })
+      .catch(response => {
+        Swal.fire({
+          icon: "error",
+          // title: response.response.data.message,
+        });
+      });
+    $(this).parents(".input-file-list-item").remove();
+  });
+
+  $(".image-container input[type='file']").on("change", function () {
+
+    let formData = new FormData();
+
+    Array.from(this.files).forEach(file => {
+      formData.append($(this).prop("name"), file)
+    });
+
+    axios.post("/api/pa/users/files/upload", formData).then(response => { });
+  });
+
 });

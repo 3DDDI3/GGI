@@ -3,8 +3,8 @@
 use App\Http\Controllers\Pa\AchievementController;
 use App\Http\Controllers\Pa\AuthorizationController;
 use App\Http\Controllers\Pa\ExaminationSheetController;
+use App\Http\Controllers\Pa\FileUpload;
 use App\Http\Controllers\Pa\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,14 +26,18 @@ Route::prefix('auth')
         ->group(function () {
                 Route::post('/signin', [AuthorizationController::class, 'signin']);
                 Route::post('/login', [AuthorizationController::class, 'login']);
-                Route::post('/check', [AuthorizationController::class, 'check'])->middleware('auth:sanctum', 'acount');
-                Route::post('/logout', [AuthorizationController::class, 'logout'])->middleware('auth:sanctum', 'acount');
+                Route::post('/check', [AuthorizationController::class, 'check'])->middleware('auth:sanctum');
+                Route::post('/logout', [AuthorizationController::class, 'logout'])->middleware('auth:sanctum');
         });
 
 Route::prefix('pa/users')
         ->group(function () {
-                Route::put('/edit', [UserController::class, 'edit']);
-                Route::delete('/delete', [UserController::class, 'detete']);
+                Route::put('/personal_data/edit', [UserController::class, 'personalDataEdit'])->middleware('auth:sanctum');
+                Route::put('/main_info/edit', [UserController::class, 'mainInfoEdit'])->middleware('auth:sanctum');
+                Route::prefix('files')->group(function () {
+                        Route::post('/upload',  [FileUpload::class, 'upload'])->middleware('auth:sanctum');
+                        Route::delete('/delete', [FileUpload::class, 'delete'])->middleware('auth:sanctum');
+                });
         });
 
 Route::prefix('pa/achievments')

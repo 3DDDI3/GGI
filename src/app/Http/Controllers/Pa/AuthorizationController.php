@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
 
 class AuthorizationController extends Controller
 {
@@ -31,35 +33,20 @@ class AuthorizationController extends Controller
 
     public function login(Request $request)
     {
-        $acount = Acount::query()
-            ->where(['email' => $request->email])->first();
+        if (!Auth::guard('pa')->attempt(['email' => $request->email, 'password' => $request->password]))
+            return response()->json(['message' => "Неверный логин или пароль"], 401);
 
-        if (! Hash::check($request->password, $acount->password))
-            return response()->json(['message' => 'Неверный email и/или пароль'], 401);
+        $user = Acount::where(request()->only('name'))->first();
 
-        Auth::guard('web')->login($acount);
+        $token = $user->createToken('App')->plainTextToken;
 
-        $token = $acount->createToken('App')->plainTextToken;
-
-        // $user = User::query()->where(['email' => $request->email])->first();
-
-        // if (!Hash::check($request->password, $user->password))
-        //     return;
-
-        // Auth::login($user);
-
-        // $token =  Auth::user()->createToken('App')->plainTextToken;
-        // dd($token);
         return response([], 200);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-    }
-
-    public function check(Request $request)
-    {
-        dd(Auth::user());
+        $request->user()->tokens()->delete();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 }

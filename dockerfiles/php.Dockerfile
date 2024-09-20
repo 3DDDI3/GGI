@@ -7,24 +7,13 @@ RUN apk add --no-cache linux-headers \
   g++ \
   make 
 
-RUN apk add --no-cache \
-  freetype \
-  libjpeg-turbo \
-  libpng \
-  freetype-dev \
-  libjpeg-turbo-dev \
+RUN apk update && apk add --no-cache \
   libpng-dev \
-  && docker-php-ext-configure gd \
-  --with-freetype=/usr/include/ \
-  # --with-png=/usr/include/ \ # No longer necessary as of 7.4; https://github.com/docker-library/php/pull/910#issuecomment-559383597
-  --with-jpeg=/usr/include/ \
-  && docker-php-ext-install -j$(nproc) gd \
-  && docker-php-ext-enable gd \
-  && apk del --no-cache \
-  freetype-dev \
   libjpeg-turbo-dev \
-  libpng-dev \
-  && rm -rf /tmp/*
+  libwebp-dev \
+  freetype-dev \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+  && docker-php-ext-install gd
 
 RUN docker-php-ext-install \
   pdo \
@@ -34,5 +23,7 @@ RUN docker-php-ext-install \
 RUN docker-php-ext-configure pcntl --enable-pcntl \
   && docker-php-ext-install \
   pcntl 
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/laravel
