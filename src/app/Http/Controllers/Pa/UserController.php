@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Pa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pa\DissertationWorkRequest;
 use App\Http\Requests\Pa\MainUserRequest;
 use App\Http\Requests\Pa\PersonalUserRequest;
+use App\Http\Requests\Pa\ScientificSupervisorRequest;
 use App\Models\Pa\Acount;
+use App\Models\Pa\PersonalWork;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -41,5 +44,55 @@ class UserController extends Controller
             ->save();
 
         return response([], 200);
+    }
+
+    public function dissertationWorkEdit(DissertationWorkRequest $request)
+    {
+        $request->validated();
+
+        $personalWork = PersonalWork::query()
+            ->where([
+                'year' => $request->year,
+                'acount_id' => $request->user()->id
+            ])
+            ->first();
+
+        if (!$personalWork) (new PersonalWork())
+            ->create([
+                'year' => $request->year,
+                'acount_id' => $request->user()->id
+            ]);
+        else $personalWork
+            ->fill($request->only(['year', 'topic']))
+            ->save();
+
+        return response([], 200);
+    }
+
+    public function scientificSupervisorEdit(ScientificSupervisorRequest $request)
+    {
+        $request->validated();
+
+        $personalWork = PersonalWork::query()
+            ->where([
+                'year' => $request->year,
+                'acount_id' => $request->user()->id
+            ])
+            ->first();
+
+        if (!$personalWork) (new PersonalWork())->create([
+            'acount_id' => $request->user()->id,
+            'year' => $request->year,
+            'scientific_head' => $request->scientific_head,
+            'post' => $request->input('post'),
+            'scientific_degree' => $request->scientific_degree,
+        ]);
+        else $personalWork
+            ->fill($request->only([
+                'scientific_head',
+                'post',
+                'scientific_degree'
+            ]))
+            ->save();
     }
 }

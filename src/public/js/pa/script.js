@@ -243,12 +243,23 @@ $(function () {
     focusedBlock = $(this);
   });
 
+  $(".main__item.name-scientist").on("click", function () {
+    focusedBlock = $(this);
+  });
+
+  $(".main__item.diploma").on("click", function () {
+    focusedBlock = $(this);
+  })
+
+  let url, data = undefined;
+
   $(document).on("mouseup", function (e) {
+    console.log($(focusedBlock).has(e.target).length === 0, focusedBlock);
+    // data, focusedBlock = undefined;
+
     if ($(focusedBlock).has(e.target).length === 0
       && $(".main__list").has(e.target).length === 0
       && $(e.target).parents(".swal2-shown").length === 0) {
-
-      let url, data = undefined;
 
       switch ($(focusedBlock).prop("class")) {
         case "main__item initials":
@@ -270,6 +281,26 @@ $(function () {
           }
           break;
 
+        case "main__item name-scientist":
+          url = "/api/pa/users/scientific_supervisor/edit";
+          data = {
+            year: $("#date-select").val(),
+            scientific_head: $("input[name='fullNameScientist']").val(),
+            post: $("input[name='positionScientist']").val(),
+            scientific_degree: $("input[name='scientificDegree']").val(),
+          }
+          break;
+
+        case "main__item diploma":
+          url = "/api/pa/users/dissertation_work/edit";
+          data = {
+            topic: $("input[name='thesisTopic']").val(),
+            year: $("#date-select").val(),
+          }
+
+          console.log(data);
+          break;
+
         case "document-uploads":
 
           break;
@@ -282,6 +313,7 @@ $(function () {
 
       axios.put(`${window.location.origin}${url}`, data)
         .then(response => {
+          data, url = undefined;
         })
         .catch(response => {
           Swal.fire({
@@ -304,7 +336,28 @@ $(function () {
     });
   });
 
-  $(".input-file-list-remove").on("click", function () {
+  $(".main__item.additional-files input[name='personalFiles']").on("change", function () {
+
+    let formData = new FormData();
+
+    Array.from(this.files).forEach(file => {
+      formData.append(file.name, file)
+    });
+
+    formData.append("document", `${$(this).attr('aria-label')}`);
+    formData.append("page", "Персональные данные");
+
+    axios.post("/api/pa/users/files/upload", formData).then(response => {
+      console.log(response);
+      $(this).parents(".inner-title").find(".input-file-list li").remove();
+      response.data.documents.forEach(element => {
+        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
+      });
+    });
+
+  });
+
+  $(".input-file-list").on("click", ".input-file-list-remove", function () {
 
     let path = $(this).parents(".input-file-list-item").find(".input-file-list-name").text();
     let name = $(this).parents(".main__item-files").find("input[type='file']").prop("name");

@@ -31,13 +31,16 @@ Route::prefix('auth')
         });
 
 Route::prefix('pa/users')
+        ->middleware('auth:sanctum')
         ->group(function () {
-                Route::put('/personal_data/edit', [UserController::class, 'personalDataEdit'])->middleware('auth:sanctum');
-                Route::put('/main_info/edit', [UserController::class, 'mainInfoEdit'])->middleware('auth:sanctum');
+                Route::put('/personal_data/edit', [UserController::class, 'personalDataEdit']);
+                Route::put('/main_info/edit', [UserController::class, 'mainInfoEdit']);
                 Route::prefix('files')->group(function () {
-                        Route::post('/upload',  [FileUpload::class, 'upload'])->middleware('auth:sanctum');
-                        Route::delete('/delete', [FileUpload::class, 'delete'])->middleware('auth:sanctum');
+                        Route::post('/upload',  [FileUpload::class, 'upload']);
+                        Route::delete('/delete', [FileUpload::class, 'delete']);
                 });
+                Route::put('/dissertation_work/edit', [UserController::class, 'dissertationWorkEdit']);
+                Route::put('/scientific_supervisor/edit', [UserController::class, 'scientificSupervisorEdit']);
         });
 
 Route::prefix('pa/achievments')

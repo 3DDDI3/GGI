@@ -5,15 +5,17 @@ namespace App\Models\Pa;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Achievment extends Model
+class PersonalWork extends Model
 {
     use HasFactory;
 
-    protected $table = "achievments";
+    protected $table = "personal_works";
 
     protected $fillable = [
-        'diploma',
-        'report',
-        'other'
+        'year',
+        'topic',
+        'post',
+        'acount_id',
+        'scientific_degree',
     ];
 }

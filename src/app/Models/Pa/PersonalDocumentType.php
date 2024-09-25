@@ -5,16 +5,13 @@ namespace App\Models\Pa;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExaminationSheet extends Model
+class PersonalDocumentType extends Model
 {
     use HasFactory;
 
-    protected $table = "achievments";
+    protected $table = "personal_document_types";
 
     protected $fillable = [
-        'acount_id',
-        'diploma',
-        'report',
-        'other',
+       
     ];
 }
