@@ -257,7 +257,7 @@ $(function () {
     console.log($(focusedBlock).has(e.target).length === 0, focusedBlock);
     // data, focusedBlock = undefined;
 
-    if ($(focusedBlock).has(e.target).length === 0
+    if (focusedBlock != undefined && $(focusedBlock).has(e.target).length === 0
       && $(".main__list").has(e.target).length === 0
       && $(e.target).parents(".swal2-shown").length === 0) {
 
@@ -392,6 +392,30 @@ $(function () {
     });
 
     axios.post("/api/pa/users/files/upload", formData).then(response => { });
+  });
+
+  $(".achievement-item__input input[type='file']").on("change", function () {
+
+    console.log($(this).parents("form").attr("class").replace(/main__form/, ''));
+
+    return;
+
+    let formData = new FormData();
+
+    Array.from(this.files).forEach(file => {
+      formData.append(file.name, file)
+    });
+
+    formData.append("document", `${$(this).attr('aria-label')}`);
+    formData.append("page", "Индивидуальные достижения");
+
+    axios.post("/api/pa/users/files/upload", formData).then(response => {
+      console.log(response);
+      $(this).parents(".inner-title").find(".input-file-list li").remove();
+      response.data.documents.forEach(element => {
+        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
+      });
+    });
   });
 
 });

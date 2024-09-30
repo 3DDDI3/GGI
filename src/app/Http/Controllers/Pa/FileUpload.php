@@ -56,21 +56,22 @@ class FileUpload extends Controller
 
     public function delete(Request $request)
     {
-
         $acount = Acount::query()
             ->find($request->user()->id);
 
-        if (
-            $acount->query()
-            ->where([$request->input('name') => $request->input('path')])
-            ->count() == 0
-        )
-            return response()->json(['message' => 'Что-то пошло нет так'], 400);
+        $personalDocument = PersonalDocument::query()
+            ->where([
+                'acount_id' => $acount->id,
+                'path' => $request->input('path')
+            ])
+            ->first();
+
+        if (!$personalDocument)
+            return response()->json(['message' => 'Что-то пошло не так'], 400);
 
         Storage::delete($request->input('path'));
 
-        $acount->fill([$request->input('name') => null])
-            ->save();
+        $personalDocument->delete();
 
         return response()->json(['message' => 'Файл успешно удален'], 200);
     }

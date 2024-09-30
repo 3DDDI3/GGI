@@ -602,10 +602,20 @@
                                     </h3>
                                     <label class="input-file">
                                         <input type="file" id="diplomaApp" name="diplomaApp" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Диплом" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="diplomaApp-files" class="input-file-list"></ul>
+                                    <ul id="diplomaApp-files" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Диплом')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">
@@ -623,10 +633,20 @@
                                     </h3>
                                     <label class="input-file">
                                         <input type="file" id="reportApp" name="reportApp" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Реферат" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="reportApp-files" class="input-file-list"></ul>
+                                    <ul id="reportApp-files" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Реферат')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">
@@ -644,10 +664,20 @@
                                     </h3>
                                     <label class="input-file">
                                         <input type="file" id="anotherApp" name="articleApp" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Другое" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="articleApp-files" class="input-file-list"></ul>
+                                    <ul id="articleApp-files" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Другое')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -658,25 +688,45 @@
                                     <h3 class="achievement__subtitle">Материалы конференций</h3>
                                     <label class="input-file">
                                         <input type="file" id="materialConf" name="materialConf" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Материалы конференций" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="materialConf" class="input-file-list"></ul>
+                                    <ul id="materialConf" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Материалы конференций')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">Тезисы докладов</h3>
                                     <label class="input-file">
                                         <input type="file" id="thesisReport" name="thesisReport" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Тезисы докладов" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="thesisReport" class="input-file-list"></ul>
+                                    <ul id="thesisReport" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Тезисы докладов')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">Статьи</h3>
                                     <label class="input-file">
                                         <input type="file" id="article" name="article" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Статьи" />
                                         <span>Выбрать файл</span>
                                     </label>
                                     <ul id="article" class="input-file-list"></ul>
@@ -684,29 +734,58 @@
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">РИД</h3>
                                     <label class="input-file">
-                                        <input type="file" id="pid" name="pid" multiple
-                                            aria-label="Выбрать файл" />
+                                        <input type="file" id="pid" name="pid" multiple aria-label="РИД" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="pid" class="input-file-list"></ul>
+                                    <ul id="pid" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Статьи')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">Другое</h3>
                                     <label class="input-file">
                                         <input type="file" id="anotherPg" name="anotherPg" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Другое" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="anotherPg-files" class="input-file-list"></ul>
+                                    <ul id="anotherPg-files" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Другое')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                                 <li class="achievement-item__input">
                                     <h3 class="achievement__subtitle">Отчет аспиранта</h3>
                                     <label class="input-file">
                                         <input type="file" id="reportStudent" name="reportStudent" multiple
-                                            aria-label="Выбрать файл" />
+                                            aria-label="Отчет аспиранта" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="reportStudent" class="input-file-list"></ul>
+                                    <ul id="reportStudent" class="input-file-list">
+                                        @foreach ($documents as $document)
+                                            @if ($document->document->type == 'Отчет аспиранта')
+                                                <li class="input-file-list-item">
+                                                    <div class="input-file-svg"></div><span
+                                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                                        class="input-file-list-remove">x</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -735,10 +814,20 @@
                                 </h3>
                                 <label class="input-file">
                                     <input type="file" id="Philosophy" name="materialConf" multiple
-                                        aria-label="Выбрать файл" />
+                                        aria-label="Философия" />
                                     <span>Выбрать файл</span>
                                 </label>
-                                <ul id="materialConf" class="input-file-list"></ul>
+                                <ul id="materialConf" class="input-file-list">
+                                    @foreach ($documents as $document)
+                                        @if ($document->document->type == 'Философия')
+                                            <li class="input-file-list-item">
+                                                <div class="input-file-svg"></div><span
+                                                    class="input-file-list-name">{{ $document->path }}</span><a
+                                                    class="input-file-list-remove">x</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
                             </li>
                             <li class="achievement-item__input">
                                 <h3 class="achievement__subtitle">
@@ -756,10 +845,20 @@
                                 </h3>
                                 <label class="input-file">
                                     <input type="file" id="thesisReport" name="thesisReport" multiple
-                                        aria-label="Выбрать файл" />
+                                        aria-label="Английский язык" />
                                     <span>Выбрать файл</span>
                                 </label>
-                                <ul id="thesisReport" class="input-file-list"></ul>
+                                <ul id="thesisReport" class="input-file-list">
+                                    @foreach ($documents as $document)
+                                        @if ($document->document->type == 'Английский язык')
+                                            <li class="input-file-list-item">
+                                                <div class="input-file-svg"></div><span
+                                                    class="input-file-list-name">{{ $document->path }}</span><a
+                                                    class="input-file-list-remove">x</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
                             </li>
                             <li class="achievement-item__input">
                                 <h3 class="achievement__subtitle">
@@ -777,10 +876,20 @@
                                 </h3>
                                 <label class="input-file">
                                     <input type="file" id="article" name="article" multiple
-                                        aria-label="Выбрать файл" />
+                                        aria-label="Специальность" />
                                     <span>Выбрать файл</span>
                                 </label>
-                                <ul id="article" class="input-file-list"></ul>
+                                <ul id="article" class="input-file-list">
+                                    @foreach ($documents as $document)
+                                        @if ($document->document->type == 'Специальность')
+                                            <li class="input-file-list-item">
+                                                <div class="input-file-svg"></div><span
+                                                    class="input-file-list-name">{{ $document->path }}</span><a
+                                                    class="input-file-list-remove">x</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
                             </li>
                         </ul>
                     </form>
