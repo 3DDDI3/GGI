@@ -18,7 +18,7 @@ class UserController extends Controller
         $request->validated();
 
         Acount::query()
-            ->find($request->user()->id)
+            ->find($request->user('pa')->id)
             ->fill($request->only([
                 "lastName",
                 "firstName",
@@ -35,7 +35,7 @@ class UserController extends Controller
         $request->validated();
 
         Acount::query()
-            ->find($request->user()->id)
+            ->find($request->user('pa')->id)
             ->fill($request->only([
                 'birthday',
                 'study_place',
@@ -53,14 +53,14 @@ class UserController extends Controller
         $personalWork = PersonalWork::query()
             ->where([
                 'year' => $request->year,
-                'acount_id' => $request->user()->id
+                'acount_id' => $request->user('pa')->id
             ])
             ->first();
 
         if (!$personalWork) (new PersonalWork())
             ->create([
                 'year' => $request->year,
-                'acount_id' => $request->user()->id
+                'acount_id' => $request->user('pa')->id
             ]);
         else $personalWork
             ->fill($request->only(['year', 'topic']))
@@ -76,12 +76,12 @@ class UserController extends Controller
         $personalWork = PersonalWork::query()
             ->where([
                 'year' => $request->year,
-                'acount_id' => $request->user()->id
+                'acount_id' => $request->user('pa')->id
             ])
             ->first();
 
         if (!$personalWork) (new PersonalWork())->create([
-            'acount_id' => $request->user()->id,
+            'acount_id' => $request->user('pa')->id,
             'year' => $request->year,
             'scientific_head' => $request->scientific_head,
             'post' => $request->input('post'),

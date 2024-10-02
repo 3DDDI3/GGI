@@ -17,5 +17,6 @@ class PersonalWork extends Model
         'post',
         'acount_id',
         'scientific_degree',
+        'scientific_head'
     ];
 }

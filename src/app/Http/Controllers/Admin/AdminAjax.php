@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Catalog\CatalogTags;
 use App\Models\Location\Storage\CatalogStorage;
+use PhpOffice\PhpSpreadsheet\Shared\OLE\PPS\Root;
 
 class AdminAjax extends Controller
 {
@@ -28,10 +29,9 @@ class AdminAjax extends Controller
 
             $action = array_shift($_POST);
             call_user_func_array([$this, $action], $_POST);
-
         } else {
-//            $error = new Error();
-//            $error();
+            //            $error = new Error();
+            //            $error();
         }
 
         return true;
@@ -61,7 +61,6 @@ class AdminAjax extends Controller
 
 
         echo 'success';
-
     }
 
     private function changeVideoRating($id, $value)
@@ -156,6 +155,8 @@ class AdminAjax extends Controller
 
     private function fileDelete($id, $className, $path, $field)
     {
+        $_SERVER['DOCUMENT_ROOT'];
+
         $object = $className::find($id);
 
         if ($object && !empty($object->$field)) {
@@ -188,13 +189,13 @@ class AdminAjax extends Controller
 
         if ($image) {
 
-//            if (!empty($image->original)) {
-//                unlink(public_path() . $path . '/' . $image->original);
-//            }
-//
-//            if (!empty($image->thumbnail)) {
-//                unlink(public_path() . $path . '/' . $image->thumbnail);
-//            }
+            //            if (!empty($image->original)) {
+            //                unlink(public_path() . $path . '/' . $image->original);
+            //            }
+            //
+            //            if (!empty($image->thumbnail)) {
+            //                unlink(public_path() . $path . '/' . $image->thumbnail);
+            //            }
 
             Storage::delete($image->original);
 
@@ -206,7 +207,8 @@ class AdminAjax extends Controller
         }
     }
 
-    private function items_add($table, $id, $type = '') {
+    private function items_add($table, $id, $type = '')
+    {
         switch ($table) {
             case 'catalog_attributes_value':
                 $model = new CatalogAttributesValue();
@@ -255,7 +257,8 @@ class AdminAjax extends Controller
         return;
     }
 
-    private function items_edit($table, $item_id, $value, $type = '') {
+    private function items_edit($table, $item_id, $value, $type = '')
+    {
         switch ($table) {
             case 'catalog_attributes_value':
                 $model = CatalogAttributesValue::where('id', $item_id)->first();
@@ -289,7 +292,8 @@ class AdminAjax extends Controller
         return;
     }
 
-    private function items_edit_checkbox($table, $item_id, $value, $field) {
+    private function items_edit_checkbox($table, $item_id, $value, $field)
+    {
         switch ($table) {
             case 'catalog_chars_value':
                 $model = CatalogCharsValue::where('id', $item_id)->first();
@@ -302,7 +306,8 @@ class AdminAjax extends Controller
         return;
     }
 
-    private function items_edit2($table, $item_id, $value, $type = '') {
+    private function items_edit2($table, $item_id, $value, $type = '')
+    {
         switch ($table) {
             case 'catalog_tags':
                 $model = CatalogTags::where('id', $item_id)->first();
@@ -329,7 +334,8 @@ class AdminAjax extends Controller
         return;
     }
 
-    private function items_delete($table, $id, $type = '') {
+    private function items_delete($table, $id, $type = '')
+    {
         switch ($table) {
             case 'catalog_attributes_value':
                 $model = CatalogAttributesValue::where('id', $id)->delete();
@@ -347,10 +353,11 @@ class AdminAjax extends Controller
         return;
     }
 
-    private function accordion($name, $value) {
+    private function accordion($name, $value)
+    {
         if (empty($name)) return;
         $str = Str::slug($name);
-        session(['accordion_'.$str => $value]);
+        session(['accordion_' . $str => $value]);
         return;
     }
 
@@ -371,9 +378,9 @@ class AdminAjax extends Controller
         $file->delete();
     }
 
-    private function bonusesAccrual($count, $id , $type)
+    private function bonusesAccrual($count, $id, $type)
     {
-        switch ($type){
+        switch ($type) {
             case 'review':
                 $review = Reviews::find($id);
                 $user_id = $review->user->id;

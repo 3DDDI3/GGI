@@ -20,6 +20,11 @@ class PersonalDocument extends Model
         return $this->hasOne(PersonalPage::class, 'id', 'personal_page_id');
     }
 
+    public function agent(): HasOne
+    {
+        return $this->hasOne(Acount::class, 'id', 'acount_id');
+    }
+
     protected $table = "personal_documents";
 
     protected $fillable = [

@@ -40,7 +40,7 @@ class FileUpload
         }
     }
 
-    public static function uploadGallery($inputName, $item_id, $item_type, $smallWidth = null, $smallHeight = null, $path = '/upload', $structure = false , $request = null)
+    public static function uploadGallery($inputName, $item_id, $item_type, $smallWidth = null, $smallHeight = null, $path = '/upload', $structure = false, $request = null)
     {
 
         if (!$structure) {
@@ -62,7 +62,7 @@ class FileUpload
 
             try {
                 $serverPath = $v->store($path);
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 continue;
             }
 
@@ -76,19 +76,18 @@ class FileUpload
 
                 $smallName = explode('.', $serverPath);
                 $smallName[0] .= '_small';
-                $smallName = implode('.' , $smallName);
+                $smallName = implode('.', $smallName);
 
                 $galleryImg->thumbnail = $smallName;
 
                 $manager = new ImageManager(['driver' => 'gd']);
                 $manager
-                    ->make('storage/'.$serverPath)
+                    ->make('storage/' . $serverPath)
                     ->resize($smallWidth, $smallHeight, function ($img) {
                         $img->aspectRatio();
                         $img->upsize();
                     })
-                    ->save('storage/'.$smallName, 100);
-
+                    ->save('storage/' . $smallName, 100);
             }
 
             $galleryImg->alt = null;
@@ -98,8 +97,6 @@ class FileUpload
             $galleryImg->item_id = $item_id;
 
             $galleryImg->save();
-
-
         }
     }
 
@@ -112,34 +109,34 @@ class FileUpload
         foreach ($_FILES[$inputName] as $k => $v) {
 
 
-                // Загружаем по одному файлу
-                $filePath = $_FILES[$inputName][$k]['tmp_name'];
-                $errorCode = $_FILES[$inputName][$k]['error'];
-                $fileName = $_FILES[$inputName][$k]['name'];
+            // Загружаем по одному файлу
+            $filePath = $_FILES[$inputName][$k]['tmp_name'];
+            $errorCode = $_FILES[$inputName][$k]['error'];
+            $fileName = $_FILES[$inputName][$k]['name'];
 
-                // Проверим на ошибки
-                if ($errorCode !== UPLOAD_ERR_OK || !is_uploaded_file($filePath)) {
-                    $outputMessage = isset(self::$errorMessages[$errorCode]) ? self::$errorMessages[$errorCode] : self::$unknownMessage;
-                    continue;
-                }
+            // Проверим на ошибки
+            if ($errorCode !== UPLOAD_ERR_OK || !is_uploaded_file($filePath)) {
+                $outputMessage = isset(self::$errorMessages[$errorCode]) ? self::$errorMessages[$errorCode] : self::$unknownMessage;
+                continue;
+            }
 
-                $limitBytes = 1024 * 1024 * self::$maxFileSize;
-                if (filesize($filePath) > $limitBytes) die('Размер файла не должен превышать ' . self::$maxFileSize . ' Мбайт.');
+            $limitBytes = 1024 * 1024 * self::$maxFileSize;
+            if (filesize($filePath) > $limitBytes) die('Размер файла не должен превышать ' . self::$maxFileSize . ' Мбайт.');
 
-                $serverPath = public_path() . $path . '/' . $fileName;
+            $serverPath = public_path() . $path . '/' . $fileName;
 
-                // Переместим картинку с новым именем и расширением в папку
-                if (!move_uploaded_file($filePath, $serverPath)) {
-                    die('При записи файла на диск произошла ошибка.');
-                }
+            // Переместим картинку с новым именем и расширением в папку
+            if (!move_uploaded_file($filePath, $serverPath)) {
+                die('При записи файла на диск произошла ошибка.');
+            }
 
-                $object = new MainVideo();
-                $object->file = $fileName;
-                $object->save();
+            $object = new MainVideo();
+            $object->file = $fileName;
+            $object->save();
         }
     }
 
-    public static function uploadImage($inputName, $class, $field, $id, $width, $height, $path = '/storage', $webp = false , Request $request = null)
+    public static function uploadImage($inputName, $class, $field, $id, $width, $height, $path = '/storage', $webp = false, Request $request = null)
     {
 
         $filePath = $_FILES[$inputName]['tmp_name'];
@@ -176,9 +173,9 @@ class FileUpload
 
         $serverPath =  $request->file($inputName)->store($path);
         if (!empty($width) || !empty($height)) {
-            $arrPath = explode('.' , $serverPath);
+            $arrPath = explode('.', $serverPath);
 
-            if ($arrPath[sizeof($arrPath)-1] != 'svg'){
+            if ($arrPath[sizeof($arrPath) - 1] != 'svg') {
                 $manager = new ImageManager(['driver' => 'gd']);
 
                 if ($webp) {
@@ -189,10 +186,9 @@ class FileUpload
                             $img->aspectRatio();
                             $img->upsize();
                         })->save($serverPath, 100, 'webp');
-
                 } else {
                     $manager
-                        ->make('storage/'.$serverPath)
+                        ->make('storage/' . $serverPath)
                         ->resize($width, $height, function ($img) {
                             $img->aspectRatio();
                             $img->upsize();
@@ -201,8 +197,7 @@ class FileUpload
             }
         }
 
-        self::addToDb($id, $class, $field, $path , $serverPath);
-
+        self::addToDb($id, $class, $field, $path, $serverPath);
     }
 
     public static function editorUploadImage($inputName, $path = '/storage/images/editor')
@@ -257,7 +252,6 @@ class FileUpload
         }
 
         echo $src;
-
     }
 
     public static function uploadFile($inputName, $class, $field, $id, $path = '/files')
@@ -286,19 +280,18 @@ class FileUpload
 
         // Сгенерируем новое имя файла на основе MD5-хеша
 
-        // $name = uniqid();
-        // $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-        // $serverPath = public_path() . $path . '/' . $name . $extension;
+        $name = uniqid();
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $serverPath = public_path() . "/storage" . $path . $name . "." . $extension;
 
-         $serverPath = public_path() .'/storage'.$path . '/' . $fileName;
+        //  $serverPath = public_path() .'/storage'.$path . '/' . $fileName;
 
         // Переместим картинку с новым именем и расширением в папку
         if (!move_uploaded_file($filePath, $serverPath)) {
             die('При записи файла на диск произошла ошибка.');
         }
 
-        self::addToDb($id, $class, $field, $path, $path.'/'.$fileName);
-
+        self::addToDb($id, $class, $field, $path, $path . "{$name}.{$extension}");
     }
 
     public static function uploadFileMain($inputName, $path = '/upload')
@@ -319,7 +312,7 @@ class FileUpload
         // Проверим нужные параметры
         if (filesize($filePath) > $limitBytes) die('Размер файла не должен превышать ' . self::$maxFileSize . ' Мбайт.');
 
-         $serverPath = public_path() . $path . '/' . $fileName;
+        $serverPath = public_path() . $path . '/' . $fileName;
 
         if (!move_uploaded_file($filePath, $serverPath)) {
             die('При записи файла на диск произошла ошибка.');
@@ -402,7 +395,6 @@ class FileUpload
         }
         $mainObject->value = $name . $format;
         $mainObject->save();
-
     }
 
     public static function uploadFiles($request, $name, $path, $item_id, $item_type)
@@ -410,8 +402,8 @@ class FileUpload
         $files = $request->file($name);
 
 
-        if (!empty($files)){
-            foreach ($files as $value){
+        if (!empty($files)) {
+            foreach ($files as $value) {
                 $file_data = new Files();
                 $file_data->path = $value->store($path);
                 $file_data->item_id = $item_id;
@@ -430,17 +422,14 @@ class FileUpload
         if (!empty($object->$field)) {
             try {
                 unlink(public_path() . $path . '/' . $object->$field);
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 //
             }
-
         }
 
         $object->$field = $file;
 
 
         $object->save();
-
     }
-
 }

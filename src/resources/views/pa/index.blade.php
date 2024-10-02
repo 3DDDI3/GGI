@@ -56,22 +56,25 @@
                             <p class="nav__text">Индивидуальные достижения</p>
                         </a>
                     </li>
-                    <li class="nav__item" id="examLink">
-                        <a href="#" class="nav__link" data-target="exam">
-                            <div class="wrapp-svg">
-                                <svg class="nav-svg" width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2.856 20.58H13.272C11.424 19.572 10.164 17.64 10.164 15.372C10.164 12.096 12.852 9.40804 16.128 9.40804H16.212V2.60404C16.212 1.42804 15.204 0.420044 14.028 0.420044H2.856C1.68 0.420044 0.671997 1.42804 0.671997 2.60404V18.396C0.671997 19.572 1.596 20.58 2.856 20.58ZM4.788 3.78004H12.012C12.516 3.78004 12.852 4.20004 12.852 4.62004C12.852 5.12404 12.516 5.46004 12.012 5.46004H4.788C4.284 5.46004 3.948 5.12404 3.948 4.62004C3.948 4.20004 4.368 3.78004 4.788 3.78004ZM4.788 7.72804H9.492C9.996 7.72804 10.332 8.14804 10.332 8.56804C10.332 9.07204 9.996 9.40804 9.492 9.40804H4.788C4.284 9.40804 3.948 9.07204 3.948 8.56804C3.948 8.06404 4.368 7.72804 4.788 7.72804Z"
-                                        fill="#008DF2" />
-                                    <path
-                                        d="M16.128 11.172C13.776 11.172 11.844 13.104 11.844 15.456C11.844 17.808 13.776 19.74 16.128 19.74C18.48 19.74 20.412 17.808 20.412 15.456C20.412 13.104 18.48 11.172 16.128 11.172ZM18.228 15.036L16.128 17.052C15.96 17.22 15.792 17.304 15.54 17.304C15.288 17.304 15.12 17.22 14.952 17.052L13.944 15.96C13.608 15.624 13.608 15.12 14.028 14.784C14.364 14.448 14.868 14.448 15.204 14.784L15.624 15.288L17.136 13.86C17.472 13.524 17.976 13.524 18.312 13.86C18.564 14.112 18.564 14.7 18.228 15.036Z"
-                                        fill="#008DF2" />
-                                </svg>
-                            </div>
-                            <p class="nav__text">Экзаменационная ведомость</p>
-                        </a>
-                    </li>
+                    @if ($acount->acount_type_id == 2)
+                        <li class="nav__item" id="examLink">
+                            <a href="#" class="nav__link" data-target="exam">
+                                <div class="wrapp-svg">
+                                    <svg class="nav-svg" width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2.856 20.58H13.272C11.424 19.572 10.164 17.64 10.164 15.372C10.164 12.096 12.852 9.40804 16.128 9.40804H16.212V2.60404C16.212 1.42804 15.204 0.420044 14.028 0.420044H2.856C1.68 0.420044 0.671997 1.42804 0.671997 2.60404V18.396C0.671997 19.572 1.596 20.58 2.856 20.58ZM4.788 3.78004H12.012C12.516 3.78004 12.852 4.20004 12.852 4.62004C12.852 5.12404 12.516 5.46004 12.012 5.46004H4.788C4.284 5.46004 3.948 5.12404 3.948 4.62004C3.948 4.20004 4.368 3.78004 4.788 3.78004ZM4.788 7.72804H9.492C9.996 7.72804 10.332 8.14804 10.332 8.56804C10.332 9.07204 9.996 9.40804 9.492 9.40804H4.788C4.284 9.40804 3.948 9.07204 3.948 8.56804C3.948 8.06404 4.368 7.72804 4.788 7.72804Z"
+                                            fill="#008DF2" />
+                                        <path
+                                            d="M16.128 11.172C13.776 11.172 11.844 13.104 11.844 15.456C11.844 17.808 13.776 19.74 16.128 19.74C18.48 19.74 20.412 17.808 20.412 15.456C20.412 13.104 18.48 11.172 16.128 11.172ZM18.228 15.036L16.128 17.052C15.96 17.22 15.792 17.304 15.54 17.304C15.288 17.304 15.12 17.22 14.952 17.052L13.944 15.96C13.608 15.624 13.608 15.12 14.028 14.784C14.364 14.448 14.868 14.448 15.204 14.784L15.624 15.288L17.136 13.86C17.472 13.524 17.976 13.524 18.312 13.86C18.564 14.112 18.564 14.7 18.228 15.036Z"
+                                            fill="#008DF2" />
+                                    </svg>
+                                </div>
+                                <p class="nav__text">Экзаменационная ведомость</p>
+                            </a>
+                        </li>
+                    @endif
+
                 </ul>
             </nav>
         </aside>
@@ -115,7 +118,7 @@
                         <ul class="main__list">
                             <li class="main__item wrapp-title">
                                 <h2 class="main__title">Персональные данные</h2>
-                                <section class="switch-container">
+                                {{-- <section class="switch-container">
                                     <input type="radio" id="option1" name="switch" checked />
                                     <input type="radio" id="option2" name="switch" />
                                     <div class="switch">
@@ -126,7 +129,7 @@
                                             <span class="switch-text">Аспирант</span>
                                         </label>
                                     </div>
-                                </section>
+                                </section> --}}
                             </li>
                             <li class="main__item initials">
                                 <div id="image-container" class="image-container">
@@ -177,7 +180,11 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="main__item document-uploads abit" id="abit">
+
+                            {{-- @dd($acount->acount_type_id == 1 ? '' : 'hidden') --}}
+
+                            <li class="main__item document-uploads abit {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}"
+                                id="abit">
                                 {{-- <ul class="main__list-files grid-container">
                                     <li class="main__item-files first-item">
                                         <h3 class="main__subtitle">
@@ -324,7 +331,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="main__item diploma hidden" id="diplomSec">
+                            <li class="main__item diploma {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
+                                id="diplomSec">
                                 <ul class="main__list-diploma">
                                     <li class="main__item-diploma">
                                         <h3 class="main__subtitle">
@@ -345,7 +353,9 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="main__item name-scientist hidden" id="scientist">
+                            {{-- @dd($acount->acount_type_id) --}}
+                            <li class="main__item name-scientist {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
+                                id="scientist">
                                 <h3 class="main__subtitle">Научный руководитель</h3>
                                 <ul class="main__list-scientist">
                                     <li class="main__item-scientist">
@@ -360,7 +370,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="main__item additional-files hidden" id="additional">
+                            <li class="main__item additional-files {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
+                                id="additional">
                                 <ul class="main__list-plan">
                                     <li class="main__item-plan">
                                         <div class="inner-title">
@@ -386,7 +397,7 @@
                                             </label>
                                             <ul id="passport-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Реферат')
+                                                    @if ($document->document->type == 'Реферат' && $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -422,7 +433,9 @@
                                             </label>
                                             <ul id="individualPlan-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Индивидуальный план научной деятельности по годам/семестрам')
+                                                    @if (
+                                                        $document->document->type == 'Индивидуальный план научной деятельности по годам/семестрам' &&
+                                                            $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -457,7 +470,7 @@
                                             </label>
                                             <ul id="annualPlan-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'План научной деятельности по годам')
+                                                    @if ($document->document->type == 'План научной деятельности по годам' && $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -492,7 +505,7 @@
                                             </label>
                                             <ul id="supervisorReview-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Отзыв научного руководителя')
+                                                    @if ($document->document->type == 'Отзыв научного руководителя' && $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -527,7 +540,7 @@
                                             </label>
                                             <ul id="seminarProtocol-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Выписка из протокола семинара')
+                                                    @if ($document->document->type == 'Выписка из протокола семинара' && $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -562,7 +575,7 @@
                                             </label>
                                             <ul id="councilReport-files" class="input-file-list">
                                                 @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Протокол отчета на Ученом совете')
+                                                    @if ($document->document->type == 'Протокол отчета на Ученом совете' && $document->agent->acount_type_id == 1)
                                                         <li class="input-file-list-item">
                                                             <div class="input-file-svg"></div><span
                                                                 class="input-file-list-name">{{ $document->path }}</span><a
@@ -583,7 +596,7 @@
                         <h2 class="main__title achievement__title">
                             Индивидуальные достижения
                         </h2>
-                        <div class="content-form" id="appForm">
+                        <div class="content-form {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}" id="appForm">
                             <h3 class="achievement__heding">Загрузите свои документы</h3>
                             <ul class="achievement__list-input">
                                 <li class="achievement-item__input">
@@ -607,7 +620,10 @@
                                     </label>
                                     <ul id="diplomaApp-files" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Диплом')
+                                            @if (
+                                                $document->document->type == 'Диплом' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 2)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -638,7 +654,10 @@
                                     </label>
                                     <ul id="reportApp-files" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Реферат')
+                                            @if (
+                                                $document->document->type == 'Реферат' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 2)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -669,7 +688,10 @@
                                     </label>
                                     <ul id="articleApp-files" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Другое')
+                                            @if (
+                                                $document->document->type == 'Другое' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 2)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -681,7 +703,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="content-form hidden" id="pgForm">
+                        <div class="content-form {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}" id="pgForm">
                             <h3 class="achievement__heding">Публикации</h3>
                             <ul class="achievement__list-input">
                                 <li class="achievement-item__input">
@@ -693,7 +715,10 @@
                                     </label>
                                     <ul id="materialConf" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Материалы конференций')
+                                            @if (
+                                                $document->document->type == 'Материалы конференций' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 1)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -712,7 +737,10 @@
                                     </label>
                                     <ul id="thesisReport" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Тезисы докладов')
+                                            @if (
+                                                $document->document->type == 'Тезисы докладов' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 1)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -739,7 +767,10 @@
                                     </label>
                                     <ul id="pid" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Статьи')
+                                            @if (
+                                                $document->document->type == 'Статьи' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 1)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -758,7 +789,10 @@
                                     </label>
                                     <ul id="anotherPg-files" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Другое')
+                                            @if (
+                                                $document->document->type == 'Другое' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 1)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -777,7 +811,10 @@
                                     </label>
                                     <ul id="reportStudent" class="input-file-list">
                                         @foreach ($documents as $document)
-                                            @if ($document->document->type == 'Отчет аспиранта')
+                                            @if (
+                                                $document->document->type == 'Отчет аспиранта' &&
+                                                    $document->page->page == 'Индивидуальные достижения' &&
+                                                    $document->agent->acount_type_id == 1)
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -819,7 +856,10 @@
                                 </label>
                                 <ul id="materialConf" class="input-file-list">
                                     @foreach ($documents as $document)
-                                        @if ($document->document->type == 'Философия')
+                                        @if (
+                                            $document->document->type == 'Философия' &&
+                                                $document->page->page == ' Экзаменационная ведомость' &&
+                                                $document->agent->acount_type_id == 2)
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div><span
                                                     class="input-file-list-name">{{ $document->path }}</span><a
@@ -850,7 +890,10 @@
                                 </label>
                                 <ul id="thesisReport" class="input-file-list">
                                     @foreach ($documents as $document)
-                                        @if ($document->document->type == 'Английский язык')
+                                        @if (
+                                            $document->document->type == 'Английский язык' &&
+                                                $document->page->page == ' Экзаменационная ведомость' &&
+                                                $document->agent->acount_type_id == 2)
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div><span
                                                     class="input-file-list-name">{{ $document->path }}</span><a
@@ -881,7 +924,10 @@
                                 </label>
                                 <ul id="article" class="input-file-list">
                                     @foreach ($documents as $document)
-                                        @if ($document->document->type == 'Специальность')
+                                        @if (
+                                            $document->document->type == 'Специальность' &&
+                                                $document->page->page == ' Экзаменационная ведомость' &&
+                                                $document->agent->acount_type_id == 2)
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div><span
                                                     class="input-file-list-name">{{ $document->path }}</span><a

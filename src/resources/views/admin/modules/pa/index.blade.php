@@ -3,11 +3,11 @@
 
     <h1>{{ $title[0] }}</h1>
 
-    @include('admin.includes.search', ['search_label' => 'Введите Email, Телефон или ФИО'])
+    @include('admin.includes.search', ['search_label' => 'Введите Email'])
 
     @include('admin.includes.add')
 
-    @include('admin.includes.paginate.total')
+    {{-- @include('admin.includes.paginate.total') --}}
 
     @if ($objects)
         <div class="sortable_list_off">
@@ -40,7 +40,7 @@
 
             @include('admin.includes.not_found')
         </div>
-        {{ $objects->links('pagination.default') }}
+        {{-- {{ $objects->links('pagination.default') }} --}}
     @endif
 
 @endsection

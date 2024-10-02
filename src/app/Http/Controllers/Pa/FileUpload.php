@@ -19,11 +19,11 @@ class FileUpload extends Controller
 
             if (empty($request->page) && empty($request->document)) {
                 Acount::query()
-                    ->find($request->user()->id)
+                    ->find($request->user('pa')->id)
                     ->fill([$name => $path])
                     ->save();
 
-                return;
+                return response()->json(['image' => $path], 200);
             }
 
             $page = PersonalPage::query()
@@ -35,7 +35,7 @@ class FileUpload extends Controller
                 ->first();
 
             (new PersonalDocument())->create([
-                'acount_id' => $request->user()->id,
+                'acount_id' => $request->user('pa')->id,
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
                 'path' => $path,
@@ -43,10 +43,9 @@ class FileUpload extends Controller
             ]);
         }
 
-
         $documents = PersonalDocument::query()
             ->where([
-                'acount_id' => $request->user()->id,
+                'acount_id' => $request->user('pa')->id,
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
             ])->get();
@@ -57,7 +56,17 @@ class FileUpload extends Controller
     public function delete(Request $request)
     {
         $acount = Acount::query()
-            ->find($request->user()->id);
+            ->find($request->user('pa')->id);
+
+        if (!empty($request->name)) {
+            $field = $request->name;
+            $acount->$field = null;
+            $acount->save();
+
+            Storage::delete($request->input('path'));
+
+            return response()->json(['message' => 'Файл успешно удален'], 200);
+        }
 
         $personalDocument = PersonalDocument::query()
             ->where([

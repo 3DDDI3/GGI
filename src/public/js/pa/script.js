@@ -32,8 +32,8 @@ function curSelect() {
     pgForm.classList.remove("hidden");
   }
 }
-option1.addEventListener("change", curSelect);
-option2.addEventListener("change", curSelect);
+// option1.addEventListener("change", curSelect);
+// option2.addEventListener("change", curSelect);
 
 const select = document.getElementById("date-select");
 for (let year = 2024; year >= 1910; year--) {
@@ -114,10 +114,10 @@ document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
         let fileSvg = document.createElement("div");
         fileSvg.classList.add("input-file-svg");
 
-        fileItem.appendChild(fileSvg);
-        fileItem.appendChild(fileName);
-        fileItem.appendChild(removeLink);
-        filesList.appendChild(fileItem);
+        // fileItem.appendChild(fileSvg);
+        // fileItem.appendChild(fileName);
+        // fileItem.appendChild(removeLink);
+        // filesList.appendChild(fileItem);
 
         dt.items.add(file);
       }
@@ -297,8 +297,6 @@ $(function () {
             topic: $("input[name='thesisTopic']").val(),
             year: $("#date-select").val(),
           }
-
-          console.log(data);
           break;
 
         case "document-uploads":
@@ -328,11 +326,11 @@ $(function () {
     let formData = new FormData();
 
     Array.from(this.files).forEach(file => {
-      formData.append($(this).prop("name"), file)
+      formData.append($(this).prop("name"), file);
     });
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
-
+      $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span><a class='input-file-list-remove'>x</a></li>`);
     });
   });
 
@@ -346,12 +344,13 @@ $(function () {
 
     formData.append("document", `${$(this).attr('aria-label')}`);
     formData.append("page", "Персональные данные");
+    formData.append("year", $("#date-select").val());
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       console.log(response);
-      $(this).parents(".inner-title").find(".input-file-list li").remove();
+      // $(this).parents(".inner-title").find(".input-file-list li").remove();
       response.data.documents.forEach(element => {
-        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
+        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`);
       });
     });
 
@@ -391,14 +390,14 @@ $(function () {
       formData.append($(this).prop("name"), file)
     });
 
-    axios.post("/api/pa/users/files/upload", formData).then(response => { });
+    axios.post("/api/pa/users/files/upload", formData).then(response => {
+      $(".header__btn.user-btn img").attr("src", `/storage/${response.data.image}`);
+    });
   });
 
   $(".achievement-item__input input[type='file']").on("change", function () {
 
-    console.log($(this).parents("form").attr("class").replace(/main__form/, ''));
-
-    return;
+    let clasName = $(this).parents("form").attr("class").replace(/main__form /, '');
 
     let formData = new FormData();
 
@@ -407,13 +406,22 @@ $(function () {
     });
 
     formData.append("document", `${$(this).attr('aria-label')}`);
-    formData.append("page", "Индивидуальные достижения");
+
+    switch (clasName) {
+      case "achievement":
+        formData.append("page", "Индивидуальные достижения");
+        break;
+
+      case "exam":
+        formData.append("page", "Экзаменационная ведомость")
+        break;
+    }
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       console.log(response);
       $(this).parents(".inner-title").find(".input-file-list li").remove();
       response.data.documents.forEach(element => {
-        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
+        $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
       });
     });
   });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Pa\PersonalAcountController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -36,57 +37,62 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 });
             });
 
-            Route::group(['prefix' => 'publications', 'as' => 'publications.'], function(){
+            Route::group(['prefix' => 'pa', 'as' => 'pa.'], function () {
+                Route::get('/', [PersonalAcountController::class, 'index'])->name('index');
+                Route::match(['get', 'post'], '/edit/{id?}', [PersonalAcountController::class, 'edit'])->name('edit');
+            });
+
+            Route::group(['prefix' => 'publications', 'as' => 'publications.'], function () {
                 Route::get('/', 'PublicationsController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'PublicationsController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'publications2', 'as' => 'publications2.'], function(){
+            Route::group(['prefix' => 'publications2', 'as' => 'publications2.'], function () {
                 Route::get('/', 'Publications2Controller@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'Publications2Controller@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'magazine', 'as' => 'magazine.'], function(){
+            Route::group(['prefix' => 'magazine', 'as' => 'magazine.'], function () {
                 Route::get('/', 'MagazineController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'MagazineController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'laboratories', 'as' => 'laboratories.'], function(){
+            Route::group(['prefix' => 'laboratories', 'as' => 'laboratories.'], function () {
                 Route::get('/', 'LaboratoriesController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'LaboratoriesController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'subdivisions', 'as' => 'subdivisions.'], function(){
+            Route::group(['prefix' => 'subdivisions', 'as' => 'subdivisions.'], function () {
                 Route::get('/', 'SubdivisionsController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'SubdivisionsController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'staff', 'as' => 'staff.'], function(){
+            Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
                 Route::get('/', 'StaffController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'StaffController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'departments', 'as' => 'departments.'], function(){
+            Route::group(['prefix' => 'departments', 'as' => 'departments.'], function () {
                 Route::get('/', 'DepartmentsController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'DepartmentsController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'administration', 'as' => 'administration.'], function(){
+            Route::group(['prefix' => 'administration', 'as' => 'administration.'], function () {
                 Route::get('/', 'AdministrationController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'AdministrationController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'vacancies', 'as' => 'vacancies.'], function(){
+            Route::group(['prefix' => 'vacancies', 'as' => 'vacancies.'], function () {
                 Route::get('/', 'VacanciesController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'VacanciesController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'courses', 'as' => 'courses.'], function(){
+            Route::group(['prefix' => 'courses', 'as' => 'courses.'], function () {
                 Route::get('/', 'CoursesController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'CoursesController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'portfolio', 'as' => 'portfolio.'], function(){
+            Route::group(['prefix' => 'portfolio', 'as' => 'portfolio.'], function () {
                 Route::get('/', 'PortfolioController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'PortfolioController@edit')->name('edit');
             });
@@ -101,7 +107,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::match(['get', 'post'], '/edit/{id?}', 'ServicesController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'documents', 'as' => 'documents.'], function(){
+            Route::group(['prefix' => 'documents', 'as' => 'documents.'], function () {
                 Route::get('/', 'DocumentsController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'DocumentsController@edit')->name('edit');
             });
@@ -116,17 +122,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::match(['get', 'post'], '/edit/{id?}', 'EformController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'branches', 'as' => 'branches.'], function(){
+            Route::group(['prefix' => 'branches', 'as' => 'branches.'], function () {
                 Route::get('/', 'BranchesController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'BranchesController@edit')->name('edit');
             });
 
-            Route::group(['prefix' => 'institute-objects', 'as' => 'institute-objects.'], function(){
+            Route::group(['prefix' => 'institute-objects', 'as' => 'institute-objects.'], function () {
                 Route::get('/', 'InstituteObjectsController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'InstituteObjectsController@edit')->name('edit');
             });
 
-            
+
             Route::group(['prefix' => 'formstyle', 'as' => 'formstyle.'], function () {
                 Route::get('/', 'FormStyleController@index')->name('index');
                 Route::match(['get', 'post'], '/edit/{id?}', 'FormStyleController@edit')->name('edit');
@@ -138,7 +144,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             });
 
 
-      Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+            Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
                 Route::match(['get', 'post'], '/', 'SettingsController@index')->name('index');
             });
 
@@ -156,7 +162,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::group(['prefix' => 'search_checkboxes', 'as' => 'search_checkboxes.'], function () {
                 //
             });
-
         });
     });
 
@@ -164,4 +169,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         return  redirect()->route(auth()->check() ? 'admin.settings.index' : 'admin.login');
     });
 });
-
