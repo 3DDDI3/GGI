@@ -64,6 +64,11 @@ $(function () {
       data: obj,
       dataType: "json",
       success: function (response) {
+        Swal.fire({
+          icon: 'success',
+          title: response.message,
+          confirmButtonText: 'Ok',
+        });
       },
       error: function (response) {
         Swal.fire({

@@ -5,6 +5,9 @@ use App\Http\Controllers\Pa\AuthorizationController;
 use App\Http\Controllers\Pa\ExaminationSheetController;
 use App\Http\Controllers\Pa\FileUpload;
 use App\Http\Controllers\Pa\UserController;
+use App\Models\Pa\Acount;
+use App\Models\Pa\PersonalDocument;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')
         ->group(function () {
-                Route::post('/signin', [AuthorizationController::class, 'signin']);
+                Route::post('/signin', [AuthorizationController::class, 'signin'])->withoutMiddleware('api');
                 Route::post('/login', [AuthorizationController::class, 'login']);
                 Route::post('/check', [AuthorizationController::class, 'check'])->middleware('auth:sanctum');
                 Route::post('/logout', [AuthorizationController::class, 'logout'])->middleware('auth:sanctum');
@@ -49,4 +52,38 @@ Route::prefix('pa/examination-sheets')
         ->group(function () {
                 Route::put('/edit', [ExaminationSheetController::class, 'edit']);
                 Route::delete('/delete', [ExaminationSheetController::class, 'delete']);
+        });
+
+Route::prefix("pa/files")
+        ->withoutMiddleware('api')
+        ->group(function () {
+                Route::delete("delete", function (Request $request) {
+                        $acountFields = collect(
+                                'passport',
+                                'snils',
+                                'inn'
+                        );
+
+                        if ($acountFields->contains($request->field)) {
+                                Acount::query()
+                                        ->where([
+                                                'id' => $request->id,
+                                                "{$request->field}" => $request->input('path'),
+                                        ])
+                                        ->first()
+                                        ->fill([
+                                                "{$request->field}" => null,
+                                                "{$request->field}_comment" => null
+                                        ])
+                                        ->save();
+
+                                return response()->json(["message" => "Удалено"], 200);
+                        } else {
+                                PersonalDocument::query()
+                                        ->where(['id' => $request->id,])
+                                        ->delete();
+
+                                return response()->json(["message" => "Удалено"], 200);
+                        }
+                });
         });

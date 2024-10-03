@@ -28,8 +28,11 @@ class Acount extends Authenticatable
         'study_place',
         'icon',
         'passport',
+        'passport_comment',
         'inn',
+        'inn_comment',
         'snils',
+        'snils_comment',
     ];
 
     protected $casts = [
@@ -54,14 +57,17 @@ class Acount extends Authenticatable
     /**
      * Получение определенного документа
      *
-     * @param string $type название типа документа
+     * @param string $type Тип документа
+     * @param integer $user_id Id пользователя
+     * @param integer|null $year - год
      * @return PersonalDocument
      */
-    public function certainDocument(string $type, int $year = null): PersonalDocument
+    public function certainDocument(string $type, int $user_id, int $year = null): PersonalDocument
     {
         if (!empty($year))
             $result = $this->documents()
                 ->where([
+                    'acount_id' => $user_id,
                     'personal_document_type_id' => PersonalDocumentType::query()
                         ->where(['type' => $type])
                         ->first()->id,
@@ -70,6 +76,7 @@ class Acount extends Authenticatable
 
         $result = $this->documents()
             ->where([
+                'acount_id' => $user_id,
                 'personal_document_type_id' => PersonalDocumentType::query()
                     ->where(['type' => $type])
                     ->first()->id

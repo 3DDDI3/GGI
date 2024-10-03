@@ -31,8 +31,11 @@ return new class extends Migration
             $table->string('study_place', 1000)->nullable();
             $table->text('icon')->nullable();
             $table->text('passport')->nullable();
+            $table->text('passport_comment')->nullable();
             $table->text('inn')->nullable();
+            $table->text('inn_comment')->nullable();
             $table->text('snils')->nullable();
+            $table->text('snils_comment')->nullable();
             $table->boolean('isConfirmed')->nullable()->default(0);
             $table->timestamps();
         });

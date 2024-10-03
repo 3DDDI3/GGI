@@ -14,12 +14,14 @@ class FileUpload extends Controller
 {
     public function upload(Request $request)
     {
+        $user = empty($request->user('pa')) ? $request->input('user') : $request->user('pa')->id;
+
         foreach ($request->file() as $name => $file) {
             $path = $file->store('pa');
 
             if (empty($request->page) && empty($request->document)) {
                 Acount::query()
-                    ->find($request->user('pa')->id)
+                    ->find($user)
                     ->fill([$name => $path])
                     ->save();
 
@@ -35,7 +37,7 @@ class FileUpload extends Controller
                 ->first();
 
             (new PersonalDocument())->create([
-                'acount_id' => $request->user('pa')->id,
+                'acount_id' => $user,
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
                 'path' => $path,
@@ -55,6 +57,8 @@ class FileUpload extends Controller
 
     public function delete(Request $request)
     {
+        dd($request);
+
         $acount = Acount::query()
             ->find($request->user('pa')->id);
 

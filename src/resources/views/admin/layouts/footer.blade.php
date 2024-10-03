@@ -26,6 +26,7 @@
 <script src='/private/src/js/buttons.js?v={{ sha1_file(public_path('/private/src/js/buttons.js')) }}'></script>
 <script src='/private/src/js/main.js?v={{ sha1_file(public_path('/private/src/js/main.js')) }}'></script>
 <script src='/private/src/js/styles.js?v={{ sha1_file(public_path('/private/src/js/styles.js')) }}'></script>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
+
 </html>
