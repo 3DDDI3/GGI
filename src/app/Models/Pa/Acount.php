@@ -60,9 +60,9 @@ class Acount extends Authenticatable
      * @param string $type Тип документа
      * @param integer $user_id Id пользователя
      * @param integer|null $year - год
-     * @return PersonalDocument
+     * @return Collection
      */
-    public function certainDocument(string $type, int $user_id, int $year = null): PersonalDocument
+    public function certainDocument(string $type, int $user_id, int $year = null): Collection
     {
         if (!empty($year))
             $result = $this->documents()
@@ -72,7 +72,7 @@ class Acount extends Authenticatable
                         ->where(['type' => $type])
                         ->first()->id,
                     'year' => $year
-                ])->first();
+                ])->get();
 
         $result = $this->documents()
             ->where([
@@ -80,8 +80,8 @@ class Acount extends Authenticatable
                 'personal_document_type_id' => PersonalDocumentType::query()
                     ->where(['type' => $type])
                     ->first()->id
-            ])->first();
+            ])->get();
 
-        return !$result ? new PersonalDocument() : $result;
+        return $result;
     }
 }

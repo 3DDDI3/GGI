@@ -63,7 +63,7 @@ class PersonalAcountController extends Controller
 
         if ($request->isMethod('post')) {
 
-            dd($request->input());
+            dd($request->input(), $request->file());
 
             $object->fill([
                 'lastName' => $request->lastName,

@@ -24,6 +24,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->year('admission_year')->nullable();
             $table->string('email', 500)->nullable();
             $table->string('password', 255)->nullable();
             $table->timestamp('birthday')->nullable();

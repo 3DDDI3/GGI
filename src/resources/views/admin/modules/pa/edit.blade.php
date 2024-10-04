@@ -53,20 +53,38 @@
             <fieldset>
                 <legend>Персональные данные</legend>
 
-                <div class="column-items column-items2">
-                    <div class="column-item">
-                        @include('admin.includes.input', [
-                            'label' => 'Фамилия:',
-                            'name' => 'lastName',
-                            'value' => $object->lastName ?? '',
-                        ])
-                    </div>
-                    <div class="column-item">
-                        @include('admin.includes.input', [
-                            'label' => 'Имя:',
-                            'name' => 'firstName',
-                            'value' => $object->firstName ?? '',
-                        ])
+                <div class="column-items column-items2" style="align-items: center; column-gap: 50px">
+                    <label for="acount_icon">
+                        <input type="file" id="acount_icon"
+                            style=" height: 0;
+                                width: 0;
+                                padding: 0;
+                                border: 0 !important;">
+                        <img src="storage/pa/{{ $object->icon }}"
+                            style="width: 100px; height: 100px; border-radius: 50%; cursor: pointer" alt="Иконка">
+                    </label>
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 10px;">
+                        <div class="column-item" style="width: inherit !important; margin-right: unset ">
+                            @include('admin.includes.input', [
+                                'label' => 'Фамилия:',
+                                'name' => 'lastName',
+                                'value' => $object->lastName ?? '',
+                            ])
+                        </div>
+                        <div class="column-item" style="width: inherit !important">
+                            @include('admin.includes.input', [
+                                'label' => 'Имя:',
+                                'name' => 'firstName',
+                                'value' => $object->firstName ?? '',
+                            ])
+                        </div>
+                        <div class="column-item">
+                            @include('admin.includes.input', [
+                                'label' => 'Год поступления:',
+                                'name' => 'admission_year',
+                                'value' => $object->admission_year ?? '',
+                            ])
+                        </div>
                     </div>
                 </div>
                 <div class="column-items column-items2" style="padding-top: 20px">
@@ -146,415 +164,110 @@
                         ])
                     </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Диплом',
-                                'diploma',
-                                $object->certainDocument('Диплом', $object->id),
-                                '/storage' . $object->certainDocument('Диплом', $object->id)->path,
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => 'diploma_comment',
-                            'value' => $object->certainDocument('Диплом', $object->id)->comment,
-                        ])
+                    <div class="field">
+                        <x-input-file :files="$object->certainDocument('Диплом', $object->id)" title="Диплом" name="diploma" path="/storage/pa/" field="path"
+                            page="Персональные данные" document="Диплом" />
                     </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Реферат',
-                                'report',
-                                $object->certainDocument('Реферат', $object->id),
-                                '/storage/' . $object->certainDocument('Реферат', $object->id)->path,
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => 'report_comment',
-                            'value' => $object->certainDocument('Диплом', $object->id)->comment,
-                        ])
+                    <div class="field">
+                        <x-input-file :files="$object->certainDocument('Реферат', $object->id)" title="Реферат" name="report" path="/storage/pa/" field="path"
+                            page="Персональные данные" document="Реферат" isMultiple=true />
                     </div>
                 </fieldset>
 
                 <div class="works">
-                    <fieldset class="work" style="display: none">
-                        <legend style="display: flex; column-gap: 20px; cursor: pointer">Работы года
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_85_80)">
-                                    <path
-                                        d="M7.78671 12.1108C7.60462 12.1 7.43154 12.017 7.29731 11.8761L1.18945 5.43842C1.11393 5.35843 1.05293 5.26224 1.00997 5.15533C0.966998 5.04843 0.942897 4.93291 0.93903 4.81537C0.935163 4.69783 0.951603 4.58057 0.987426 4.47029C1.02325 4.36001 1.07775 4.25887 1.1478 4.17263C1.21786 4.0864 1.30211 4.01677 1.39574 3.96772C1.48937 3.91866 1.59054 3.89114 1.69348 3.88674C1.79642 3.88233 1.89911 3.90112 1.99569 3.94203C2.09227 3.98294 2.18085 4.04517 2.25637 4.12517L7.83077 9.99841L13.4052 4.12517C13.4807 4.04517 13.5693 3.98294 13.6658 3.94203C13.7624 3.90112 13.8651 3.88233 13.968 3.88674C14.071 3.89115 14.1722 3.91866 14.2658 3.96772C14.3594 4.01677 14.4437 4.0864 14.5137 4.17263C14.5838 4.25887 14.6383 4.36001 14.6741 4.47029C14.7099 4.58058 14.7264 4.69783 14.7225 4.81537C14.7186 4.93291 14.6945 5.04843 14.6516 5.15533C14.6086 5.26224 14.5476 5.35843 14.4721 5.43842L8.36422 11.8761C8.28672 11.9575 8.19564 12.0203 8.09642 12.0606C7.99719 12.1009 7.89185 12.118 7.78671 12.1108Z"
-                                        fill="#494949" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_85_80">
-                                        <rect width="16" height="16" fill="white"
-                                            transform="matrix(-4.37114e-08 1 1 4.37114e-08 0 0)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </legend>
-                        <div style="display: none" class="work__wrapper">
+                    <fieldset class="work">
+                        <legend style="display: flex; column-gap: 20px; cursor: pointer">Диссертационная работа</legend>
+                        <div class="column-items column-items2">
+                            <div class="column-item">
+                                @include('admin.includes.input', [
+                                    'label' => 'Тема диссертационной работы:',
+                                    'name' => 'topic',
+                                    'value' => $work->topic ?? '',
+                                ])
+                            </div>
+                            <div class="column-item">
+                                @include('admin.includes.input', [
+                                    'label' => 'Год обучения',
+                                    'name' => 'year',
+                                    'value' => $work->year ?? '',
+                                ])
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend>Научный руководитель</legend>
                             <div class="column-items column-items2">
                                 <div class="column-item">
                                     @include('admin.includes.input', [
-                                        'label' => 'Тема диссертационной работы:',
-                                        'name' => 'topic',
-                                        'value' => '',
+                                        'label' => 'Ф.И.О.',
+                                        'name' => 'scientific_head',
+                                        'value' => $work->scientific_head ?? '',
                                     ])
                                 </div>
                                 <div class="column-item">
                                     @include('admin.includes.input', [
-                                        'label' => 'Год обучения',
-                                        'name' => 'year',
-                                        'value' => '',
+                                        'label' => 'Должность',
+                                        'name' => 'post',
+                                        'value' => $work->post ?? '',
                                     ])
                                 </div>
                             </div>
-                            <fieldset class="scientific_work">
-                                <legend>Научный руководитель</legend>
-                                <div class="column-items column-items2">
-                                    <div class="column-item">
-                                        @include('admin.includes.input', [
-                                            'label' => 'Ф.И.О.',
-                                            'name' => 'scientific_head',
-                                            'value' => '',
-                                        ])
-                                    </div>
-                                    <div class="column-item">
-                                        @include('admin.includes.input', [
-                                            'label' => 'Должность',
-                                            'name' => 'post',
-                                            'value' => '',
-                                        ])
-                                    </div>
-                                </div>
-                                <div class="column-item">
-                                    @include('admin.includes.input', [
-                                        'label' => 'Научная степень',
-                                        'name' => 'scientific_degree',
-                                        'value' => '',
-                                    ])
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="documents">
-                                <legend>Документы</legend>
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile('Реферат', 'workReport-2', null, '/storage', field: 'path') !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'workReportComment-2',
-                                        'value' => '',
-                                    ])
-                                </div>
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile(
-                                            'Индивидуальный план<br> научной деятельности<br> по годам/семестрам',
-                                            'individualPlan-12',
-                                            null,
-                                            '/storage',
-                                            field: 'path',
-                                        ) !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'individualPlanComment-12',
-                                        'value' => '',
-                                    ])
-                                </div>
-
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile(
-                                            'План научной деятельности<br> по годам',
-                                            'yearPlan-13',
-                                            null,
-                                            '/storage',
-                                            field: 'path',
-                                        ) !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'yearPlanComment-13',
-                                        'value' => '',
-                                    ])
-                                </div>
-
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile(
-                                            'Отзыв научного<br> руководителя',
-                                            'review-14',
-                                            null,
-                                            '/storage',
-                                            field: 'path',
-                                        ) !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'reviewComment-14',
-                                        'value' => '',
-                                    ])
-                                </div>
-
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile(
-                                            'Выписка из протокола<br> семинара',
-                                            'extract-15',
-                                            null,
-                                            '',
-                                            field: 'path',
-                                        ) !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'extractComment-15',
-                                        'value' => '',
-                                    ])
-                                </div>
-
-                                <div class="field-wrapper">
-                                    <div class="field">
-                                        {!! \App\Helpers\GenerateForm::makeFile(
-                                            'Протокол отчета<br> на Ученом совете',
-                                            'protocol-16',
-                                            null,
-                                            '/storage/pa',
-                                            field: 'path',
-                                        ) !!}
-                                    </div>
-                                    @include('admin.includes.textarea', [
-                                        'label' => 'Комментарий:',
-                                        'name' => 'protocolComment-16',
-                                        'value' => '',
-                                    ])
-                                </div>
-                            </fieldset>
-
-                        </div>
-                    </fieldset>
-
-                    @foreach ($object->works()->orderBy('year', 'desc')->get() as $work)
-                        <fieldset class="work">
-                            <legend style="display: flex; column-gap: 20px; cursor: pointer">Работы {{ $work->year }} года
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_85_80)">
-                                        <path
-                                            d="M7.78671 12.1108C7.60462 12.1 7.43154 12.017 7.29731 11.8761L1.18945 5.43842C1.11393 5.35843 1.05293 5.26224 1.00997 5.15533C0.966998 5.04843 0.942897 4.93291 0.93903 4.81537C0.935163 4.69783 0.951603 4.58057 0.987426 4.47029C1.02325 4.36001 1.07775 4.25887 1.1478 4.17263C1.21786 4.0864 1.30211 4.01677 1.39574 3.96772C1.48937 3.91866 1.59054 3.89114 1.69348 3.88674C1.79642 3.88233 1.89911 3.90112 1.99569 3.94203C2.09227 3.98294 2.18085 4.04517 2.25637 4.12517L7.83077 9.99841L13.4052 4.12517C13.4807 4.04517 13.5693 3.98294 13.6658 3.94203C13.7624 3.90112 13.8651 3.88233 13.968 3.88674C14.071 3.89115 14.1722 3.91866 14.2658 3.96772C14.3594 4.01677 14.4437 4.0864 14.5137 4.17263C14.5838 4.25887 14.6383 4.36001 14.6741 4.47029C14.7099 4.58058 14.7264 4.69783 14.7225 4.81537C14.7186 4.93291 14.6945 5.04843 14.6516 5.15533C14.6086 5.26224 14.5476 5.35843 14.4721 5.43842L8.36422 11.8761C8.28672 11.9575 8.19564 12.0203 8.09642 12.0606C7.99719 12.1009 7.89185 12.118 7.78671 12.1108Z"
-                                            fill="#494949" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_85_80">
-                                            <rect width="16" height="16" fill="white"
-                                                transform="matrix(-4.37114e-08 1 1 4.37114e-08 0 0)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </legend>
-                            <div style="display: none" class="work__wrapper">
-                                <div class="column-items column-items2">
-                                    <div class="column-item">
-                                        @include('admin.includes.input', [
-                                            'label' => 'Тема диссертационной работы:',
-                                            'name' => "topic-{$work->year}",
-                                            'value' => $work->topic ?? '',
-                                        ])
-                                    </div>
-                                    <div class="column-item">
-                                        @include('admin.includes.input', [
-                                            'label' => 'Год обучения',
-                                            'name' => "year-{$work->year}",
-                                            'value' => $work->year ?? '',
-                                        ])
-                                    </div>
-                                </div>
-                                <fieldset>
-                                    <legend>Научный руководитель</legend>
-                                    <div class="column-items column-items2">
-                                        <div class="column-item">
-                                            @include('admin.includes.input', [
-                                                'label' => 'Ф.И.О.',
-                                                'name' => "scientific_head-{$work->year}",
-                                                'value' => $work->scientific_head ?? '',
-                                            ])
-                                        </div>
-                                        <div class="column-item">
-                                            @include('admin.includes.input', [
-                                                'label' => 'Должность',
-                                                'name' => "post-{$work->year}",
-                                                'value' => $work->post ?? '',
-                                            ])
-                                        </div>
-                                    </div>
-                                    <div class="column-item">
-                                        @include('admin.includes.input', [
-                                            'label' => 'Научная степень',
-                                            'name' => "scientific_degree-{$work->year}",
-                                            'value' => $work->scientific_degree ?? '',
-                                        ])
-                                    </div>
-                                </fieldset>
+                            <div class="column-item">
+                                @include('admin.includes.input', [
+                                    'label' => 'Научная степень',
+                                    'name' => 'scientific_degree',
+                                    'value' => $work->scientific_degree ?? '',
+                                ])
                             </div>
                         </fieldset>
-                    @endforeach
-                </div>
-
-            </fieldset>
-
-            <fieldset>
-                <legend>Добавление новых документов</legend>
-                <div class="add-new-work" style="display: flex; column-gap:10px">
-                    <select name="workYear" style="cursor: pointer">
-                        @for ($i = 1970; $i < date('Y') + 50; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                    <button class="add-new-work__button" class="button">Добавить документы</button>
+                    </fieldset>
                 </div>
             </fieldset>
+    </div>
 
-            @foreach ($object->documents as $document)
-                <fieldset>
-                    <legend>Документы</legend>
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Реферат',
-                                "workReport-{$document->year}-2",
-                                $object->certainDocument('Реферат', $document->year),
-                                '/storage',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "workReportComment-{$document->year}-2",
-                            'value' => $object->certainDocument('Реферат', $document->year)->comment,
-                        ])
-                    </div>
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Индивидуальный план<br> научной деятельности<br> по годам/семестрам',
-                                "individualPlan-{$document->year}-12",
-                                $object->certainDocument(
-                                    'Индивидуальный план научной деятельности по годам/семестрам',
-                                    $object->id,
-                                    $document->year,
-                                ),
-                                '/storage',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "individualPlanComment-{$document->year}-12",
-                            'value' => $object->certainDocument(
-                                'Индивидуальный план научной деятельности по годам/семестрам',
-                                $object->id,
-                                $document->year)->comment,
-                        ])
-                    </div>
+    <fieldset>
+        <legend>Документы</legend>
+        <div class="field">
+            <x-input-file :files="$object->certainDocument('Реферат', $object->id)" title="Реферат" name="workReport" path="/storage/pa/" field="path"
+                page="Персональные данные" document="Реферат" isMultiple=true />
+        </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'План научной деятельности<br> по годам',
-                                "yearPlan-{$document->year}-13",
-                                $object->certainDocument('План научной деятельности по годам', $object->id, $document->year),
-                                '/storage',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "yearPlanComment-{$document->year}-13",
-                            'value' => $object->certainDocument(
-                                'План научной деятельности по годам',
-                                $object->id,
-                                $document->year)->comment,
-                        ])
-                    </div>
+        <div class="field">
+            <x-input-file :files="$object->certainDocument(
+                'Индивидуальный план научной деятельности по годам/семестрам',
+                $object->id,
+            )" title="Индивидуальный план<br> научной деятельности<br> по годам/семестрам"
+                name="individualPlan" path="/storage/pa/" field="path" page="Персональные данные"
+                document="Индивидуальный план научной деятельности по годам/семестрам" isMultiple=true />
+        </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Отзыв научного<br> руководителя',
-                                "review-{$document->year}-14",
-                                $object->certainDocument('Отзыв научного руководителя', $object->id, $document->year),
-                                '/storage',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "reviewComment-{$document->year}-14",
-                            'value' => $object->certainDocument(
-                                'Отзыв научного руководителя',
-                                $object->id,
-                                $document->year)->comment,
-                        ])
-                    </div>
+        <div class="field">
+            <x-input-file :files="$object->certainDocument('План научной деятельности по годам', $object->id)" title="План научной деятельности<br> по годам" name="yearPlan"
+                path="/storage/pa/" field="path" page="Персональные данные"
+                document="План научной деятельности по годам" />
+        </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Выписка из протокола<br> семинара',
-                                "extract-{$document->year}-15",
-                                $object->certainDocument('Выписка из протокола семинара', $object->id, $document->year),
-                                '',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "extractComment-{$document->year}-15",
-                            'value' => $object->certainDocument(
-                                'Выписка из протокола семинара',
-                                $object->id,
-                                $document->year)->comment,
-                        ])
-                    </div>
+        <div class="field">
+            <x-input-file :files="$object->certainDocument('Отзыв научного руководителя', $object->id)" title="Отзыв научного<br> руководителя" name="review" path="/storage/pa/"
+                field="path" page="Персональные данные" document="Отзыв научного руководителя" />
+        </div>
 
-                    <div class="field-wrapper">
-                        <div class="field">
-                            {!! \App\Helpers\GenerateForm::makeFile(
-                                'Протокол отчета<br> на Ученом совете',
-                                "protocol-{$document->year}-16",
-                                $object->certainDocument('Протокол отчета на Ученом совете', $object->id, $document->year),
-                                '/storage/pa',
-                                field: 'path',
-                            ) !!}
-                        </div>
-                        @include('admin.includes.textarea', [
-                            'label' => 'Комментарий:',
-                            'name' => "protocolComment-{$document->year}-16",
-                            'value' => $object->certainDocument(
-                                'Протокол отчета на Ученом совете',
-                                $object->id,
-                                $document->year)->comment,
-                        ])
-                    </div>
-                    <div style="display: flex; column-gap:20px; justify-content: end; margin: 15px 0;">
-                        <button class="work__save">Сохранить</button>
-                        <button class="work_delete"
-                            style="background-color: #FF0000; border-color: #FF0000">Удалить</button>
-                    </div>
-                </fieldset>
-            @endforeach
 
-            <fieldset>
+        <div class="field">
+            <x-input-file :files="$object->certainDocument('Выписка из протокола семинара', $object->id)" title="Выписка из протокола<br> семинара" name="extract" path="/storage/pa/"
+                field="path" page="Персональные данные" document="Выписка из протокола семинара" />
+        </div>
+
+        <div class="field-wrapper">
+            <div class="field">
+                <x-input-file :files="$object->certainDocument('Протокол отчета на Ученом совете', $object->id)" title="Протокол отчета<br> на Ученом совете" name="protocolComment"
+                    path="/storage/pa/" field="path" page="Персональные данные"
+                    document="Протокол отчета на Ученом совете" />
+            </div>
+        </div>
+    </fieldset>
+
+    {{-- <fieldset>
                 <legend>Индивидуальные достижения</legend>
                 <fieldset>
                     <legend>Публикации</legend>
@@ -715,11 +428,11 @@
                         'value' => $object->certainDocument('Специальность', $object->id)->comment,
                     ])
                 </div>
-            </fieldset>
+            </fieldset> --}}
 
-            @include('admin.includes.submit')
+    @include('admin.includes.submit')
 
-        </form>
+    </form>
     </div>
 
     <script src="/lib/jquery.min.js"></script>

@@ -287,8 +287,6 @@ $(document).ready(function () {
                     },
                     success: function (data) {
                         if (data == 'success') {
-                            
-
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Удалено',
@@ -302,5 +300,61 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("click", function (e) {
+        let newBlock = $(".comment-popup"),
+            editIcon = $(".file__edit");
+
+        if ((!newBlock.is(e.target) && !newBlock.is(e.target) && newBlock.has(e.target).length === 0) && (!editIcon.is(e.target) && !editIcon.is(e.target) && editIcon.has(e.target).length === 0))
+            $(newBlock).hide(100);
+    });
+
+    $(".files").on("click", ".file .comment-popup svg", function () {
+        let data = {
+            id: $(this).parents(".file__edit").data("id"),
+            text: $(this).parents(".comment-popup").find("textarea").val()
+        };
+
+        $.ajax({
+            type: "method",
+            url: "url",
+            data: "data",
+            dataType: "dataType",
+            success: function (response) {
+
+            }
+        });
+
+        $(this).parents(".comment-popup").hide(100);
+    });
+
+    $(".file__edit").on("click", function (e) {
+        e.preventDefault();
+        console.log($(this).parents(".file__edit").find(".comment-popup"));
+        $(this).find(".comment-popup").show(100);
+    });
+
+    $(".file-loader-wrapper input[type='file']").on("change", function () {
+        let formData = new FormData();
+
+        Array.from(this.files).forEach(file => {
+            formData.append(file.name, file)
+        });
+
+        formData.append("document", $(this).data("document"));
+        formData.append("page", $(this).data("page"));
+
+        axios.post("/api/pa/users/files/upload", formData).then(response => {
+            console.log(response);
+            response.data.documents.forEach(element => {
+                let newBlock = $(this).parents(".file-loader-wrapper").find(".file-loader__files .file:first-child").clone();
+                $(newBlock).find(".file__name").attr("href", 1231);
+                $(newBlock).find(".file__name").text("123123123");
+                $(newBlock).find(".tooltip").data("id", 45);
+                $(newBlock).css("display", "flex");
+                $(this).parents(".file-loader-wrapper").find(".file-loader__files").append(newBlock);
+            });
+
+        });
+    });
 
 });
