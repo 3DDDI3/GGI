@@ -181,11 +181,9 @@
                                 </ul>
                             </li>
 
-                            {{-- @dd($acount->acount_type_id == 1 ? '' : 'hidden') --}}
-
                             <li class="main__item document-uploads abit {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}"
                                 id="abit">
-                                {{-- <ul class="main__list-files grid-container">
+                                <ul class="main__list-files grid-container">
                                     <li class="main__item-files first-item">
                                         <h3 class="main__subtitle">
                                             Диплом
@@ -232,7 +230,7 @@
                                         </label>
                                         <ul id="report-files" class="input-file-list"></ul>
                                     </li>
-                                </ul> --}}
+                                </ul>
                             </li>
                             <li class="main__item document-uploads">
                                 <ul class="main__list-files grid-container">

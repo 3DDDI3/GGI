@@ -11,6 +11,7 @@ RUN apk update && apk add --no-cache \
   libpng-dev \
   libjpeg-turbo-dev \
   libwebp-dev \
+  libzip-dev \
   freetype-dev \
   && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
   && docker-php-ext-install gd
@@ -18,7 +19,8 @@ RUN apk update && apk add --no-cache \
 RUN docker-php-ext-install \
   pdo \
   pdo_mysql \
-  sockets  
+  sockets \
+  zip
 
 RUN docker-php-ext-configure pcntl --enable-pcntl \
   && docker-php-ext-install \

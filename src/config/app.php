@@ -187,6 +187,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        ZanySoft\Zip\ZipServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -217,12 +218,12 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-//        // 'ExampleClass' => App\Example\ExampleClass::class,
-//        'SEOMeta'       => Artesaos\SEOTools\Facades\SEOMeta::class,
-//        'OpenGraph'     => Artesaos\SEOTools\Facades\OpenGraph::class,
-//        'Twitter'       => Artesaos\SEOTools\Facades\TwitterCard::class,
-//        'JsonLd'        => Artesaos\SEOTools\Facades\JsonLd::class,
-//        'JsonLdMulti'   => Artesaos\SEOTools\Facades\JsonLdMulti::class,
+        //        // 'ExampleClass' => App\Example\ExampleClass::class,
+        //        'SEOMeta'       => Artesaos\SEOTools\Facades\SEOMeta::class,
+        //        'OpenGraph'     => Artesaos\SEOTools\Facades\OpenGraph::class,
+        //        'Twitter'       => Artesaos\SEOTools\Facades\TwitterCard::class,
+        //        'JsonLd'        => Artesaos\SEOTools\Facades\JsonLd::class,
+        //        'JsonLdMulti'   => Artesaos\SEOTools\Facades\JsonLdMulti::class,
 
     ])->toArray(),
 

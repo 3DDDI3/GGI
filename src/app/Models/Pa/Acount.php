@@ -33,6 +33,7 @@ class Acount extends Authenticatable
         'inn_comment',
         'snils',
         'snils_comment',
+        'admission_year'
     ];
 
     protected $casts = [

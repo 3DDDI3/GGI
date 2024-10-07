@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\ExportUserInfo;
 use App\Http\Controllers\Pa\AchievementController;
 use App\Http\Controllers\Pa\AuthorizationController;
 use App\Http\Controllers\Pa\ExaminationSheetController;
@@ -9,6 +10,10 @@ use App\Models\Pa\Acount;
 use App\Models\Pa\PersonalDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Console\Input\Input;
+use ZanySoft\Zip\Facades\Zip;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,5 +90,27 @@ Route::prefix("pa/files")
 
                                 return response()->json(["message" => "Удалено"], 200);
                         }
+                });
+                Route::get('/{id}/zip/create', function ($id) {
+
+                        $acount = Acount::query()->find($id);
+
+                        // dd($acount->acountType);
+
+                        Excel::store(new ExportUserInfo($acount->id, $acount->acount_type_id), "pa/{$acount->lastName}.xlsx");
+
+                        $zip = Zip::create("storage/pa/{$acount->lastName}.zip");
+
+                        foreach ($acount->documents as $document) {
+                                $content = file_get_contents("storage/{$document->path}");
+                                preg_match("/.([a-zA-Z]+)$/", $document->path, $extensions);
+                                $name = preg_replace("/[^a-zA-Zа-яА-Я0-9\s+]/u", " ", $document->document->type);
+                                $zip->addFromString($name . $extensions[0], $content);
+                        }
+
+                        $zip->add("storage/pa/{$acount->lastName}.xlsx");
+
+                        $zip->close();
+                        return response()->download("storage/pa/{$acount->lastName}.zip")->deleteFileAfterSend();
                 });
         });

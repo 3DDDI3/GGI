@@ -309,29 +309,62 @@ $(document).ready(function () {
     });
 
     $(".files").on("click", ".file .comment-popup svg", function () {
+
         let data = {
-            id: $(this).parents(".file__edit").data("id"),
-            text: $(this).parents(".comment-popup").find("textarea").val()
-        };
+            document: $(this).parents(".file-loader-wrapper").find(".file-loader input[type='file']").data("document"),
+            page: $(this).parents(".file-loader-wrapper").find(".file-loader input[type='file']").data("page"),
+            user: location.pathname.match(/\d+$/)[0],
+            comment: $(this).parents(".comment-popup").find("textarea").val(),
+        }
 
-        $.ajax({
-            type: "method",
-            url: "url",
-            data: "data",
-            dataType: "dataType",
-            success: function (response) {
-
-            }
+        axios.post("/api/pa/users/files/upload", data).then(response => {
+            console.log(response);
+            Swal.fire({
+                title: '',
+                text: response.data.message,
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+            });
         });
 
         $(this).parents(".comment-popup").hide(100);
     });
 
-    $(".file__edit").on("click", function (e) {
+    $(".files").on("click", ".file__edit", function (e) {
         e.preventDefault();
-        console.log($(this).parents(".file__edit").find(".comment-popup"));
         $(this).find(".comment-popup").show(100);
     });
+
+    $(".files").on("click", ".file__delete", function (e) {
+        e.preventDefault();
+
+        console.log();
+
+        let data = {
+            user: location.pathname.match(/\d+$/)[0],
+            path: $(this).parents(".file").find(".file__name").text(),
+        };
+
+        axios.delete("/api/pa/users/files/delete", { data: data })
+            .then(response => {
+                $(this).parents(".file").remove();
+                Swal.fire({
+                    title: '',
+                    text: response.data.message,
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                });
+            })
+    });
+
+    $(".getZipAchive").on("click", function (e) {
+        e.preventDefault();
+
+        location.href = `/api/pa/files/${$(this).data("id")}/zip/create`;
+    });
+
 
     $(".file-loader-wrapper input[type='file']").on("change", function () {
         let formData = new FormData();
@@ -344,17 +377,60 @@ $(document).ready(function () {
         formData.append("page", $(this).data("page"));
 
         axios.post("/api/pa/users/files/upload", formData).then(response => {
-            console.log(response);
             response.data.documents.forEach(element => {
                 let newBlock = $(this).parents(".file-loader-wrapper").find(".file-loader__files .file:first-child").clone();
-                $(newBlock).find(".file__name").attr("href", 1231);
-                $(newBlock).find(".file__name").text("123123123");
-                $(newBlock).find(".tooltip").data("id", 45);
+                $(newBlock).find(".file__name").attr("href", element.path);
+                $(newBlock).find(".file__name").text(element.path);
+                $(newBlock).find(".tooltip").data("id", element.id);
                 $(newBlock).css("display", "flex");
                 $(this).parents(".file-loader-wrapper").find(".file-loader__files").append(newBlock);
             });
 
         });
+    });
+
+    $("select[name='class']").on("change", function () {
+        if ($(this).val() == 2) {
+            /** Абитуриент */
+            $(".works").css("display", "none");
+            $(".documents input[name='diploma']").parents(".field").css("display", "block");
+            $(".documents input[name='report']").parents(".field").css("display", "block");
+            $(".documents-2").css("display", "none");
+            $(".exams").css("display", "block")
+
+            let visibleDocs = [
+                "diploma",
+                "report",
+                "other",
+            ];
+
+            Array.from($(".achievments input[type='file']")).forEach(el => {
+                console.log($(el).attr("name"));
+                if (!visibleDocs.includes($(el).attr("name"))) $(el).parents(".file-loader-wrapper").css("display", "none");
+                else $(el).parents(".file-loader-wrapper").css("display", "flex");
+            });
+        } else {
+            /** Аспирант */
+            $(".works").css("display", "block");
+            $(".documents input[name='diploma']").parents(".field").css("display", "none");
+            $(".documents input[name='report']").parents(".field").css("display", "none");
+            $(".exams").css("display", "none");
+            $(".documents-2").css("display", "block");
+
+            let visibleDocs = [
+                "materials",
+                "thesis",
+                "article",
+                'rid',
+                'aspirantReport',
+            ];
+
+            Array.from($(".achievments input[type='file']")).forEach(el => {
+                console.log($(el).attr("name"));
+                if (!visibleDocs.includes($(el).attr("name"))) $(el).parents(".file-loader-wrapper").css("display", "none")
+                else $(el).parents(".file-loader-wrapper").css("display", "flex");
+            });
+        }
     });
 
 });

@@ -14,7 +14,26 @@ class FileUpload extends Controller
 {
     public function upload(Request $request)
     {
+
         $user = empty($request->user('pa')) ? $request->input('user') : $request->user('pa')->id;
+
+        if (!empty($request->comment)) {
+            PersonalDocument::query()
+                ->where([
+                    'acount_id' => $user,
+                    'personal_document_type_id' => PersonalDocumentType::query()
+                        ->where(['type' => $request->document])
+                        ->first()->id,
+                    'personal_page_id' => PersonalPage::query()
+                        ->where(['page' => $request->page])
+                        ->first()->id
+                ])
+                ->first()
+                ->fill(['comment' => $request->comment])
+                ->save();
+
+            return response()->json(['message' => 'Комментарий обновлен'], 200);
+        }
 
         foreach ($request->file() as $name => $file) {
             $path = $file->store('pa');
@@ -57,10 +76,10 @@ class FileUpload extends Controller
 
     public function delete(Request $request)
     {
-        dd($request);
+        $user = empty($request->user('pa')) ? $request->input('user') : $request->user('pa')->id;
 
         $acount = Acount::query()
-            ->find($request->user('pa')->id);
+            ->find($user);
 
         if (!empty($request->name)) {
             $field = $request->name;

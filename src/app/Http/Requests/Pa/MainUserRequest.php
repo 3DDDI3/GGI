@@ -39,7 +39,7 @@ class MainUserRequest extends FormRequest
             'birthday.date' => 'Некорректный формат даты рождения',
             'birthday.before:today' => 'Некорректная дата рождения',
             'study_place.required' => 'Поле место учебы обязательное',
-            'specialty' => 'Поле специальность обязвтельное',
+            'specialty' => 'Поле специальность обязательное',
         ];
     }
 }

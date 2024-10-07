@@ -17,8 +17,10 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "maatwebsite/excel": "^3.1",
         "phpoffice/phpspreadsheet": "^1.26",
-        "yoomoney/yookassa-sdk-php": "^2.7"
+        "yoomoney/yookassa-sdk-php": "^2.7",
+        "zanysoft/laravel-zip": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
