@@ -185,443 +185,37 @@
                                 id="abit">
                                 <ul class="main__list-files grid-container">
                                     <li class="main__item-files first-item">
-                                        <h3 class="main__subtitle">
+                                        <h3 class="main__subtitle achievement__subtitle">
                                             Диплом
-                                            <div class="tooltip-icon hidden">
+                                            <div
+                                                class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}}}">
                                                 <div class="tooltip__container">
                                                     <div class="tooltip__status">
-                                                        <p class="toolltip__name">Иванов И.И</p>
-                                                        <p class="tooltip__date">12.12.2024</p>
-                                                        <p class="tooltip__time">9:31</p>
+                                                        <p class="toolltip__name"></p>
+                                                        <p class="tooltip__date"></p>
+                                                        <p class="tooltip__time"></p>
                                                     </div>
-                                                    <p class="tooltip__alert">
-                                                        Измените название файла
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <label class="input-file">
-                                            <input type="file" id="diploma" name="diploma" multiple
-                                                aria-label="Выбрать файл" />
-                                            <span>Выбрать файл</span>
-                                        </label>
-                                        <ul id="passport-files" class="input-file-list"></ul>
-                                    </li>
-                                    <li class="main__item-files second-item">
-                                        <h3 class="main__subtitle">
-                                            Реферат
-                                            <div class="tooltip-icon hidden">
-                                                <div class="tooltip__container">
-                                                    <div class="tooltip__status">
-                                                        <p class="toolltip__name">Иванов И.И</p>
-                                                        <p class="tooltip__date">12.12.2024</p>
-                                                        <p class="tooltip__time">9:31</p>
-                                                    </div>
-                                                    <p class="tooltip__alert">
-                                                        Измените название файла
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <label class="input-file">
-                                            <input type="file" id="report" name="file[]" multiple
-                                                aria-label="Выбрать файл" />
-                                            <span>Выбрать файл</span>
-                                        </label>
-                                        <ul id="report-files" class="input-file-list"></ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="main__item document-uploads">
-                                <ul class="main__list-files grid-container">
-                                    <li class="main__item-files first-item">
-                                        <h3 class="main__subtitle">
-                                            Паспорт
-                                            <div class="tooltip-icon hidden">
-                                                <div class="tooltip__container">
-                                                    <div class="tooltip__status">
-                                                        <p class="toolltip__name">Иванов И.И</p>
-                                                        <p class="tooltip__date">12.12.2024</p>
-                                                        <p class="tooltip__time">9:31</p>
-                                                    </div>
-                                                    <p class="tooltip__alert">
-                                                        Измените название файла
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <label class="input-file">
-                                            <input type="file" id="passport" name="passport" multiple
-                                                aria-label="Выбрать файл паспорта" />
-                                            <span>Выбрать файл</span>
-                                        </label>
-                                        <ul id="passport-files" class="input-file-list">
-                                            @if (!empty($acount->passport))
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $acount->passport }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </li>
-                                    <li class="main__item-files second-item">
-                                        <h3 class="main__subtitle">
-                                            СНИЛС
-                                            <div class="tooltip-icon hidden">
-                                                <div class="tooltip__container">
-                                                    <div class="tooltip__status">
-                                                        <p class="toolltip__name">Иванов И.И</p>
-                                                        <p class="tooltip__date">12.12.2024</p>
-                                                        <p class="tooltip__time">9:31</p>
-                                                    </div>
-                                                    <p class="tooltip__alert">
-                                                        Измените название файла
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <label class="input-file">
-                                            <input type="file" id="snils" name="snils" multiple
-                                                aria-label="Выбрать файл СНИЛС" />
-                                            <span>Выбрать файл</span>
-                                        </label>
-                                        <ul id="snils-files" class="input-file-list">
-                                            @if (!empty($acount->snils))
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $acount->snils }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </li>
-                                    <li class="main__item-files third-item">
-                                        <h3 class="main__subtitle">
-                                            ИНН
-                                            <div class="tooltip-icon hidden">
-                                                <div class="tooltip__container">
-                                                    <div class="tooltip__status">
-                                                        <p class="toolltip__name">Иванов И.И</p>
-                                                        <p class="tooltip__date">12.12.2024</p>
-                                                        <p class="tooltip__time">9:31</p>
-                                                    </div>
-                                                    <p class="tooltip__alert">
-                                                        Измените название файла
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <label class="input-file">
-                                            <input type="file" id="inn" name="inn" multiple
-                                                aria-label="Выбрать файл ИНН" />
-                                            <span>Выбрать файл</span>
-                                        </label>
-                                        <ul id="inn-files" class="input-file-list">
-                                            @if (!empty($acount->inn))
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $acount->inn }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="main__item diploma {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
-                                id="diplomSec">
-                                <ul class="main__list-diploma">
-                                    <li class="main__item-diploma">
-                                        <h3 class="main__subtitle">
-                                            Тема диссертационной работы
-                                        </h3>
-                                        <label>
-                                            <input type="text" class="main__input" name="thesisTopic"
-                                                placeholder="Тема диссертационной работы"
-                                                aria-label="Тема диссертационной работы" />
-                                        </label>
-                                    </li>
-                                    <li class="main__item-diploma">
-                                        <!-- <label> -->
-                                        <h3 class="main__subtitle">Год обучения</h3>
-                                        <label for="date-select">
-                                            <select id="date-select" name="date"></select>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </li>
-                            {{-- @dd($acount->acount_type_id) --}}
-                            <li class="main__item name-scientist {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
-                                id="scientist">
-                                <h3 class="main__subtitle">Научный руководитель</h3>
-                                <ul class="main__list-scientist">
-                                    <li class="main__item-scientist">
-                                        <input type="text" name="fullNameScientist" class="main__input"
-                                            placeholder="Ф.И.О." aria-label="Ф.И.О." />
-                                        <input type="text" name="positionScientist" class="main__input"
-                                            placeholder="Должность" aria-label="Должность" />
-                                    </li>
-                                    <li class="main__item-scientist">
-                                        <input type="text" class="main__input" name="scientificDegree"
-                                            placeholder="Научная степень" aria-label="Научная степень" />
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="main__item additional-files {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
-                                id="additional">
-                                <ul class="main__list-plan">
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                Реферат
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
+                                                    @foreach ($acount->certainComment('Диплом', $acount->id, 1) as $comment)
                                                         <p class="tooltip__alert">
-                                                            Измените название файла
+                                                            {{ $comment->comment }}
                                                         </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="report" multiple name="personalFiles"
-                                                    aria-label="Реферат" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="passport-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Реферат' && $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
+                                                    @break
                                                 @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                Индивидуальный план научной деятельности по
-                                                годам/семестрам
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
-                                                        <p class="tooltip__alert">
-                                                            Измените название файла
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="individualPlan" multiple name="personalFiles"
-                                                    aria-label="Индивидуальный план научной деятельности по годам/семестрам" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="individualPlan-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if (
-                                                        $document->document->type == 'Индивидуальный план научной деятельности по годам/семестрам' &&
-                                                            $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                План научной деятельности по годам
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
-                                                        <p class="tooltip__alert">
-                                                            Измените название файла
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="annualPlan" multiple name="personalFiles"
-                                                    aria-label="План научной деятельности по годам" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="annualPlan-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'План научной деятельности по годам' && $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                Отзыв научного руководителя
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
-                                                        <p class="tooltip__alert">
-                                                            Измените название файла
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="supervisorReview" multiple name="personalFiles"
-                                                    aria-label="Отзыв научного руководителя" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="supervisorReview-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Отзыв научного руководителя' && $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                Выписка из протокола семинара
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
-                                                        <p class="tooltip__alert">
-                                                            Измените название файла
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="seminarProtocol" multiple name="personalFiles"
-                                                    aria-label="Выписка из протокола семинара" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="seminarProtocol-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Выписка из протокола семинара' && $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="main__item-plan">
-                                        <div class="inner-title">
-                                            <h3 class="main__subtitle">
-                                                Протокол отчета на Ученом совете
-                                                <div class="tooltip-icon hidden">
-                                                    <div class="tooltip__container">
-                                                        <div class="tooltip__status">
-                                                            <p class="toolltip__name">Иванов И.И</p>
-                                                            <p class="tooltip__date">12.12.2024</p>
-                                                            <p class="tooltip__time">9:31</p>
-                                                        </div>
-                                                        <p class="tooltip__alert">
-                                                            Измените название файла
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </h3>
-                                            <label class="input-file">
-                                                <input type="file" id="councilReport" multiple name="personalFiles"
-                                                    aria-label="Протокол отчета на Ученом совете" />
-                                                <span>Выбрать файл</span>
-                                            </label>
-                                            <ul id="councilReport-files" class="input-file-list">
-                                                @foreach ($documents as $document)
-                                                    @if ($document->document->type == 'Протокол отчета на Ученом совете' && $document->agent->acount_type_id == 1)
-                                                        <li class="input-file-list-item">
-                                                            <div class="input-file-svg"></div><span
-                                                                class="input-file-list-name">{{ $document->path }}</span><a
-                                                                class="input-file-list-remove">x</a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-                <div class="main main-container achievement">
-                    <form action="#!" method="post" enctype="multipart/form-data" class="main__form achievement">
-                        <h2 class="main__title achievement__title">
-                            Индивидуальные достижения
-                        </h2>
-                        <div class="content-form {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}" id="appForm">
-                            <h3 class="achievement__heding">Загрузите свои документы</h3>
-                            <ul class="achievement__list-input">
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">
-                                        Диплом
-                                        <div class="tooltip-icon hidden">
-                                            <div class="tooltip__container">
-                                                <div class="tooltip__status">
-                                                    <p class="toolltip__name">Иванов И.И</p>
-                                                    <p class="tooltip__date">12.12.2024</p>
-                                                    <p class="tooltip__time">9:31</p>
-                                                </div>
-                                                <p class="tooltip__alert">Измените название файла</p>
+
                                             </div>
                                         </div>
                                     </h3>
                                     <label class="input-file">
-                                        <input type="file" id="diplomaApp" name="diplomaApp" multiple
+                                        <input type="file" id="diploma" data-page="Персональные данные" multiple
                                             aria-label="Диплом" />
                                         <span>Выбрать файл</span>
                                     </label>
-                                    <ul id="diplomaApp-files" class="input-file-list">
+                                    <ul id="passport-files" class="input-file-list">
                                         @foreach ($documents as $document)
                                             @if (
                                                 $document->document->type == 'Диплом' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 2)
+                                                    $document->agent->acount_type_id == 2 &&
+                                                    $document->page->page == 'Персональные данные')
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div><span
                                                         class="input-file-list-name">{{ $document->path }}</span><a
@@ -631,301 +225,37 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">
+                                <li class="main__item-files second-item">
+                                    <h3 class="main__subtitle achievement__subtitle">
                                         Реферат
-                                        <div class="tooltip-icon hidden">
+                                        <div
+                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}}}">
                                             <div class="tooltip__container">
                                                 <div class="tooltip__status">
-                                                    <p class="toolltip__name">Иванов И.И</p>
-                                                    <p class="tooltip__date">12.12.2024</p>
-                                                    <p class="tooltip__time">9:31</p>
+                                                    <p class="toolltip__name"></p>
+                                                    <p class="tooltip__date"></p>
+                                                    <p class="tooltip__time"></p>
                                                 </div>
-                                                <p class="tooltip__alert">Измените название файла</p>
-                                            </div>
-                                        </div>
-                                    </h3>
-                                    <label class="input-file">
-                                        <input type="file" id="reportApp" name="reportApp" multiple
-                                            aria-label="Реферат" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="reportApp-files" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Реферат' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 2)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">
-                                        Другое
-                                        <div class="tooltip-icon hidden">
-                                            <div class="tooltip__container">
-                                                <div class="tooltip__status">
-                                                    <p class="toolltip__name">Иванов И.И</p>
-                                                    <p class="tooltip__date">12.12.2024</p>
-                                                    <p class="tooltip__time">9:31</p>
-                                                </div>
-                                                <p class="tooltip__alert">Измените название файла</p>
-                                            </div>
-                                        </div>
-                                    </h3>
-                                    <label class="input-file">
-                                        <input type="file" id="anotherApp" name="articleApp" multiple
-                                            aria-label="Другое" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="articleApp-files" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Другое' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 2)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="content-form {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}" id="pgForm">
-                            <h3 class="achievement__heding">Публикации</h3>
-                            <ul class="achievement__list-input">
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">Материалы конференций</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="materialConf" name="materialConf" multiple
-                                            aria-label="Материалы конференций" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="materialConf" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Материалы конференций' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 1)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">Тезисы докладов</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="thesisReport" name="thesisReport" multiple
-                                            aria-label="Тезисы докладов" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="thesisReport" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Тезисы докладов' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 1)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">Статьи</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="article" name="article" multiple
-                                            aria-label="Статьи" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="article" class="input-file-list"></ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">РИД</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="pid" name="pid" multiple aria-label="РИД" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="pid" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Статьи' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 1)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">Другое</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="anotherPg" name="anotherPg" multiple
-                                            aria-label="Другое" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="anotherPg-files" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Другое' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 1)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="achievement-item__input">
-                                    <h3 class="achievement__subtitle">Отчет аспиранта</h3>
-                                    <label class="input-file">
-                                        <input type="file" id="reportStudent" name="reportStudent" multiple
-                                            aria-label="Отчет аспиранта" />
-                                        <span>Выбрать файл</span>
-                                    </label>
-                                    <ul id="reportStudent" class="input-file-list">
-                                        @foreach ($documents as $document)
-                                            @if (
-                                                $document->document->type == 'Отчет аспиранта' &&
-                                                    $document->page->page == 'Индивидуальные достижения' &&
-                                                    $document->agent->acount_type_id == 1)
-                                                <li class="input-file-list-item">
-                                                    <div class="input-file-svg"></div><span
-                                                        class="input-file-list-name">{{ $document->path }}</span><a
-                                                        class="input-file-list-remove">x</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-                <div class="main main-container exam">
-                    <form action="#!" method="post" enctype="multipart/form-data" class="main__form exam">
-                        <h2 class="main__title achievement__title">
-                            Экзаменационная ведомость
-                        </h2>
-                        <h3 class="achievement__heding">Загрузите свои документы</h3>
-                        <ul class="achievement__list-input">
-                            <li class="achievement-item__input">
-                                <h3 class="achievement__subtitle">
-                                    Философия
-                                    <div class="tooltip-icon hidden">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name">Иванов И.И</p>
-                                                <p class="tooltip__date">12.12.2024</p>
-                                                <p class="tooltip__time">9:31</p>
-                                            </div>
-                                            <p class="tooltip__alert">Измените название файла</p>
+                                                @foreach ($acount->certainComment('Реферат', $acount->id, 1) as $comment)
+                                                    <p class="tooltip__alert">
+                                                        {{ $comment->comment }}
+                                                    </p>
+                                                @break
+                                            @endforeach
                                         </div>
                                     </div>
                                 </h3>
                                 <label class="input-file">
-                                    <input type="file" id="Philosophy" name="materialConf" multiple
-                                        aria-label="Философия" />
+                                    <input type="file" id="report" multiple aria-label="Реферат"
+                                        data-page="Персональные данные" />
                                     <span>Выбрать файл</span>
                                 </label>
-                                <ul id="materialConf" class="input-file-list">
+                                <ul id="report-files" class="input-file-list">
                                     @foreach ($documents as $document)
                                         @if (
-                                            $document->document->type == 'Философия' &&
-                                                $document->page->page == ' Экзаменационная ведомость' &&
-                                                $document->agent->acount_type_id == 2)
-                                            <li class="input-file-list-item">
-                                                <div class="input-file-svg"></div><span
-                                                    class="input-file-list-name">{{ $document->path }}</span><a
-                                                    class="input-file-list-remove">x</a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="achievement-item__input">
-                                <h3 class="achievement__subtitle">
-                                    Английский язык
-                                    <div class="tooltip-icon hidden">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name">Иванов И.И</p>
-                                                <p class="tooltip__date">12.12.2024</p>
-                                                <p class="tooltip__time">9:31</p>
-                                            </div>
-                                            <p class="tooltip__alert">Измените название файла</p>
-                                        </div>
-                                    </div>
-                                </h3>
-                                <label class="input-file">
-                                    <input type="file" id="thesisReport" name="thesisReport" multiple
-                                        aria-label="Английский язык" />
-                                    <span>Выбрать файл</span>
-                                </label>
-                                <ul id="thesisReport" class="input-file-list">
-                                    @foreach ($documents as $document)
-                                        @if (
-                                            $document->document->type == 'Английский язык' &&
-                                                $document->page->page == ' Экзаменационная ведомость' &&
-                                                $document->agent->acount_type_id == 2)
-                                            <li class="input-file-list-item">
-                                                <div class="input-file-svg"></div><span
-                                                    class="input-file-list-name">{{ $document->path }}</span><a
-                                                    class="input-file-list-remove">x</a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="achievement-item__input">
-                                <h3 class="achievement__subtitle">
-                                    Специальность
-                                    <div class="tooltip-icon hidden">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name">Иванов И.И</p>
-                                                <p class="tooltip__date">12.12.2024</p>
-                                                <p class="tooltip__time">9:31</p>
-                                            </div>
-                                            <p class="tooltip__alert">Измените название файла</p>
-                                        </div>
-                                    </div>
-                                </h3>
-                                <label class="input-file">
-                                    <input type="file" id="article" name="article" multiple
-                                        aria-label="Специальность" />
-                                    <span>Выбрать файл</span>
-                                </label>
-                                <ul id="article" class="input-file-list">
-                                    @foreach ($documents as $document)
-                                        @if (
-                                            $document->document->type == 'Специальность' &&
-                                                $document->page->page == ' Экзаменационная ведомость' &&
-                                                $document->agent->acount_type_id == 2)
+                                            $document->document->type == 'Реферат' &&
+                                                $document->agent->acount_type_id == 2 &&
+                                                $document->page->page == 'Персональные данные')
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div><span
                                                     class="input-file-list-name">{{ $document->path }}</span><a
@@ -936,18 +266,763 @@
                                 </ul>
                             </li>
                         </ul>
-                    </form>
+                    </li>
+                    <li class="main__item document-uploads">
+                        <ul class="main__list-files grid-container">
+                            <li class="main__item-files first-item">
+                                <h3 class="main__subtitle achievement__subtitle">
+                                    Паспорт
+                                    <div
+                                        class="tooltip-icon {{ !empty($acount->passport_comment) ? '' : ' hidden' }}">
+                                        <div class="tooltip__container">
+                                            <div class="tooltip__status">
+                                                <p class="toolltip__name"></p>
+                                                <p class="tooltip__date"></p>
+                                                <p class="tooltip__time"></p>
+                                            </div>
+                                            <p class="tooltip__alert">
+                                                {{ $acount->passport_comment }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </h3>
+                                <label class="input-file">
+                                    <input type="file" id="passport" name="passport" multiple
+                                        aria-label="Выбрать файл паспорта" />
+                                    <span>Выбрать файл</span>
+                                </label>
+                                <ul id="passport-files" class="input-file-list">
+                                    @if (!empty($acount->passport))
+                                        <li class="input-file-list-item">
+                                            <div class="input-file-svg"></div><span
+                                                class="input-file-list-name">{{ $acount->passport }}</span><a
+                                                class="input-file-list-remove">x</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                            <li class="main__item-files second-item">
+                                <h3 class="main__subtitle achievement__subtitle">
+                                    СНИЛС
+                                    <div
+                                        class="tooltip-icon {{ !empty($acount->snils_comment) ? '' : ' hidden' }}">
+                                        <div class="tooltip__container">
+                                            <div class="tooltip__status">
+                                                <p class="toolltip__name"></p>
+                                                <p class="tooltip__date"></p>
+                                                <p class="tooltip__time"></p>
+                                            </div>
+                                            <p class="tooltip__alert">
+                                                {{ $acount->snils_comment }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </h3>
+                                <label class="input-file">
+                                    <input type="file" id="snils" name="snils" multiple
+                                        aria-label="Выбрать файл СНИЛС" />
+                                    <span>Выбрать файл</span>
+                                </label>
+                                <ul id="snils-files" class="input-file-list">
+                                    @if (!empty($acount->snils))
+                                        <li class="input-file-list-item">
+                                            <div class="input-file-svg"></div><span
+                                                class="input-file-list-name">{{ $acount->snils }}</span><a
+                                                class="input-file-list-remove">x</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                            <li class="main__item-files third-item">
+                                <h3 class="main__subtitle achievement__subtitle">
+                                    ИНН
+                                    <div class="tooltip-icon {{ !empty($acount->inn_comment) ? '' : ' hidden' }}">
+                                        <div class="tooltip__container">
+                                            <div class="tooltip__status">
+                                                <p class="toolltip__name"></p>
+                                                <p class="tooltip__date"></p>
+                                                <p class="tooltip__time"></p>
+                                            </div>
+                                            <p class="tooltip__alert">
+                                                {{ $acount->inn_comment }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </h3>
+                                <label class="input-file">
+                                    <input type="file" id="inn" name="inn" multiple
+                                        aria-label="Выбрать файл ИНН" />
+                                    <span>Выбрать файл</span>
+                                </label>
+                                <ul id="inn-files" class="input-file-list">
+                                    @if (!empty($acount->inn))
+                                        <li class="input-file-list-item">
+                                            <div class="input-file-svg"></div><span
+                                                class="input-file-list-name">{{ $acount->inn }}</span><a
+                                                class="input-file-list-remove">x</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main__item diploma{{ $acount->acount_type_id == 1 ? '' : ' hidden' }}"
+                        id="diplomSec">
+                        <ul class="main__list-diploma">
+                            <li class="main__item-diploma">
+                                <h3 class="main__subtitle achievement__subtitle">
+                                    Тема диссертационной работы
+                                </h3>
+                                <label>
+                                    <input type="text" class="main__input" name="thesisTopic"
+                                        placeholder="Тема диссертационной работы"
+                                        aria-label="Тема диссертационной работы"
+                                        value="{{ $acount->works()->first()?->topic }}" />
+                                </label>
+                            </li>
+                            <li class="main__item-diploma">
+                                <h3 class="main__subtitle">Год обучения</h3>
+                                <label for="date-select">
+                                    <select id="date-select" data-year="{{ $acount->admission_year }}"
+                                        name="date"></select>
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main__item name-scientist{{ $acount->acount_type_id == 1 ? '' : ' hidden' }}"
+                        id="scientist">
+                        <h3 class="main__subtitle">Научный руководитель</h3>
+                        <ul class="main__list-scientist">
+                            <li class="main__item-scientist">
+                                <input type="text" name="fullNameScientist" class="main__input"
+                                    placeholder="Ф.И.О." aria-label="Ф.И.О."
+                                    value="{{ $acount->works()->first()?->scientific_head }}" />
+                                <input type="text" name="positionScientist" class="main__input"
+                                    placeholder="Должность" aria-label="Должность"
+                                    value="{{ $acount->works()->first()?->post }}" />
+                            </li>
+                            <li class="main__item-scientist">
+                                <input type="text" class="main__input" name="scientificDegree"
+                                    placeholder="Научная степень" aria-label="Научная степень"
+                                    value="{{ $acount->works()->first()?->scientific_degree }}" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main__item additional-files {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}"
+                        id="additional">
+                        <ul class="main__list-plan">
+                            <li class="main__item-plan">
+                                <div class="inner-title">
+                                    <h3 class="main__subtitle achievement__subtitle">
+                                        Реферат
+                                        <div
+                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                            <div class="tooltip__container">
+                                                <div class="tooltip__status">
+                                                    <p class="toolltip__name"></p>
+                                                    <p class="tooltip__date"></p>
+                                                    <p class="tooltip__time"></p>
+                                                </div>
+                                                @foreach ($acount->certainComment('Диплом', $acount->id, 1) as $comment)
+                                                    <p class="tooltip__alert"> {{ $comment->comment }}</p>
+                                                @break
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </h3>
+                                <label class="input-file">
+                                    <input type="file" id="report" multiple name="personalFiles"
+                                        aria-label="Реферат" />
+                                    <span>Выбрать файл</span>
+                                </label>
+                                <ul id="passport-files" class="input-file-list">
+                                    @foreach ($documents as $document)
+                                        @if ($document->document->type == 'Реферат' && $document->agent->acount_type_id == 1)
+                                            <li class="input-file-list-item">
+                                                <div class="input-file-svg"></div><span
+                                                    class="input-file-list-name">{{ $document->path }}</span><a
+                                                    class="input-file-list-remove">x</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="main__item-plan">
+                            <div class="inner-title">
+                                <h3 class="main__subtitle achievement__subtitle">
+                                    Индивидуальный план научной деятельности по
+                                    годам/семестрам
+                                    <div
+                                        class="tooltip-icon {{ $acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                        <div class="tooltip__container">
+                                            <div class="tooltip__status">
+                                                <p class="toolltip__name"></p>
+                                                <p class="tooltip__date"></p>
+                                                <p class="tooltip__time"></p>
+                                            </div>
+                                            @foreach ($acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1) as $comment)
+                                                <p class="tooltip__alert">{{ $comment->comment }}</p>
+                                            @break
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </h3>
+                            <label class="input-file">
+                                <input type="file" id="individualPlan" multiple name="personalFiles"
+                                    aria-label="Индивидуальный план научной деятельности по годам/семестрам" />
+                                <span>Выбрать файл</span>
+                            </label>
+                            <ul id="individualPlan-files" class="input-file-list">
+                                @foreach ($documents as $document)
+                                    @if (
+                                        $document->document->type == 'Индивидуальный план научной деятельности по годам/семестрам' &&
+                                            $document->agent->acount_type_id == 1)
+                                        <li class="input-file-list-item">
+                                            <div class="input-file-svg"></div><span
+                                                class="input-file-list-name">{{ $document->path }}</span><a
+                                                class="input-file-list-remove">x</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="main__item-plan">
+                        <div class="inner-title">
+                            <h3 class="main__subtitle achievement__subtitle">
+                                План научной деятельности по годам
+                                <div
+                                    class="tooltip-icon {{ $acount->certainComment('План научной деятельности по годам', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                    <div class="tooltip__container">
+                                        <div class="tooltip__status">
+                                            <p class="toolltip__name"></p>
+                                            <p class="tooltip__date"></p>
+                                            <p class="tooltip__time"></p>
+                                        </div>
+                                        @foreach ($acount->certainComment('План научной деятельности по годам', $acount->id, 1) as $comment)
+                                            <p class="tooltip__alert">{{ $comment->comment }} </p>
+                                        @break
+                                    @endforeach
+                                </div>
+                            </div>
+                        </h3>
+                        <label class="input-file">
+                            <input type="file" id="annualPlan" multiple name="personalFiles"
+                                aria-label="План научной деятельности по годам" />
+                            <span>Выбрать файл</span>
+                        </label>
+                        <ul id="annualPlan-files" class="input-file-list">
+                            @foreach ($documents as $document)
+                                @if ($document->document->type == 'План научной деятельности по годам' && $document->agent->acount_type_id == 1)
+                                    <li class="input-file-list-item">
+                                        <div class="input-file-svg"></div><span
+                                            class="input-file-list-name">{{ $document->path }}</span><a
+                                            class="input-file-list-remove">x</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                <li class="main__item-plan">
+                    <div class="inner-title">
+                        <h3 class="main__subtitle achievement__subtitle">
+                            Отзыв научного руководителя
+                            <div
+                                class="tooltip-icon {{ $acount->certainComment('Отзыв научного руководителя', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                <div class="tooltip__container">
+                                    <div class="tooltip__status">
+                                        <p class="toolltip__name"></p>
+                                        <p class="tooltip__date"></p>
+                                        <p class="tooltip__time"></p>
+                                    </div>
+                                    @foreach ($acount->certainComment('Отзыв научного руководителя', $acount->id, 1) as $comment)
+                                        <p class="tooltip__alert">{{ $comment->comment }}</p>
+                                    @break
+                                @endforeach
+                            </div>
+                        </div>
+                    </h3>
+                    <label class="input-file">
+                        <input type="file" id="supervisorReview" multiple name="personalFiles"
+                            aria-label="Отзыв научного руководителя" />
+                        <span>Выбрать файл</span>
+                    </label>
+                    <ul id="supervisorReview-files" class="input-file-list">
+                        @foreach ($documents as $document)
+                            @if ($document->document->type == 'Отзыв научного руководителя' && $document->agent->acount_type_id == 1)
+                                <li class="input-file-list-item">
+                                    <div class="input-file-svg"></div><span
+                                        class="input-file-list-name">{{ $document->path }}</span><a
+                                        class="input-file-list-remove">x</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
-            </section>
-        </main>
+            </li>
+            <li class="main__item-plan">
+                <div class="inner-title">
+                    <h3 class="main__subtitle achievement__subtitle">
+                        Выписка из протокола семинара
+                        <div
+                            class="tooltip-icon {{ $acount->certainComment('Выписка из протокола семинара', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                            <div class="tooltip__container">
+                                <div class="tooltip__status">
+                                    <p class="toolltip__name"></p>
+                                    <p class="tooltip__date"></p>
+                                    <p class="tooltip__time"></p>
+                                </div>
+                                @foreach ($acount->certainComment('Выписка из протокола семинара', $acount->id, 1) as $comment)
+                                    <p class="tooltip__alert"> {{ $comment->comment }}</p>
+                                @break
+                            @endforeach
+                        </div>
+                    </div>
+                </h3>
+                <label class="input-file">
+                    <input type="file" id="seminarProtocol" multiple name="personalFiles"
+                        aria-label="Выписка из протокола семинара" />
+                    <span>Выбрать файл</span>
+                </label>
+                <ul id="seminarProtocol-files" class="input-file-list">
+                    @foreach ($documents as $document)
+                        @if ($document->document->type == 'Выписка из протокола семинара' && $document->agent->acount_type_id == 1)
+                            <li class="input-file-list-item">
+                                <div class="input-file-svg"></div><span
+                                    class="input-file-list-name">{{ $document->path }}</span><a
+                                    class="input-file-list-remove">x</a>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        </li>
+        <li class="main__item-plan">
+            <div class="inner-title">
+                <h3 class="main__subtitle achievement__subtitle">
+                    Протокол отчета на Ученом совете
+                    <div
+                        class="tooltip-icon {{ $acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                        <div class="tooltip__container">
+                            <div class="tooltip__status">
+                                <p class="toolltip__name"></p>
+                                <p class="tooltip__date"></p>
+                                <p class="tooltip__time"></p>
+                            </div>
+                            @foreach ($acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1) as $comment)
+                                <p class="tooltip__alert">{{ $comment->comment }}</p>
+                            @break
+                        @endforeach
+                    </div>
+                </div>
+            </h3>
+            <label class="input-file">
+                <input type="file" id="councilReport" multiple name="personalFiles"
+                    aria-label="Протокол отчета на Ученом совете" />
+                <span>Выбрать файл</span>
+            </label>
+            <ul id="councilReport-files" class="input-file-list">
+                @foreach ($documents as $document)
+                    @if ($document->document->type == 'Протокол отчета на Ученом совете' && $document->agent->acount_type_id == 1)
+                        <li class="input-file-list-item">
+                            <div class="input-file-svg"></div><span
+                                class="input-file-list-name">{{ $document->path }}</span><a
+                                class="input-file-list-remove">x</a>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </li>
+</ul>
+</li>
+</ul>
+</form>
+</div>
+
+<div class="main main-container achievement">
+<form action="#!" method="post" enctype="multipart/form-data" class="main__form achievement">
+<h2 class="main__title achievement__title">
+Индивидуальные достижения
+</h2>
+<div class="content-form {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}" id="appForm">
+<h3 class="achievement__heding">Загрузите свои документы</h3>
+<ul class="achievement__list-input">
+<li class="achievement-item__input">
+    <h3 class="achievement__subtitle">
+        Диплом
+        <div
+            class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 2)->count() > 0 ? '' : ' hidden' }}">
+            <div class="tooltip__container">
+                <div class="tooltip__status">
+                    <p class="toolltip__name"></p>
+                    <p class="tooltip__date"></p>
+                    <p class="tooltip__time"></p>
+                </div>
+                @foreach ($acount->certainComment('Диплом', $acount->id, 2) as $comment)
+                    <p class="tooltip__alert">{{ $comment->comment }}</p>
+                @break
+            @endforeach
+        </div>
     </div>
+</h3>
+<label class="input-file">
+    <input type="file" id="diplomaApp" name="diplomaApp" multiple
+        aria-label="Диплом" />
+    <span>Выбрать файл</span>
+</label>
+<ul id="diplomaApp-files" class="input-file-list">
+    @foreach ($documents as $document)
+        @if (
+            $document->document->type == 'Диплом' &&
+                $document->page->page == 'Индивидуальные достижения' &&
+                $document->agent->acount_type_id == 2)
+            <li class="input-file-list-item">
+                <div class="input-file-svg"></div><span
+                    class="input-file-list-name">{{ $document->path }}</span><a
+                    class="input-file-list-remove">x</a>
+            </li>
+        @endif
+    @endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+    Реферат
+    <div class="tooltip-icon hidden">
+        <div class="tooltip__container">
+            <div class="tooltip__status">
+                <p class="toolltip__name"></p>
+                <p class="tooltip__date"></p>
+                <p class="tooltip__time"></p>
+            </div>
+            @foreach ($acount->certainComment('Реферат', $acount->id, 2) as $comment)
+                <p class="tooltip__alert">{{ $comment->comment }}</p>
+            @break
+        @endforeach
+    </div>
+</div>
+</h3>
+<label class="input-file">
+<input type="file" id="reportApp" name="reportApp" multiple
+    aria-label="Реферат" />
+<span>Выбрать файл</span>
+</label>
+<ul id="reportApp-files" class="input-file-list">
+@foreach ($documents as $document)
+    @if (
+        $document->document->type == 'Реферат' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 2)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+Другое
+<div class="tooltip-icon hidden">
+    <div class="tooltip__container">
+        <div class="tooltip__status">
+            <p class="toolltip__name"></p>
+            <p class="tooltip__date"></p>
+            <p class="tooltip__time"></p>
+        </div>
+        @foreach ($acount->certainComment('Другое', $acount->id, 2) as $comment)
+            <p class="tooltip__alert">{{ $comment->path }}</p>
+        @break
+    @endforeach
+</div>
+</div>
+</h3>
+<label class="input-file">
+<input type="file" id="anotherApp" name="articleApp" multiple
+aria-label="Другое" />
+<span>Выбрать файл</span>
+</label>
+<ul id="articleApp-files" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Другое' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 2)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+</ul>
+</div>
+<div class="content-form {{ $acount->acount_type_id == 1 ? '' : 'hidden' }}" id="pgForm">
+<h3 class="achievement__heding">Публикации</h3>
+<ul class="achievement__list-input">
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">Материалы конференций</h3>
+<label class="input-file">
+<input type="file" id="materialConf" name="materialConf" multiple
+aria-label="Материалы конференций" />
+<span>Выбрать файл</span>
+</label>
+<ul id="materialConf" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Материалы конференций' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 1)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">Тезисы докладов</h3>
+<label class="input-file">
+<input type="file" id="thesisReport" name="thesisReport" multiple
+aria-label="Тезисы докладов" />
+<span>Выбрать файл</span>
+</label>
+<ul id="thesisReport" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Тезисы докладов' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 1)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">Статьи</h3>
+<label class="input-file">
+<input type="file" id="article" name="article" multiple
+aria-label="Статьи" />
+<span>Выбрать файл</span>
+</label>
+<ul id="article" class="input-file-list"></ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">РИД</h3>
+<label class="input-file">
+<input type="file" id="pid" name="pid" multiple aria-label="РИД" />
+<span>Выбрать файл</span>
+</label>
+<ul id="pid" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Статьи' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 1)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">Другое</h3>
+<label class="input-file">
+<input type="file" id="anotherPg" name="anotherPg" multiple
+aria-label="Другое" />
+<span>Выбрать файл</span>
+</label>
+<ul id="anotherPg-files" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Другое' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 1)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">Отчет аспиранта</h3>
+<label class="input-file">
+<input type="file" id="reportStudent" name="reportStudent" multiple
+aria-label="Отчет аспиранта" />
+<span>Выбрать файл</span>
+</label>
+<ul id="reportStudent" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Отчет аспиранта' &&
+        $document->page->page == 'Индивидуальные достижения' &&
+        $document->agent->acount_type_id == 1)
+    <li class="input-file-list-item">
+        <div class="input-file-svg"></div><span
+            class="input-file-list-name">{{ $document->path }}</span><a
+            class="input-file-list-remove">x</a>
+    </li>
+@endif
+@endforeach
+</ul>
+</li>
+</ul>
+</div>
+</form>
+</div>
+<div class="main main-container exam">
+<form action="#!" method="post" enctype="multipart/form-data" class="main__form exam">
+<h2 class="main__title achievement__title">
+Экзаменационная ведомость
+</h2>
+<h3 class="achievement__heding">Загрузите свои документы</h3>
+<ul class="achievement__list-input">
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+Философия
+<div
+class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
+<div class="tooltip__container">
+<div class="tooltip__status">
+    <p class="toolltip__name"></p>
+    <p class="tooltip__date"></p>
+    <p class="tooltip__time"></p>
+</div>
+@foreach ($acount->certainComment('Философия', $acount->id, 3) as $comment)
+    <p class="tooltip__alert">{{ $comment->comment }}</p>
+@break
+@endforeach
+</div>
+</div>
+</h3>
+<label class="input-file">
+<input type="file" id="Philosophy" name="materialConf" multiple
+aria-label="Философия" />
+<span>Выбрать файл</span>
+</label>
+<ul id="materialConf" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Философия' &&
+        $document->page->page == 'Экзаменационная ведомость' &&
+        $document->agent->acount_type_id == 2)
+<li class="input-file-list-item">
+<div class="input-file-svg"></div><span
+    class="input-file-list-name">{{ $document->path }}</span><a
+    class="input-file-list-remove">x</a>
+</li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+Английский язык
+<div
+class="tooltip-icon {{ $acount->certainComment('Английский язык', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
+<div class="tooltip__container">
+<div class="tooltip__status">
+<p class="toolltip__name"></p>
+<p class="tooltip__date"></p>
+<p class="tooltip__time"></p>
+</div>
+@foreach ($acount->certainComment('Английский язык', $acount->id, 3) as $comment)
+<p class="tooltip__alert">{{ $comment->comment }}</p>
+@break
+@endforeach
+</div>
+</div>
+</h3>
+<label class="input-file">
+<input type="file" id="thesisReport" name="thesisReport" multiple
+aria-label="Английский язык" />
+<span>Выбрать файл</span>
+</label>
+<ul id="thesisReport" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Английский язык' &&
+        $document->page->page == 'Экзаменационная ведомость' &&
+        $document->agent->acount_type_id == 2)
+<li class="input-file-list-item">
+<div class="input-file-svg"></div><span
+class="input-file-list-name">{{ $document->path }}</span><a
+class="input-file-list-remove">x</a>
+</li>
+@endif
+@endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+Специальность
+<div
+class="tooltip-icon {{ $acount->certainComment('Специальность', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
+<div class="tooltip__container">
+<div class="tooltip__status">
+<p class="toolltip__name"></p>
+<p class="tooltip__date"></p>
+<p class="tooltip__time"></p>
+</div>
+@foreach ($acount->certainComment('Специальность', $acount->id, 3) as $comment)
+<p class="tooltip__alert">{{ $comment->comment }}</p>
+@break
+@endforeach
+</div>
+</div>
+</h3>
+<label class="input-file">
+<input type="file" id="article" name="article" multiple
+aria-label="Специальность" />
+<span>Выбрать файл</span>
+</label>
+<ul id="article" class="input-file-list">
+@foreach ($documents as $document)
+@if (
+    $document->document->type == 'Специальность' &&
+        $document->page->page == 'Экзаменационная ведомость' &&
+        $document->agent->acount_type_id == 2)
+<li class="input-file-list-item">
+<div class="input-file-svg"></div><span
+class="input-file-list-name">{{ $document->path }}</span><a
+class="input-file-list-remove">x</a>
+</li>
+@endif
+@endforeach
+</ul>
+</li>
+</ul>
+</form>
+</div>
+</section>
+</main>
+</div>
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('/lib/jquery.min.js') }}"></script>
-    <script defer src="{{ asset('js/pa/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('/lib/jquery.min.js') }}"></script>
+<script defer src="{{ asset('js/pa/script.js') }}"></script>
 @endsection

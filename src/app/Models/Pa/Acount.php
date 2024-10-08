@@ -63,7 +63,7 @@ class Acount extends Authenticatable
      * @param integer|null $year - год
      * @return Collection
      */
-    public function certainDocument(string $type, int $user_id, int $year = null): Collection
+    public function certainDocument(string $type, int $user_id, int $year = null)
     {
         if (!empty($year))
             $result = $this->documents()
@@ -82,6 +82,22 @@ class Acount extends Authenticatable
                     ->where(['type' => $type])
                     ->first()->id
             ])->get();
+
+        return $result;
+    }
+
+    public function certainComment(string $type, int $user_id, $page)
+    {
+        $result = $this->documents()
+            ->where([
+                'acount_id' => $user_id,
+                'personal_page_id' => $page,
+                'personal_document_type_id' => PersonalDocumentType::query()
+                    ->where(['type' => $type])
+                    ->first()->id
+            ])
+            ->whereNotNull('comment')
+            ->get();
 
         return $result;
     }

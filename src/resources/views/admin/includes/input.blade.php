@@ -2,7 +2,9 @@
     @if (!empty($label))
         <span>{!! $label ?? '' !!}</span>
     @endif
-    <input type="{{(isset($type) && $type) ? $type : 'text'}}" name="{{ $name ?? '' }}" value="{{ $value ?? '' }}" {{ $required ?? '' }} class="{{ $class ?? '' }}" maxlength="191">
+    <input type="{{ isset($type) && $type ? $type : 'text' }}" name="{{ $name ?? '' }}"
+        placeholder="{{ $placeholder ?? '' }}" value="{{ $value ?? '' }}" {{ $required ?? '' }} class="{{ $class ?? '' }}"
+        maxlength="191">
     @if (!empty($help))
         <small class="help-textarea">{{ $help }}</small>
     @endif

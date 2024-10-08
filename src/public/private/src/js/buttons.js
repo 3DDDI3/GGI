@@ -433,4 +433,16 @@ $(document).ready(function () {
         }
     });
 
+    $(".user_icon").on("change", function () {
+        let formData = new FormData();
+
+        Array.from(this.files).forEach(file => {
+            formData.append($(this).prop("name"), file)
+        });
+
+        axios.post("/api/pa/users/files/upload", formData).then(response => {
+            $(this).parents("label").find("img").attr("src", `/storage/${response.data.image}`);
+        });
+    });
+
 });

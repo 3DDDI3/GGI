@@ -36,12 +36,18 @@ function curSelect() {
 // option2.addEventListener("change", curSelect);
 
 const select = document.getElementById("date-select");
-for (let year = 2024; year >= 1910; year--) {
+for (let year = new Date().getFullYear(); year >= 1970; year--) {
   const option = document.createElement("option");
   option.value = year;
   option.text = year;
   select.appendChild(option);
 }
+
+Array.from($(select).find("option")).forEach(el => {
+  if ($(el).val() == $(select).data("year"))
+    $(select).prop("selectedIndex", $(el).index());
+
+})
 
 const choices = new Choices(select, {
   searchEnabled: false,
@@ -57,6 +63,23 @@ for (let year = 1920; year <= 2025; year++) {
   option.innerHTML = year;
   document.getElementById("date-select").appendChild(option);
 }
+
+
+const inputElement = document.getElementById("input");
+const placeholder = document.querySelector(".label-placeholder");
+// Function to toggle 'active' class based on input content
+function toggleActiveClass() {
+  if (inputElement.value) {
+    placeholder.classList.add("active");
+    inputElement.classList.add("active");
+  } else {
+    placeholder.classList.remove("active");
+    inputElement.classList.remove("active");
+  }
+}
+// Add event listeners for input and change events
+inputElement.addEventListener("input", toggleActiveClass);
+inputElement.addEventListener("change", toggleActiveClass);
 
 // end toggle
 
@@ -254,11 +277,11 @@ $(function () {
   let url, data = undefined;
 
   $(document).on("mouseup", function (e) {
-    console.log($(focusedBlock).has(e.target).length === 0, focusedBlock);
+    // console.log($(focusedBlock));
     // data, focusedBlock = undefined;
 
     if (focusedBlock != undefined && $(focusedBlock).has(e.target).length === 0
-      && $(".main__list").has(e.target).length === 0
+      && $(".name-scientist").has(e.target).length === 0
       && $(e.target).parents(".swal2-shown").length === 0) {
 
       switch ($(focusedBlock).prop("class")) {
@@ -289,6 +312,8 @@ $(function () {
             post: $("input[name='positionScientist']").val(),
             scientific_degree: $("input[name='scientificDegree']").val(),
           }
+          // console.log(url);
+          // return;
           break;
 
         case "main__item diploma":
@@ -298,14 +323,9 @@ $(function () {
             year: $("#date-select").val(),
           }
           break;
-
-        case "document-uploads":
-
-          break;
-
-        default:
-          break;
       }
+
+      if (url == undefined) return;
 
       axios.defaults.withXSRFToken = true;
 
@@ -325,12 +345,27 @@ $(function () {
   $(".main__item-files input[type='file']").on("change", function () {
     let formData = new FormData();
 
-    Array.from(this.files).forEach(file => {
-      formData.append($(this).prop("name"), file);
-    });
+    if ($(this).data("page") != undefined) {
+      Array.from(this.files).forEach(file => {
+        formData.append($(this).prop("name"), file);
+      });
+      formData.append("document", `${$(this).attr('aria-label')}`);
+      formData.append("page", $(this).data("page"));
+    } else {
+      Array.from(this.files).forEach(file => {
+        formData.append($(this).prop("name"), file);
+      });
+    }
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
-      $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span><a class='input-file-list-remove'>x</a></li>`);
+      console.log(response);
+      if (response.data.documents != undefined)
+        Array.from(response.data.documents).forEach(el => {
+          $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${el.path}</span><a class='input-file-list-remove'>x</a></li>`);
+        })
+      else {
+        $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span><a class='input-file-list-remove'>x</a></li>`);
+      }
     });
   });
 
@@ -344,7 +379,7 @@ $(function () {
 
     formData.append("document", `${$(this).attr('aria-label')}`);
     formData.append("page", "Персональные данные");
-    formData.append("year", $("#date-select").val());
+    // formData.append("year", $("#date-select").val());
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       console.log(response);

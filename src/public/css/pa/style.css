@@ -438,6 +438,10 @@ body {
   font-weight: 500;
 }
 
+.main__subtitle.achievement__subtitle {
+  margin-bottom: 20px;
+}
+
 .main__list-mainInfo {
   display: flex;
   flex-direction: column;
@@ -607,12 +611,16 @@ span.btn-more {
   margin-bottom: 0;
 }
 
+.main__item-diploma:last-child {
+  width: fit-content;
+}
+
 .main__list-diploma {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 50px;
   justify-content: space-between;
 }

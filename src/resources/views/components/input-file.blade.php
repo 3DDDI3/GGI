@@ -53,7 +53,7 @@
         <div class="file" style="display: none">
             <a class="file__name"></a>
             <div class="file__action">
-                <button class="file__edit">
+                {{-- <button class="file__edit">
                     <svg width="64px" height="64px" viewBox="0 -0.5 25 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -77,7 +77,7 @@
                             </g>
                         </svg>
                     </div>
-                </button>
+                </button> --}}
                 <button class="file__delete">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="25"
                         width="25">
@@ -97,7 +97,7 @@
             <div class="file">
                 <a href="{{ $attributes->get('path') }}" class="file__name">{{ $file->$field }}</a>
                 <div class="file__action">
-                    <button data-id="{{ $file->id }}" class="file__edit">
+                    {{-- <button data-id="{{ $file->id }}" class="file__edit">
                         <svg width="64px" height="64px" viewBox="0 -0.5 25 25" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -122,7 +122,7 @@
                                 </g>
                             </svg>
                         </div>
-                    </button>
+                    </button> --}}
                     <button data-id="{{ $file->id }}" class="file__delete">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="25"
                             width="25">

@@ -14,6 +14,7 @@ class FileUpload extends Controller
 {
     public function upload(Request $request)
     {
+        // dd($request->input());
 
         $user = empty($request->user('pa')) ? $request->input('user') : $request->user('pa')->id;
 
@@ -39,7 +40,7 @@ class FileUpload extends Controller
             $path = $file->store('pa');
 
             if (empty($request->page) && empty($request->document)) {
-                Acount::query()
+                $documents = Acount::query()
                     ->find($user)
                     ->fill([$name => $path])
                     ->save();

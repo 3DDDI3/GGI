@@ -50,20 +50,28 @@ class UserController extends Controller
     {
         $request->validated();
 
+        if (!empty($request->year))
+            Acount::query()
+                ->where(['id' => $request->user('pa')->id])
+                ->first()
+                ->fill(['admission_year' => $request->year])
+                ->save();
+
+
+
         $personalWork = PersonalWork::query()
             ->where([
-                'year' => $request->year,
                 'acount_id' => $request->user('pa')->id
             ])
             ->first();
 
         if (!$personalWork) (new PersonalWork())
             ->create([
-                'year' => $request->year,
+                'topic' => $request->topic,
                 'acount_id' => $request->user('pa')->id
             ]);
         else $personalWork
-            ->fill($request->only(['year', 'topic']))
+            ->fill($request->only(['topic']))
             ->save();
 
         return response([], 200);
@@ -75,7 +83,6 @@ class UserController extends Controller
 
         $personalWork = PersonalWork::query()
             ->where([
-                'year' => $request->year,
                 'acount_id' => $request->user('pa')->id
             ])
             ->first();
