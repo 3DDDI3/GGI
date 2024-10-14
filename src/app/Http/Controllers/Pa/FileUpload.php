@@ -14,8 +14,6 @@ class FileUpload extends Controller
 {
     public function upload(Request $request)
     {
-        // dd($request->input());
-
         $user = empty($request->user('pa')) ? $request->input('user') : $request->user('pa')->id;
 
         if (!empty($request->comment)) {
@@ -71,6 +69,8 @@ class FileUpload extends Controller
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
             ])->get();
+
+        // dd($documents);
 
         return response(['documents' => $documents], 200);
     }

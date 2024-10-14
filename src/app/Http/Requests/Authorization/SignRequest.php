@@ -53,7 +53,7 @@ class SignRequest extends FormRequest
             'secondName.required' => 'Поле отчество обязательное',
             'birthday.required' => 'Поле дата рождения обязательное',
             'birthday.date' => 'Некорректный формат даты рождения',
-            'birthday.before:today' => 'Некорректная дата рождения',
+            'birthday.before' => 'Некорректная дата рождения',
             'email.required' => 'Поле email обязательное',
             'email.email' => 'Email некорректный',
             'email.unique' => 'Такой email уже существует',

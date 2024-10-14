@@ -74,7 +74,7 @@ class PersonalAcountController extends Controller
                 'snils_comment' => $request->snils_comment,
                 'passport_comment' => $request->passport_comment,
                 'inn_comment' => $request->inn_comment,
-                'admission_year' => $request->admission_year,
+                'admission_year' => $request->admission_year > 0 ? $request->admission_year : null,
             ]);
 
             if ($request->class > 0)

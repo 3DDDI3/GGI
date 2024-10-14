@@ -231,8 +231,8 @@
                                 width: 0;
                                 padding: 0;
                                 border: 0 !important;">
-                        <img src="/storage/{{ $object->icon }}"
-                            style="width: 100px; height: 100px; border-radius: 50%; cursor: pointer; object-fit: cover;"
+                        <img src='{{ $object->icon == null ? '/images/pa/upload-icon.svg' : "/storage/$object->icon" }}'
+                            style="width: 100px; height: 100px; border-radius: 50%; cursor: pointer; object-fit: fill;"
                             alt="Иконка">
                     </label>
                     <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 10px;">
@@ -684,40 +684,40 @@
     <script src="/lib/jquery.min.js"></script>
 
     <script>
-        $(".file_delete").on("click", function(e) {
-            e.stopImmediatePropagation();
+        // $(".file_delete").on("click", function(e) {
+        //     e.stopImmediatePropagation();
 
-            Swal.fire({
-                title: 'Вы действительно хотите удалить?',
-                text: 'Отменить это действие будет невозможно',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Удалить',
-                cancelButtonText: 'Отмена',
-            }).then((response) => {
+        //     Swal.fire({
+        //         title: 'Вы действительно хотите удалить?',
+        //         text: 'Отменить это действие будет невозможно',
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Удалить',
+        //         cancelButtonText: 'Отмена',
+        //     }).then((response) => {
 
-                $.ajax({
-                    type: "delete",
-                    url: "/api/pa/files/delete",
-                    data: {
-                        id: $(this).data("id"),
-                        field: $(this).parents(".field").find("input[type='file']").attr("name"),
-                        path: $(this).parents(".admin_file_container").find("a").text()
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        $(this).parents(".field-wrapper").find(".input_block textarea").val("");
-                        $(this).parents(".admin_file_container").remove();
+        //         $.ajax({
+        //             type: "delete",
+        //             url: "/api/pa/files/delete",
+        //             data: {
+        //                 id: $(this).data("id"),
+        //                 field: $(this).parents(".field").find("input[type='file']").attr("name"),
+        //                 path: $(this).parents(".admin_file_container").find("a").text()
+        //             },
+        //             dataType: "json",
+        //             success: function(response) {
+        //                 $(this).parents(".field-wrapper").find(".input_block textarea").val("");
+        //                 $(this).parents(".admin_file_container").remove();
 
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Удалено',
-                            timer: 1000,
-                        });
-                    }.bind(this)
-                });
-            });
+        //                 Swal.fire({
+        //                     icon: 'success',
+        //                     title: 'Удалено',
+        //                     timer: 1000,
+        //                 });
+        //             }.bind(this)
+        //         });
+        //     });
 
-        });
+        // });
     </script>
 @endsection

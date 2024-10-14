@@ -27,7 +27,7 @@ return new class extends Migration
             $table->year('admission_year')->nullable();
             $table->string('email', 500)->nullable();
             $table->string('password', 255)->nullable();
-            $table->timestamp('birthday')->nullable();
+            $table->dateTime('birthday')->nullable();
             $table->string('specialty', 1000)->nullable();
             $table->string('study_place', 1000)->nullable();
             $table->text('icon')->nullable();

@@ -8,8 +8,8 @@
                     <li class="nav__item logo">
                         <a href="index.html" class="logo__nav">
                             <div class="nav__wrapp-img">
-                                <img src="img/logo-img-1.png" alt="Логотип Государственного гидрологического института"
-                                    class="nav__img" />
+                                <img src="{{ asset('images/pa/logo-img-1.png') }}"
+                                    alt="Логотип Государственного гидрологического института" class="nav__img" />
                             </div>
                             <div class="sidebar__wrapp-title">
                                 <h2 class="sidebar__title">
@@ -74,6 +74,7 @@
                             </a>
                         </li>
                     @endif
+
                 </ul>
             </nav>
         </aside>
@@ -133,7 +134,7 @@
                             </li>
                             <li class="main__item initials">
                                 <div id="image-container" class="image-container">
-                                    <input type="file" id="file-input" accept="image/*" />
+                                    <input type="file" name="icon" id="file-input" accept="image/*" />
                                     <img id="image-preview" class="image-preview" src="/storage/{{ $acount->icon }}"
                                         style="{{ !empty($acount->icon) ? 'display: block' : '' }}" alt="Image Preview" />
                                 </div>
@@ -157,21 +158,9 @@
                                     </li>
                                 </ul>
                             </li>
+
                             <li class="main__item mainInfo">
-                                <h3 class="main__subtitle">
-                                    Основная информация
-                                    <div
-                                        class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name"></p>
-                                                <p class="tooltip__date"></p>
-                                                <p class="tooltip__time"></p>
-                                            </div>
-                                            <p class="tooltip__alert"></p>
-                                        </div>
-                                    </div>
-                                </h3>
+                                <h3 class="main__subtitle">Основная информация</h3>
                                 <ul class="main__list-mainInfo">
                                     <li class="main__item-mainInfo">
                                         <label for="input" class="main__label main__input">
@@ -192,6 +181,7 @@
                                     </li>
                                 </ul>
                             </li>
+
                             <li class="main__item document-uploads abit {{ $acount->acount_type_id == 1 ? 'hidden' : '' }}"
                                 id="abit">
                                 <ul class="main__list-files grid-container">
@@ -212,6 +202,7 @@
                                                         </p>
                                                     @break
                                                 @endforeach
+
                                             </div>
                                         </div>
                                     </h3>
@@ -382,16 +373,6 @@
                             <li class="main__item-diploma">
                                 <h3 class="main__subtitle achievement__subtitle">
                                     Тема диссертационной работы
-                                    <div class="tooltip-icon hidden">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name"></p>
-                                                <p class="tooltip__date"></p>
-                                                <p class="tooltip__time"></p>
-                                            </div>
-                                            <p class="tooltip__alert"></p>
-                                        </div>
-                                    </div>
                                 </h3>
                                 <label>
                                     <input type="text" class="main__input" name="thesisTopic"
@@ -401,20 +382,7 @@
                                 </label>
                             </li>
                             <li class="main__item-diploma">
-                                <!-- <label> -->
-                                <h3 class="main__subtitle achievement__subtitle">
-                                    Год обучения
-                                    <div class="tooltip-icon hidden">
-                                        <div class="tooltip__container">
-                                            <div class="tooltip__status">
-                                                <p class="toolltip__name"></p>
-                                                <p class="tooltip__date"></p>
-                                                <p class="tooltip__time"></p>
-                                            </div>
-                                            <p class="tooltip__alert"></p>
-                                        </div>
-                                    </div>
-                                </h3>
+                                <h3 class="main__subtitle">Год обучения</h3>
                                 <label for="date-select">
                                     <select id="date-select" data-year="{{ $acount->admission_year }}"
                                         name="date"></select>
@@ -424,19 +392,7 @@
                     </li>
                     <li class="main__item name-scientist{{ $acount->acount_type_id == 1 ? '' : ' hidden' }}"
                         id="scientist">
-                        <h3 class="main__subtitle">
-                            Научный руководитель
-                            <div class="tooltip-icon hidden">
-                                <div class="tooltip__container">
-                                    <div class="tooltip__status">
-                                        <p class="toolltip__name"></p>
-                                        <p class="tooltip__date"></p>
-                                        <p class="tooltip__time">9</p>
-                                    </div>
-                                    <p class="tooltip__alert"></p>
-                                </div>
-                            </div>
-                        </h3>
+                        <h3 class="main__subtitle">Научный руководитель</h3>
                         <ul class="main__list-scientist">
                             <li class="main__item-scientist">
                                 <input type="text" name="fullNameScientist" class="main__input"
@@ -458,7 +414,7 @@
                         <ul class="main__list-plan">
                             <li class="main__item-plan">
                                 <div class="inner-title">
-                                    <h3 class="main__subtitle">
+                                    <h3 class="main__subtitle achievement__subtitle">
                                         Реферат
                                         <div
                                             class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
@@ -495,7 +451,7 @@
                         </li>
                         <li class="main__item-plan">
                             <div class="inner-title">
-                                <h3 class="main__subtitle">
+                                <h3 class="main__subtitle achievement__subtitle">
                                     Индивидуальный план научной деятельности по
                                     годам/семестрам
                                     <div
@@ -535,7 +491,7 @@
                     </li>
                     <li class="main__item-plan">
                         <div class="inner-title">
-                            <h3 class="main__subtitle">
+                            <h3 class="main__subtitle achievement__subtitle">
                                 План научной деятельности по годам
                                 <div
                                     class="tooltip-icon {{ $acount->certainComment('План научной деятельности по годам', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
@@ -572,7 +528,7 @@
                 </li>
                 <li class="main__item-plan">
                     <div class="inner-title">
-                        <h3 class="main__subtitle">
+                        <h3 class="main__subtitle achievement__subtitle">
                             Отзыв научного руководителя
                             <div
                                 class="tooltip-icon {{ $acount->certainComment('Отзыв научного руководителя', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
@@ -609,7 +565,7 @@
             </li>
             <li class="main__item-plan">
                 <div class="inner-title">
-                    <h3 class="main__subtitle">
+                    <h3 class="main__subtitle achievement__subtitle">
                         Выписка из протокола семинара
                         <div
                             class="tooltip-icon {{ $acount->certainComment('Выписка из протокола семинара', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
@@ -646,7 +602,7 @@
         </li>
         <li class="main__item-plan">
             <div class="inner-title">
-                <h3 class="main__subtitle">
+                <h3 class="main__subtitle achievement__subtitle">
                     Протокол отчета на Ученом совете
                     <div
                         class="tooltip-icon {{ $acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
@@ -686,8 +642,9 @@
 </ul>
 </form>
 </div>
+
 <div class="main main-container achievement">
-<form action="#!" method="post" enctype="multipart/form-data" class="main__form achievement">
+<form enctype="multipart/form-data" class="main__form achievement">
 <h2 class="main__title achievement__title">
 Индивидуальные достижения
 </h2>
@@ -862,20 +819,7 @@ aria-label="Тезисы докладов" />
 aria-label="Статьи" />
 <span>Выбрать файл</span>
 </label>
-<ul id="article" class="input-file-list">
-@foreach ($documents as $document)
-@if (
-    $document->document->type == 'Статьи' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
-@endforeach
-</ul>
+<ul id="article" class="input-file-list"></ul>
 </li>
 <li class="achievement-item__input">
 <h3 class="achievement__subtitle">РИД</h3>
@@ -956,22 +900,24 @@ aria-label="Отчет аспиранта" />
 <li class="achievement-item__input">
 <h3 class="achievement__subtitle">
 Философия
+<div
 class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
 <div class="tooltip__container">
 <div class="tooltip__status">
-<p class="toolltip__name"></p>
-<p class="tooltip__date"></p>
-<p class="tooltip__time"></p>
+    <p class="toolltip__name"></p>
+    <p class="tooltip__date"></p>
+    <p class="tooltip__time"></p>
 </div>
 @foreach ($acount->certainComment('Философия', $acount->id, 3) as $comment)
-<p class="tooltip__alert">{{ $comment->comment }}</p>
+    <p class="tooltip__alert">{{ $comment->comment }}</p>
 @break
 @endforeach
 </div>
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="Philosophy" name="materialConf" multiple aria-label="Философия" />
+<input type="file" id="Philosophy" name="materialConf" multiple
+aria-label="Философия" />
 <span>Выбрать файл</span>
 </label>
 <ul id="materialConf" class="input-file-list">
@@ -982,8 +928,8 @@ class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id
         $document->agent->acount_type_id == 2)
 <li class="input-file-list-item">
 <div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+    class="input-file-list-name">{{ $document->path }}</span><a
+    class="input-file-list-remove">x</a>
 </li>
 @endif
 @endforeach
@@ -1046,7 +992,8 @@ class="tooltip-icon {{ $acount->certainComment('Специальность', $ac
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="article" name="article" multiple aria-label="Специальность" />
+<input type="file" id="article" name="article" multiple
+aria-label="Специальность" />
 <span>Выбрать файл</span>
 </label>
 <ul id="article" class="input-file-list">

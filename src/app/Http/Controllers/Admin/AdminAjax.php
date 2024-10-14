@@ -155,12 +155,12 @@ class AdminAjax extends Controller
 
     private function fileDelete($id, $className, $path, $field)
     {
-        $_SERVER['DOCUMENT_ROOT'];
-
         $object = $className::find($id);
 
+        
+
         if ($object && !empty($object->$field)) {
-            unlink(ROOT . $path . '/' . $object->$field);
+            unlink($_SERVER['DOCUMENT_ROOT'] . $path);
             $object->$field = null;
             $object->save();
             echo 'success';

@@ -1,4 +1,4 @@
-@import url("./fonts.css");
+@import url("../fonts.css");
 
 * {
   box-sizing: border-box;
@@ -30,8 +30,7 @@ button {
     hsl(0, 0%, 29%);
 }
 
-.container {
-}
+.container {}
 
 .auth__logo {
   position: absolute;
@@ -61,8 +60,7 @@ button {
   z-index: 1;
 }
 
-.auth__img {
-}
+.auth__img {}
 
 .auth__wrapp-title {
   width: min-content;
@@ -140,10 +138,10 @@ button {
   gap: 15px;
 }
 
-.auth__item {
-}
+.auth__item {}
 
 .auth__label {
+  position: relative;
   background-color: #fff;
   width: 100%;
   height: 100%;
@@ -164,15 +162,15 @@ button {
   cursor: pointer;
 }
 
-.auth__input:focus + span,
-.auth__input:hover + span,
-.auth__input:active + span {
+.auth__input:focus+span,
+.auth__input:hover+span,
+.auth__input:active+span {
   color: transparent;
 }
 
-.auth__input:focus + span,
-.auth__input:hover + span,
-.auth__input:active + span {
+.auth__input:focus+span,
+.auth__input:hover+span,
+.auth__input:active+span {
   visibility: hidden;
 }
 
@@ -185,6 +183,7 @@ button {
 .bd input {
   width: 100%;
 }
+
 .bd input {
   color: transparent;
 }
@@ -196,8 +195,10 @@ button {
   color: #5b5b5b;
 }
 
-.auth__input + span {
+.auth__input+span {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .auth__input:focus {
@@ -221,8 +222,7 @@ button {
   color: red;
 }
 
-.auth__span {
-}
+.auth__span {}
 
 .auth__inner {
   margin-bottom: 23px;
@@ -241,14 +241,16 @@ button {
   z-index: -1;
   opacity: 0;
 }
-.auth__checkbox + .auth__label-checkbox {
+
+.auth__checkbox+.auth__label-checkbox {
   display: flex;
   gap: 0.8em;
   padding: 0 6px;
   align-items: center;
   user-select: none;
 }
-.auth__checkbox + .auth__label-checkbox::before {
+
+.auth__checkbox+.auth__label-checkbox::before {
   content: "";
   display: inline-block;
   width: 9px;
@@ -263,21 +265,25 @@ button {
   background-size: 50% 50%;
   transition: background-color 0.2s ease;
 }
-.auth__checkbox:checked + .auth__label-checkbox::before {
+
+.auth__checkbox:checked+.auth__label-checkbox::before {
   background: #29b3ff;
 }
 
-.auth__checkbox:not(:disabled):active + .auth__label-checkbox::before {
+.auth__checkbox:not(:disabled):active+.auth__label-checkbox::before {
   background-color: #b3d7ff;
   border-color: #b3d7ff;
 }
-.auth__checkbox:focus + .auth__label-checkbox::before {
+
+.auth__checkbox:focus+.auth__label-checkbox::before {
   /* box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); */
 }
-.auth__checkbox:focus:not(:checked) + .auth__label-checkbox::before {
+
+.auth__checkbox:focus:not(:checked)+.auth__label-checkbox::before {
   border-color: #80bdff;
 }
-.auth__checkbox:disabled + .auth__label-checkbox::before {
+
+.auth__checkbox:disabled+.auth__label-checkbox::before {
   background-color: #e9ecef;
 }
 
@@ -314,11 +320,9 @@ button {
   color: #008df2;
 }
 
-.logIn-btn {
-}
+.logIn-btn {}
 
-.create-btn {
-}
+.create-btn {}
 
 @media (min-height: 901px) {
   .auth__container {

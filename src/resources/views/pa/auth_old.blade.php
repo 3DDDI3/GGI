@@ -10,8 +10,8 @@
         <section class="auth">
             <div class="auth__logo">
                 <div class="auth__wrapp-img">
-                    <img src="img/logo-img-1.png" alt="Логотип Государственного гидрологического института"
-                        class="auth__img" />
+                    <img src="{{ asset('images/pa/logo-img-1.png') }}"
+                        alt="Логотип Государственного гидрологического института" class="auth__img" />
                 </div>
                 <div class="auth__wrapp-title">
                     <h2 class="auth__title-logo">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="container auth__container">
-                <form id="formLogIn" action="#!" method="post" class="auth__form logIn">
+                <form id="formLogIn" class="auth__form logIn">
                     <div id="showLogIn" class="form__content">
                         <h2 class="auth__title">Вход</h2>
                         <ul class="auth__list">
@@ -39,12 +39,12 @@
                             </li>
                         </ul>
                         <div class="auth__inner">
-                            <div class="auth__checkbox-inner">
+                            {{-- <div class="auth__checkbox-inner">
                                 <input type="checkbox" class="auth__checkbox" id="remember" name="remember"
                                     value="remember" />
                                 <label class="auth__label-checkbox" for="remember">Запомнить меня</label>
                             </div>
-                            <a href="#!" class="auth__recovery">Восстановить пароль</a>
+                            <a href="#!" class="auth__recovery">Восстановить пароль</a> --}}
                         </div>
                         <div class="auth__wrapp-btn">
                             <button class="auth__btn logIn-btn">Войти</button>
@@ -54,49 +54,52 @@
                         </div>
                     </div>
                 </form>
-                <form id="formSignIn" action="#!" method="post" class="auth__form singIn">
+                <form id="formSignIn" class="auth__form singIn">
                     <div id="showSingIn" class="form__content active">
                         <h2 class="auth__title">Регистрация в&nbsp;ГГИ</h2>
                         <ul class="auth__list">
                             <li class="auth__item">
-                                <label class="auth__label"><input type="text" class="auth__input required" placeholder=""
-                                        required /><span class="label-text">Фамилия <span
+                                <label class="auth__label"><input type="text" name="lastName"
+                                        class="auth__input required" placeholder="" required /><span
+                                        class="label-text">Фамилия <span class="red-asterisk">*</span></span>
+                                </label>
+                            </li>
+                            <li class="auth__item">
+                                <label class="auth__label"><input type="text" name="firstName" class="auth__input"
+                                        placeholder="" required /><span class="label-text">Имя <span
                                             class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="text" class="auth__input" placeholder=""
-                                        required /><span class="label-text">Имя <span class="red-asterisk">*</span></span>
-                                </label>
-                            </li>
-                            <li class="auth__item">
-                                <label class="auth__label"><input type="text" class="auth__input" placeholder=""
-                                        required />
+                                <label class="auth__label"><input type="text" name="secondName" class="auth__input"
+                                        placeholder="" required />
                                     <span class="label-text">Отчество</span>
                                 </label>
                             </li>
                             <li class="auth__item">
                                 <label tabindex="0" class="auth__label bd required">
-                                    <input id="birthdateInput" type="date" class="auth__input" placeholder="" required />
+                                    <input id="birthdateInput" type="date" name="birthday" class="auth__input"
+                                        placeholder="" required />
                                     <span class="label-text" id="spanDate">Дата Рождения<span
                                             class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="email" class="auth__input required" placeholder=""
-                                        required /><span class="label-text">Электронная почта
+                                <label class="auth__label"><input type="email" name="email" class="auth__input required"
+                                        placeholder="" required /><span class="label-text">Электронная почта
                                         <span class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="password" class="auth__input required"
-                                        placeholder="" required />
+                                <label class="auth__label"><input type="password" name="password"
+                                        class="auth__input required" placeholder="" required />
                                     <span class="label-text">Пароль<span class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="password" class="auth__input required"
-                                        placeholder="" required /><span class="label-text">Повторите пароль
+                                <label class="auth__label"><input type="password" name="retypePassword"
+                                        class="auth__input required" placeholder="" required /><span
+                                        class="label-text">Повторите пароль
                                         <span class="red-asterisk">*</span></span>
                                 </label>
                             </li>

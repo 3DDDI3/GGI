@@ -87,7 +87,7 @@ inputElement.addEventListener("change", toggleActiveClass);
 const max_files = 10;
 document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
   input.addEventListener("change", function () {
-    let filesList = this.closest(".input-file").nextElementSibling;
+    // let filesList = this.closest(".input-file").nextElementSibling;
 
     let existingFiles = Array.from(dt.items).map(
       (item) => item.getAsFile().name
@@ -100,93 +100,93 @@ document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
     }
 
     Array.from(this.files).forEach((file) => {
-      if (!existingFiles.includes(file.name)) {
-        let fileItem = document.createElement("li");
-        fileItem.classList.add("input-file-list-item");
+      // if (!existingFiles.includes(file.name)) {
+      let fileItem = document.createElement("li");
+      fileItem.classList.add("input-file-list-item");
 
-        let fileName = document.createElement("span");
-        fileName.classList.add("input-file-list-name");
-        fileName.textContent = file.name;
+      let fileName = document.createElement("span");
+      fileName.classList.add("input-file-list-name");
+      fileName.textContent = file.name;
 
-        let btn = this.parentNode.querySelector("span");
-        btn.classList.add("btn-more");
-        btn.textContent = "+ Добавить ещё";
+      let btn = this.parentNode.querySelector("span");
+      btn.classList.add("btn-more");
+      btn.textContent = "+ Добавить ещё";
 
-        // let list = document.querySelector(".input-file-list");
-        let list = this.parentNode.nextElementSibling;
-        // console.log(
-        //   this.parentNode.nextElementSibling,
-        //   "this.parenNode.nextElementSibling"
-        // );
-        // console.log(this.parentNode, "this.parenNode");
+      // let list = document.querySelector(".input-file-list");
+      let list = this.parentNode.nextElementSibling;
+      // console.log(
+      //   this.parentNode.nextElementSibling,
+      //   "this.parenNode.nextElementSibling"
+      // );
+      // console.log(this.parentNode, "this.parenNode");
 
-        let removeLink = document.createElement("a");
-        removeLink.href = "#";
-        removeLink.textContent = "x";
-        removeLink.classList.add("input-file-list-remove");
+      let removeLink = document.createElement("a");
+      removeLink.href = "#";
+      removeLink.textContent = "x";
+      removeLink.classList.add("input-file-list-remove");
 
-        removeLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          removeFilesItem(file.name, this);
-          if (list.querySelectorAll(".input-file-list-item").length === 0) {
-            btn.classList.remove("btn-more");
-            btn.textContent = "Выбрать файл";
-          }
-        });
+      removeLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        removeFilesItem(file.name, this);
+        if (list.querySelectorAll(".input-file-list-item").length === 0) {
+          btn.classList.remove("btn-more");
+          btn.textContent = "Выбрать файл";
+        }
+      });
 
-        let fileSvg = document.createElement("div");
-        fileSvg.classList.add("input-file-svg");
+      let fileSvg = document.createElement("div");
+      fileSvg.classList.add("input-file-svg");
 
-        // fileItem.appendChild(fileSvg);
-        // fileItem.appendChild(fileName);
-        // fileItem.appendChild(removeLink);
-        // filesList.appendChild(fileItem);
+      // fileItem.appendChild(fileSvg);
+      // fileItem.appendChild(fileName);
+      // fileItem.appendChild(removeLink);
+      // filesList.appendChild(fileItem);
 
-        dt.items.add(file);
-      }
+      dt.items.add(file);
+      // }
     });
 
-    this.files = dt.files;
+    // this.files = dt.files;
   });
 });
 
-function removeFilesItem(name, input) {
-  let filesList = input.closest(".input-file").nextElementSibling;
-  let fileItems = filesList.querySelectorAll(".input-file-list-item");
+// function removeFilesItem(name, input) {
+//   let filesList = input.closest(".input-file").nextElementSibling;
+//   let fileItems = filesList.querySelectorAll(".input-file-list-item");
 
-  fileItems.forEach((item) => {
-    let fileItemName = item.querySelector(".input-file-list-name").textContent;
-    if (fileItemName === name) {
-      filesList.removeChild(item);
-    }
-  });
+//   fileItems.forEach((item) => {
+//     let fileItemName = item.querySelector(".input-file-list-name").textContent;
+//     if (fileItemName === name) {
+//       filesList.removeChild(item);
+//     }
+//   });
 
-  let newFiles = [];
-  Array.from(dt.items).forEach((item) => {
-    if (item.getAsFile().name !== name) {
-      newFiles.push(item.getAsFile());
-    }
-  });
+//   let newFiles = [];
+//   Array.from(dt.items).forEach((item) => {
+//     if (item.getAsFile().name !== name) {
+//       newFiles.push(item.getAsFile());
+//     }
+//   });
 
-  dt.items.clear();
-  newFiles.forEach((file) => dt.items.add(file));
-  input.files = dt.files;
-}
+//   dt.items.clear();
+//   newFiles.forEach((file) => dt.items.add(file));
+//   input.files = dt.files;
+// }
 
 // загрузчик аватарки
 
-document.getElementById("file-input").addEventListener("change", (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const imagePreview = document.getElementById("image-preview");
-      imagePreview.src = e.target.result;
-      imagePreview.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-  }
-});
+// document.getElementById("file-input").addEventListener("change", (event) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//       const imagePreview = document.getElementById("image-preview");
+//       imagePreview.src = e.target.result;
+//       imagePreview.style.display = "block";
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// });
 
 // sidebar
 
@@ -296,7 +296,6 @@ $(function () {
             email: email.val(),
           };
           break;
-
         case "main__item mainInfo":
           url = "/api/pa/users/main_info/edit";
           data = {
@@ -420,15 +419,15 @@ $(function () {
         if (!$(this).parents(".input-file-list").parent("li").find("h3 div").hasClass("hidden"))
           $(this).parents(".input-file-list").parent("li").find("h3 div").addClass("hidden");
 
+        console.log($(this).parents(".input-file-list").find(".input-file-list-item"));
+
+        if ($(this).parents(".input-file-list").find(".input-file-list-item").length == 1) {
+          $(this).parents(".input-file-list").parents("li").find("span.btn-more").text("Выбрать файл");
+          $(this).parents(".input-file-list").parents("li").find("span.btn-more").removeClass("btn-more");
+        }
+
         $(this).parents(".input-file-list-item").remove();
       })
-      .catch(response => {
-        Swal.fire({
-          icon: "error",
-          // title: response.response.data.message,
-        });
-      });
-
   });
 
   $(".image-container input[type='file']").on("change", function () {
@@ -444,8 +443,11 @@ $(function () {
     });
   });
 
-  $(".achievement-item__input input[type='file']").on("change", function () {
+  // $(".achievement-item__input span.btn-more").on("click", function () {
+  //   $("form.achievement")[0].reset();
+  // });
 
+  $(".achievement-item__input input[type='file']").on("change", function () {
     let clasName = $(this).parents("form").attr("class").replace(/main__form /, '');
 
     let formData = new FormData();
@@ -467,12 +469,12 @@ $(function () {
     }
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
-      console.log(response);
-      $(this).parents(".inner-title").find(".input-file-list li").remove();
+      $(this).parents(".achievement-item__input").find(".input-file-list .input-file-list-item").remove();
       response.data.documents.forEach(element => {
         $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
       });
     });
+
   });
 
 });

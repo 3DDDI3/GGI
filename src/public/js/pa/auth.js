@@ -64,11 +64,29 @@ $(function () {
       data: obj,
       dataType: "json",
       success: function (response) {
-        Swal.fire({
-          icon: 'success',
-          title: response.message,
-          confirmButtonText: 'Ok',
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: response.message,
+        //   confirmButtonText: 'Ok',
+        // });
+
+        axios.get('/sanctum/csrf-cookie',).then(response => {
+          const data = {
+            email: $(".auth__list input[name='email']").val(),
+            password: $(".auth__list input[name='password']").val(),
+          };
+          axios.post('/api/auth/login', data)
+            .then(response => {
+              window.location.href = `/pa/`;
+            })
+            .catch(response => {
+              Swal.fire({
+                icon: "error",
+                title: response.response.data.message,
+              });
+            });
         });
+
       },
       error: function (response) {
         Swal.fire({
@@ -80,7 +98,7 @@ $(function () {
     });
 
 
-  });
+  })
 
   $("#formLogIn").on("submit", function (e) {
     e.preventDefault();
