@@ -25,7 +25,8 @@ class AuthorizationController extends Controller
             'secondName' => $request->secondName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'birthday' => $request->birthday
+            'acount_type_id' => 2,
+            'birthday' => date('Y-m-d H:i:s', strtotime($request->birthday)),
         ])->save();
 
         return response()->json(['message' => 'Вы успешно зарегистрировались'], 200);

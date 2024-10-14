@@ -188,7 +188,7 @@
                                         <h3 class="main__subtitle achievement__subtitle">
                                             Диплом
                                             <div
-                                                class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}}}">
+                                                class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
                                                 <div class="tooltip__container">
                                                     <div class="tooltip__status">
                                                         <p class="toolltip__name"></p>
@@ -207,7 +207,7 @@
                                     </h3>
                                     <label class="input-file">
                                         <input type="file" id="diploma" data-page="Персональные данные" multiple
-                                            aria-label="Диплом" />
+                                            aria-label="Диплом" data-send="1" name="diploma" />
                                         <span>Выбрать файл</span>
                                     </label>
                                     <ul id="passport-files" class="input-file-list">
@@ -229,7 +229,7 @@
                                     <h3 class="main__subtitle achievement__subtitle">
                                         Реферат
                                         <div
-                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}}}">
+                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
                                             <div class="tooltip__container">
                                                 <div class="tooltip__status">
                                                     <p class="toolltip__name"></p>
@@ -247,7 +247,7 @@
                                 </h3>
                                 <label class="input-file">
                                     <input type="file" id="report" multiple aria-label="Реферат"
-                                        data-page="Персональные данные" />
+                                        name="report" data-send="1" data-page="Персональные данные" />
                                     <span>Выбрать файл</span>
                                 </label>
                                 <ul id="report-files" class="input-file-list">

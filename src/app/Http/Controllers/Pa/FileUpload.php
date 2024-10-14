@@ -84,7 +84,10 @@ class FileUpload extends Controller
 
         if (!empty($request->name)) {
             $field = $request->name;
+            $field_comment = "{$request->name}_comment";
             $acount->$field = null;
+            $acount->$field_comment = null;
+
             $acount->save();
 
             Storage::delete($request->input('path'));

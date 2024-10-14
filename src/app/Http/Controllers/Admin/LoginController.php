@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login(){
+    public function login()
+    {
+        request()->session()->flush();
+        request()->session()->regenerateToken();
         return view('admin.login');
     }
 }

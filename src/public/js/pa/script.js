@@ -245,6 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+let url, data = undefined;
+
 $(function () {
 
   let firstName = $(".main__list-person input[name='firstName']"),
@@ -274,10 +277,9 @@ $(function () {
     focusedBlock = $(this);
   })
 
-  let url, data = undefined;
 
   $(document).on("mouseup", function (e) {
-    // console.log($(focusedBlock));
+    console.log($(focusedBlock));
     // data, focusedBlock = undefined;
 
     if (focusedBlock != undefined && $(focusedBlock).has(e.target).length === 0
@@ -325,20 +327,23 @@ $(function () {
           break;
       }
 
-      if (url == undefined) return;
+      // if (url == undefined) return;
 
       axios.defaults.withXSRFToken = true;
+
+      const handleError = function (error) {
+        focusedBlock = undefined
+        Swal.fire({
+          icon: "error",
+          title: error.response.data.message,
+        });
+      }.bind(focusedBlock);
 
       axios.put(`${window.location.origin}${url}`, data)
         .then(response => {
           data, url = undefined;
         })
-        .catch(response => {
-          Swal.fire({
-            icon: "error",
-            title: response.response.data.message,
-          });
-        });
+        .catch(handleError);
     }
   });
 
@@ -393,8 +398,12 @@ $(function () {
 
   $(".input-file-list").on("click", ".input-file-list-remove", function () {
 
+    let name = undefined;
+
+    if ($(this).parents(".main__item-files").find("input[type='file']").data("send") == undefined)
+      name = $(this).parents(".main__item-files").find("input[type='file']").prop("name");
+
     let path = $(this).parents(".input-file-list-item").find(".input-file-list-name").text();
-    let name = $(this).parents(".main__item-files").find("input[type='file']").prop("name");
 
     let data = {
       path: path,
@@ -407,6 +416,11 @@ $(function () {
           icon: "success",
           title: response.data.message,
         });
+
+        if (!$(this).parents(".input-file-list").parent("li").find("h3 div").hasClass("hidden"))
+          $(this).parents(".input-file-list").parent("li").find("h3 div").addClass("hidden");
+
+        $(this).parents(".input-file-list-item").remove();
       })
       .catch(response => {
         Swal.fire({
@@ -414,7 +428,7 @@ $(function () {
           // title: response.response.data.message,
         });
       });
-    $(this).parents(".input-file-list-item").remove();
+
   });
 
   $(".image-container input[type='file']").on("change", function () {

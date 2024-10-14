@@ -68,7 +68,7 @@ class PersonalAcountController extends Controller
                 'firstName' => $request->firstName,
                 'secondName' => $request->secondName,
                 'email' => $request->email,
-                'birthday' => $request->birthday,
+                'birthday' => date('Y-m-d H:i:s', strtotime($request->birthday)),
                 'specialty' => $request->specialty,
                 'study_place' => $request->study_place,
                 'snils_comment' => $request->snils_comment,
@@ -166,7 +166,7 @@ class PersonalAcountController extends Controller
                 $doc->fill(['comment' => $request->review_comment])->save();
             }
 
-            
+
             foreach (
                 PersonalDocument::query()->where([
                     'acount_id' => $object->id,
