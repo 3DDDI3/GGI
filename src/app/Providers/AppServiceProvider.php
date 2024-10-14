@@ -72,8 +72,6 @@ class AppServiceProvider extends ServiceProvider
         );
         $seo->buildSets();
 
-        Blade::anonymousComponentNamespace('input-file', InputFile::class);
-
         View::composer('includes.head', fn($view) => $view->with(['seo' => $seo]));
         View::composer('includes.header', fn($view) => $view->with(['pages' => $pages_header, 'services' => $services]));
         View::composer('includes.footer', fn($view) => $view->with(['pages' => $pages_footer, 'services' => $services]));

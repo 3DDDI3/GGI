@@ -29,7 +29,6 @@
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 .input-file input[type="file"] {
   position: absolute;
   z-index: -1;
@@ -40,7 +39,7 @@
 }
 
 /* Focus */
-.input-file input[type="file"]:focus+span {
+.input-file input[type="file"]:focus + span {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
@@ -48,13 +47,12 @@
 .input-file:hover span {
   background-color: #0078cd;
 }
-
 .input-file:active span {
   background-color: #00528d;
 }
 
 /* Disabled */
-.input-file input[type="file"]:disabled+span {
+.input-file input[type="file"]:disabled + span {
   background-color: #eee;
 }
 
@@ -92,7 +90,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url("../../images/pa/pdf-icon.svg") no-repeat center center / contain;
+  background: url("../img/pdf-icon.svg") no-repeat center center / contain;
 }
 
 .input-file-list-name {

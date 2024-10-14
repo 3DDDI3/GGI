@@ -8,8 +8,8 @@
                     <li class="nav__item logo">
                         <a href="index.html" class="logo__nav">
                             <div class="nav__wrapp-img">
-                                <img src="img/logo-img-1.png" alt="Логотип Государственного гидрологического института"
-                                    class="nav__img" />
+                                <img src="{{ asset('images/pa/logo-img-1.png') }}"
+                                    alt="Логотип Государственного гидрологического института" class="nav__img" />
                             </div>
                             <div class="sidebar__wrapp-title">
                                 <h2 class="sidebar__title">
@@ -160,15 +160,14 @@
                             <li class="main__item mainInfo">
                                 <h3 class="main__subtitle">
                                     Основная информация
-                                    <div
-                                        class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                    <div class="tooltip-icon hidden">
                                         <div class="tooltip__container">
                                             <div class="tooltip__status">
                                                 <p class="toolltip__name"></p>
                                                 <p class="tooltip__date"></p>
                                                 <p class="tooltip__time"></p>
                                             </div>
-                                            <p class="tooltip__alert"></p>
+                                            <p class="tooltip__alert">Измените название файла</p>
                                         </div>
                                     </div>
                                 </h3>
@@ -177,10 +176,9 @@
                                         <label for="input" class="main__label main__input">
                                             <input class="main__input-date" type="date" id="input"
                                                 style="{{ !empty($acount->birthday) ? 'color:#5b5b5b' : '' }}"
-                                                value="{{ $acount->birthday->format('Y-m-d') }}" />
+                                                value="{{ $acount->birthday->format('Y-m-d') }}" max="2030-01-01" />
                                             <span style="{{ !empty($acount->birthday) ? 'color:transparent' : '' }}"
-                                                class="label-placeholder">Дата рождения<span
-                                                    class="label-span"></span></span>
+                                                class="label-span"></span></span>
                                         </label>
                                         <input type="text" class="main__input" name="studyPlace"
                                             placeholder="Место учебы" value="{{ $acount->study_place }}"
@@ -389,7 +387,9 @@
                                                 <p class="tooltip__date"></p>
                                                 <p class="tooltip__time"></p>
                                             </div>
-                                            <p class="tooltip__alert"></p>
+                                            <p class="tooltip__alert">
+                                                Измените название файла
+                                            </p>
                                         </div>
                                     </div>
                                 </h3>
@@ -411,7 +411,9 @@
                                                 <p class="tooltip__date"></p>
                                                 <p class="tooltip__time"></p>
                                             </div>
-                                            <p class="tooltip__alert"></p>
+                                            <p class="tooltip__alert">
+                                                Измените название файла
+                                            </p>
                                         </div>
                                     </div>
                                 </h3>
@@ -431,9 +433,9 @@
                                     <div class="tooltip__status">
                                         <p class="toolltip__name"></p>
                                         <p class="tooltip__date"></p>
-                                        <p class="tooltip__time">9</p>
+                                        <p class="tooltip__time"></p>
                                     </div>
-                                    <p class="tooltip__alert"></p>
+                                    <p class="tooltip__alert">Измените название файла</p>
                                 </div>
                             </div>
                         </h3>
@@ -742,22 +744,56 @@
                 <p class="tooltip__date"></p>
                 <p class="tooltip__time"></p>
             </div>
-            @foreach ($acount->certainComment('Реферат', $acount->id, 2) as $comment)
-                <p class="tooltip__alert">{{ $comment->comment }}</p>
+            <p class="tooltip__alert">Измените название файла</p>
+        </div>
+    </div>
+</h3>
+<label class="input-file">
+    <input type="file" id="reportApp" name="reportApp" multiple
+        aria-label="Реферат" />
+    <span>Выбрать файл</span>
+</label>
+<ul id="reportApp-files" class="input-file-list">
+    @foreach ($documents as $document)
+        @if (
+            $document->document->type == 'Реферат' &&
+                $document->page->page == 'Индивидуальные достижения' &&
+                $document->agent->acount_type_id == 2)
+            <li class="input-file-list-item">
+                <div class="input-file-svg"></div><span
+                    class="input-file-list-name">{{ $document->path }}</span><a
+                    class="input-file-list-remove">x</a>
+            </li>
+        @endif
+    @endforeach
+</ul>
+</li>
+<li class="achievement-item__input">
+<h3 class="achievement__subtitle">
+    Другое
+    <div class="tooltip-icon hidden">
+        <div class="tooltip__container">
+            <div class="tooltip__status">
+                <p class="toolltip__name"></p>
+                <p class="tooltip__date"></p>
+                <p class="tooltip__time"></p>
+            </div>
+            @foreach ($acount->certainComment('Другое', $acount->id, 2) as $comment)
+                <p class="tooltip__alert">{{ $comment->path }}</p>
             @break
         @endforeach
     </div>
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="reportApp" name="reportApp" multiple
-    aria-label="Реферат" />
+<input type="file" id="anotherApp" name="articleApp" multiple
+    aria-label="Другое" />
 <span>Выбрать файл</span>
 </label>
-<ul id="reportApp-files" class="input-file-list">
+<ul id="articleApp-files" class="input-file-list">
 @foreach ($documents as $document)
     @if (
-        $document->document->type == 'Реферат' &&
+        $document->document->type == 'Другое' &&
             $document->page->page == 'Индивидуальные достижения' &&
             $document->agent->acount_type_id == 2)
         <li class="input-file-list-item">
@@ -766,43 +802,6 @@
                 class="input-file-list-remove">x</a>
         </li>
     @endif
-@endforeach
-</ul>
-</li>
-<li class="achievement-item__input">
-<h3 class="achievement__subtitle">
-Другое
-<div class="tooltip-icon hidden">
-    <div class="tooltip__container">
-        <div class="tooltip__status">
-            <p class="toolltip__name"></p>
-            <p class="tooltip__date"></p>
-            <p class="tooltip__time"></p>
-        </div>
-        @foreach ($acount->certainComment('Другое', $acount->id, 2) as $comment)
-            <p class="tooltip__alert">{{ $comment->path }}</p>
-        @break
-    @endforeach
-</div>
-</div>
-</h3>
-<label class="input-file">
-<input type="file" id="anotherApp" name="articleApp" multiple
-aria-label="Другое" />
-<span>Выбрать файл</span>
-</label>
-<ul id="articleApp-files" class="input-file-list">
-@foreach ($documents as $document)
-@if (
-    $document->document->type == 'Другое' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 2)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
 @endforeach
 </ul>
 </li>
@@ -815,21 +814,21 @@ aria-label="Другое" />
 <h3 class="achievement__subtitle">Материалы конференций</h3>
 <label class="input-file">
 <input type="file" id="materialConf" name="materialConf" multiple
-aria-label="Материалы конференций" />
+    aria-label="Материалы конференций" />
 <span>Выбрать файл</span>
 </label>
 <ul id="materialConf" class="input-file-list">
 @foreach ($documents as $document)
-@if (
-    $document->document->type == 'Материалы конференций' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
+    @if (
+        $document->document->type == 'Материалы конференций' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 1)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
 @endforeach
 </ul>
 </li>
@@ -837,21 +836,21 @@ aria-label="Материалы конференций" />
 <h3 class="achievement__subtitle">Тезисы докладов</h3>
 <label class="input-file">
 <input type="file" id="thesisReport" name="thesisReport" multiple
-aria-label="Тезисы докладов" />
+    aria-label="Тезисы докладов" />
 <span>Выбрать файл</span>
 </label>
 <ul id="thesisReport" class="input-file-list">
 @foreach ($documents as $document)
-@if (
-    $document->document->type == 'Тезисы докладов' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
+    @if (
+        $document->document->type == 'Тезисы докладов' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 1)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
 @endforeach
 </ul>
 </li>
@@ -859,23 +858,10 @@ aria-label="Тезисы докладов" />
 <h3 class="achievement__subtitle">Статьи</h3>
 <label class="input-file">
 <input type="file" id="article" name="article" multiple
-aria-label="Статьи" />
+    aria-label="Статьи" />
 <span>Выбрать файл</span>
 </label>
-<ul id="article" class="input-file-list">
-@foreach ($documents as $document)
-@if (
-    $document->document->type == 'Статьи' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
-@endforeach
-</ul>
+<ul id="article" class="input-file-list"></ul>
 </li>
 <li class="achievement-item__input">
 <h3 class="achievement__subtitle">РИД</h3>
@@ -885,16 +871,16 @@ aria-label="Статьи" />
 </label>
 <ul id="pid" class="input-file-list">
 @foreach ($documents as $document)
-@if (
-    $document->document->type == 'Статьи' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
+    @if (
+        $document->document->type == 'Статьи' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 1)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
 @endforeach
 </ul>
 </li>
@@ -902,21 +888,21 @@ aria-label="Статьи" />
 <h3 class="achievement__subtitle">Другое</h3>
 <label class="input-file">
 <input type="file" id="anotherPg" name="anotherPg" multiple
-aria-label="Другое" />
+    aria-label="Другое" />
 <span>Выбрать файл</span>
 </label>
 <ul id="anotherPg-files" class="input-file-list">
 @foreach ($documents as $document)
-@if (
-    $document->document->type == 'Другое' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
+    @if (
+        $document->document->type == 'Другое' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 1)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
 @endforeach
 </ul>
 </li>
@@ -924,21 +910,21 @@ aria-label="Другое" />
 <h3 class="achievement__subtitle">Отчет аспиранта</h3>
 <label class="input-file">
 <input type="file" id="reportStudent" name="reportStudent" multiple
-aria-label="Отчет аспиранта" />
+    aria-label="Отчет аспиранта" />
 <span>Выбрать файл</span>
 </label>
 <ul id="reportStudent" class="input-file-list">
 @foreach ($documents as $document)
-@if (
-    $document->document->type == 'Отчет аспиранта' &&
-        $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
-    <li class="input-file-list-item">
-        <div class="input-file-svg"></div><span
-            class="input-file-list-name">{{ $document->path }}</span><a
-            class="input-file-list-remove">x</a>
-    </li>
-@endif
+    @if (
+        $document->document->type == 'Отчет аспиранта' &&
+            $document->page->page == 'Индивидуальные достижения' &&
+            $document->agent->acount_type_id == 1)
+        <li class="input-file-list-item">
+            <div class="input-file-svg"></div><span
+                class="input-file-list-name">{{ $document->path }}</span><a
+                class="input-file-list-remove">x</a>
+        </li>
+    @endif
 @endforeach
 </ul>
 </li>
@@ -956,22 +942,24 @@ aria-label="Отчет аспиранта" />
 <li class="achievement-item__input">
 <h3 class="achievement__subtitle">
 Философия
+<div
 class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
 <div class="tooltip__container">
-<div class="tooltip__status">
-<p class="toolltip__name"></p>
-<p class="tooltip__date"></p>
-<p class="tooltip__time"></p>
-</div>
-@foreach ($acount->certainComment('Философия', $acount->id, 3) as $comment)
-<p class="tooltip__alert">{{ $comment->comment }}</p>
-@break
+    <div class="tooltip__status">
+        <p class="toolltip__name"></p>
+        <p class="tooltip__date"></p>
+        <p class="tooltip__time"></p>
+    </div>
+    @foreach ($acount->certainComment('Философия', $acount->id, 3) as $comment)
+        <p class="tooltip__alert">{{ $comment->comment }}</p>
+    @break
 @endforeach
 </div>
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="Philosophy" name="materialConf" multiple aria-label="Философия" />
+<input type="file" id="Philosophy" name="materialConf" multiple
+aria-label="Философия" />
 <span>Выбрать файл</span>
 </label>
 <ul id="materialConf" class="input-file-list">
@@ -981,9 +969,9 @@ class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id
         $document->page->page == 'Экзаменационная ведомость' &&
         $document->agent->acount_type_id == 2)
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+    <div class="input-file-svg"></div><span
+        class="input-file-list-name">{{ $document->path }}</span><a
+        class="input-file-list-remove">x</a>
 </li>
 @endif
 @endforeach
@@ -996,12 +984,12 @@ class="input-file-list-remove">x</a>
 class="tooltip-icon {{ $acount->certainComment('Английский язык', $acount->id, 3)->count() > 0 ? '' : ' hidden' }}">
 <div class="tooltip__container">
 <div class="tooltip__status">
-<p class="toolltip__name"></p>
-<p class="tooltip__date"></p>
-<p class="tooltip__time"></p>
+    <p class="toolltip__name"></p>
+    <p class="tooltip__date"></p>
+    <p class="tooltip__time"></p>
 </div>
 @foreach ($acount->certainComment('Английский язык', $acount->id, 3) as $comment)
-<p class="tooltip__alert">{{ $comment->comment }}</p>
+    <p class="tooltip__alert">{{ $comment->comment }}</p>
 @break
 @endforeach
 </div>
@@ -1020,8 +1008,8 @@ aria-label="Английский язык" />
         $document->agent->acount_type_id == 2)
 <li class="input-file-list-item">
 <div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+    class="input-file-list-name">{{ $document->path }}</span><a
+    class="input-file-list-remove">x</a>
 </li>
 @endif
 @endforeach
@@ -1046,7 +1034,8 @@ class="tooltip-icon {{ $acount->certainComment('Специальность', $ac
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="article" name="article" multiple aria-label="Специальность" />
+<input type="file" id="article" name="article" multiple
+aria-label="Специальность" />
 <span>Выбрать файл</span>
 </label>
 <ul id="article" class="input-file-list">

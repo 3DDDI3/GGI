@@ -36,12 +36,18 @@ function curSelect() {
 // option2.addEventListener("change", curSelect);
 
 const select = document.getElementById("date-select");
-for (let year = new Date().getFullYear(); year >= 1910; year--) {
+for (let year = new Date().getFullYear(); year >= 1970; year--) {
   const option = document.createElement("option");
   option.value = year;
   option.text = year;
   select.appendChild(option);
 }
+
+Array.from($(select).find("option")).forEach(el => {
+  if ($(el).val() == $(select).data("year"))
+    $(select).prop("selectedIndex", $(el).index());
+
+})
 
 const choices = new Choices(select, {
   searchEnabled: false,
@@ -58,13 +64,30 @@ for (let year = 1920; year <= 2025; year++) {
   document.getElementById("date-select").appendChild(option);
 }
 
+
+const inputElement = document.getElementById("input");
+const placeholder = document.querySelector(".label-placeholder");
+// Function to toggle 'active' class based on input content
+function toggleActiveClass() {
+  if (inputElement.value) {
+    placeholder.classList.add("active");
+    inputElement.classList.add("active");
+  } else {
+    placeholder.classList.remove("active");
+    inputElement.classList.remove("active");
+  }
+}
+// Add event listeners for input and change events
+inputElement.addEventListener("input", toggleActiveClass);
+inputElement.addEventListener("change", toggleActiveClass);
+
 // end toggle
 
 // files
 const max_files = 10;
 document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
   input.addEventListener("change", function () {
-    let filesList = this.closest(".input-file").nextElementSibling;
+    // let filesList = this.closest(".input-file").nextElementSibling;
 
     let existingFiles = Array.from(dt.items).map(
       (item) => item.getAsFile().name
@@ -77,50 +100,50 @@ document.querySelectorAll(".input-file input[type=file]").forEach((input) => {
     }
 
     Array.from(this.files).forEach((file) => {
-      if (!existingFiles.includes(file.name)) {
-        let fileItem = document.createElement("li");
-        fileItem.classList.add("input-file-list-item");
+      // if (!existingFiles.includes(file.name)) {
+      let fileItem = document.createElement("li");
+      fileItem.classList.add("input-file-list-item");
 
-        let fileName = document.createElement("span");
-        fileName.classList.add("input-file-list-name");
-        fileName.textContent = file.name;
+      let fileName = document.createElement("span");
+      fileName.classList.add("input-file-list-name");
+      fileName.textContent = file.name;
 
-        let btn = this.parentNode.querySelector("span");
-        btn.classList.add("btn-more");
-        btn.textContent = "+ Добавить ещё";
+      let btn = this.parentNode.querySelector("span");
+      btn.classList.add("btn-more");
+      btn.textContent = "+ Добавить ещё";
 
-        // let list = document.querySelector(".input-file-list");
-        let list = this.parentNode.nextElementSibling;
-        // console.log(
-        //   this.parentNode.nextElementSibling,
-        //   "this.parenNode.nextElementSibling"
-        // );
-        // console.log(this.parentNode, "this.parenNode");
+      // let list = document.querySelector(".input-file-list");
+      let list = this.parentNode.nextElementSibling;
+      // console.log(
+      //   this.parentNode.nextElementSibling,
+      //   "this.parenNode.nextElementSibling"
+      // );
+      // console.log(this.parentNode, "this.parenNode");
 
-        let removeLink = document.createElement("a");
-        removeLink.href = "#";
-        removeLink.textContent = "x";
-        removeLink.classList.add("input-file-list-remove");
+      let removeLink = document.createElement("a");
+      removeLink.href = "#";
+      removeLink.textContent = "x";
+      removeLink.classList.add("input-file-list-remove");
 
-        removeLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          removeFilesItem(file.name, this);
-          if (list.querySelectorAll(".input-file-list-item").length === 0) {
-            btn.classList.remove("btn-more");
-            btn.textContent = "Выбрать файл";
-          }
-        });
+      removeLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        removeFilesItem(file.name, this);
+        if (list.querySelectorAll(".input-file-list-item").length === 0) {
+          btn.classList.remove("btn-more");
+          btn.textContent = "Выбрать файл";
+        }
+      });
 
-        let fileSvg = document.createElement("div");
-        fileSvg.classList.add("input-file-svg");
+      let fileSvg = document.createElement("div");
+      fileSvg.classList.add("input-file-svg");
 
-        // fileItem.appendChild(fileSvg);
-        // fileItem.appendChild(fileName);
-        // fileItem.appendChild(removeLink);
-        // filesList.appendChild(fileItem);
+      // fileItem.appendChild(fileSvg);
+      // fileItem.appendChild(fileName);
+      // fileItem.appendChild(removeLink);
+      // filesList.appendChild(fileItem);
 
-        dt.items.add(file);
-      }
+      dt.items.add(file);
+      // }
     });
 
     // this.files = dt.files;
@@ -209,34 +232,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   yesBtn.addEventListener("click", () => {
-    alert("Вы вышли из аккаунта");
-    popup.classList.remove("visible");
+
+    axios.post('/api/auth/logout')
+      .then(response => {
+        window.location.href = `${window.location.origin}`;
+      });
   });
 
   noBtn.addEventListener("click", () => {
-    alert("Вы не вышли из аккаунта");
+    // alert("Вы не вышли из аккаунта");
     popup.classList.remove("visible");
   });
 });
 
-// placeholder - birthDay
-const inputElement = document.getElementById("input");
-const placeholder = document.querySelector(".label-placeholder");
-
-// Function to toggle 'active' class based on input content
-function toggleActiveClass() {
-  if (inputElement.value) {
-    placeholder.classList.add("active");
-    inputElement.classList.add("active");
-  } else {
-    placeholder.classList.remove("active");
-    inputElement.classList.remove("active");
-  }
-}
-
-// Add event listeners for input and change events
-inputElement.addEventListener("input", toggleActiveClass);
-inputElement.addEventListener("change", toggleActiveClass);
 
 let url, data = undefined;
 

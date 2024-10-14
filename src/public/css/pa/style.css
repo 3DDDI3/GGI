@@ -1,6 +1,6 @@
-@import url("../pa/fonts.css");
-@import url("../pa/switch.css");
-@import url("../pa/input.css");
+@import url("./fonts.css");
+@import url("./switch.css");
+@import url("./input.css");
 
 * {
   box-sizing: border-box;
@@ -110,7 +110,6 @@ body {
 .nav__item.active .nav__text {
   color: #fff;
 }
-
 .nav__item:nth-child(1).active {
   background-color: inherit;
 }
@@ -204,7 +203,6 @@ body {
   width: 100%;
   height: 100%;
 }
-
 /* changes sidebar */
 
 .nav__list {
@@ -258,7 +256,6 @@ body {
   width: 35px;
   height: auto;
   aspect-ratio: 1 / 1;
-  border-radius: 50%;
 }
 
 .exit-btn {
@@ -299,7 +296,6 @@ body {
 .nav__link {
   cursor: pointer;
 }
-
 /* end Temp style */
 
 .wrapp-title {
@@ -316,11 +312,14 @@ body {
   line-height: 40px;
 }
 
-.switch-container {}
+.switch-container {
+}
 
-.slider {}
+.slider {
+}
 
-.round {}
+.round {
+}
 
 .initials {
   display: flex;
@@ -335,7 +334,7 @@ body {
   height: 120px;
   border-radius: 50%;
   flex: auto 1 0;
-  background: url("../../images/pa/upload-icon.svg") no-repeat center center / 40%;
+  background: url("../img/upload-icon.svg") no-repeat center center / 40%;
   box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -349,7 +348,7 @@ body {
   bottom: 0;
   border-radius: 50%;
   border: 5px solid #fff;
-  background: url("../../images/pa/plus-icon.svg") no-repeat center center / 10px,
+  background: url("../img/plus-icon.svg") no-repeat center center / 10px,
     #008df2;
   pointer-events: none;
 }
@@ -427,7 +426,8 @@ body {
   justify-content: space-around;
 }
 
-.mainInfo {}
+.mainInfo {
+}
 
 .main__subtitle {
   margin: 0;
@@ -505,7 +505,8 @@ body {
 }
 
 .main__input-date:active,
-.main__input-date:focus {
+.main__input-date:focus,
+.main__input-date.active {
   color: #000;
 }
 
@@ -521,7 +522,13 @@ body {
   transform-origin: left center;
 }
 
-.main__input-date:focus+.label-placeholder {
+.main__input-date:focus + .label-placeholder {
+  top: 10px;
+  left: 20px;
+  font-size: 12px;
+}
+
+.label-placeholder.active {
   top: 10px;
   left: 20px;
   font-size: 12px;
@@ -552,7 +559,8 @@ body {
   list-style: none;
 }
 
-.main__item-files {}
+.main__item-files {
+}
 
 .grid-container {
   display: grid;
@@ -611,16 +619,12 @@ span.btn-more {
   margin-bottom: 0;
 }
 
-.main__item-diploma:last-child {
-  width: fit-content;
-}
-
 .main__list-diploma {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 50px;
   justify-content: space-between;
 }
@@ -671,7 +675,8 @@ span.btn-more {
   width: 100%;
 }
 
-.additional-files {}
+.additional-files {
+}
 
 .additional-files .main__subtitle {
   margin-bottom: 0;
@@ -713,9 +718,11 @@ span.btn-more {
   flex-wrap: wrap;
 }
 
-.achievement {}
+.achievement {
+}
 
-.main__title {}
+.main__title {
+}
 
 .achievement__title {
   margin-bottom: 40px;
