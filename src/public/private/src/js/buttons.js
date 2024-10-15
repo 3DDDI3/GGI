@@ -396,6 +396,7 @@ $(document).ready(function () {
             $(".documents input[name='diploma']").parents(".field").css("display", "block");
             $(".documents input[name='report']").parents(".field").css("display", "block");
             $(".documents-2").css("display", "none");
+            $("select[name='admission_year']").parents(".column-item").css("display", "none");
             $(".exams").css("display", "block")
 
             let visibleDocs = [
@@ -415,6 +416,7 @@ $(document).ready(function () {
             $(".documents input[name='diploma']").parents(".field").css("display", "none");
             $(".documents input[name='report']").parents(".field").css("display", "none");
             $(".exams").css("display", "none");
+            $("select[name='admission_year']").parents(".column-item").css("display", "block");
             $(".documents-2").css("display", "block");
 
             let visibleDocs = [
@@ -441,6 +443,7 @@ $(document).ready(function () {
         });
 
         axios.post("/api/pa/users/files/upload", formData).then(response => {
+            console.log($(this));
             $(this).parents("label").find("img").attr("src", `/storage/${response.data.image}`);
         });
     });

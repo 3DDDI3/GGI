@@ -40,6 +40,15 @@ document.querySelectorAll(".auth__input").forEach((input) => {
 $(function () {
   $("#formSignIn").on("submit", function (e) {
     e.preventDefault();
+
+    if (!$("#agree").prop("checked")) {
+      Swal.fire({
+        icon: "error",
+        title: "Подтвердите согласие на обработку данных",
+      });
+      return;
+    }
+
     let firstName = $(".auth__list input[name='lastName']").val();
     let secondName = $(".auth__list input[name='secondName']").val();
     let lastName = $(".auth__list input[name='lastName']").val();

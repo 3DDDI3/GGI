@@ -59,20 +59,21 @@
                         <h2 class="auth__title">Регистрация в&nbsp;ГГИ</h2>
                         <ul class="auth__list">
                             <li class="auth__item">
-                                <label class="auth__label"><input type="text" name="lastName"
-                                        class="auth__input required" placeholder="" required /><span
-                                        class="label-text">Фамилия <span class="red-asterisk">*</span></span>
-                                </label>
-                            </li>
-                            <li class="auth__item">
-                                <label class="auth__label"><input type="text" name="firstName" class="auth__input"
-                                        placeholder="" required /><span class="label-text">Имя <span
+                                <label class="auth__label">
+                                    <input type="text" name="lastName" class="auth__input required" placeholder=""
+                                        required /><span class="label-text">Фамилия <span
                                             class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="text" name="secondName" class="auth__input"
-                                        placeholder="" required />
+                                <label class="auth__label">
+                                    <input type="text" name="firstName" class="auth__input" placeholder=""
+                                        required /><span class="label-text">Имя <span class="red-asterisk">*</span></span>
+                                </label>
+                            </li>
+                            <li class="auth__item">
+                                <label class="auth__label">
+                                    <input type="text" name="secondName" class="auth__input" placeholder="" required />
                                     <span class="label-text">Отчество</span>
                                 </label>
                             </li>
@@ -85,19 +86,22 @@
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="email" name="email" class="auth__input required"
-                                        placeholder="" required /><span class="label-text">Электронная почта
+                                <label class="auth__label">
+                                    <input type="email" name="email" class="auth__input required" placeholder=""
+                                        required /><span class="label-text">Электронная почта
                                         <span class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="password" name="password"
+                                <label class="auth__label">
+                                    <input type="password" name="password"
                                         class="auth__input required" placeholder="" required />
                                     <span class="label-text">Пароль<span class="red-asterisk">*</span></span>
                                 </label>
                             </li>
                             <li class="auth__item">
-                                <label class="auth__label"><input type="password" name="retypePassword"
+                                <label class="auth__label">
+                                    <input type="password" name="retypePassword"
                                         class="auth__input required" placeholder="" required /><span
                                         class="label-text">Повторите пароль
                                         <span class="red-asterisk">*</span></span>

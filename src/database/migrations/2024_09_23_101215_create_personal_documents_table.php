@@ -34,6 +34,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->text("path")->nullable();
+            $table->string("control_name")->nullable();
             $table->boolean("hide")
                 ->nullable()
                 ->default(0);

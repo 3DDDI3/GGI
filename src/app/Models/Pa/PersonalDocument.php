@@ -25,6 +25,10 @@ class PersonalDocument extends Model
         return $this->hasOne(Acount::class, 'id', 'acount_id');
     }
 
+    protected $casts = [
+        'updated_at' => 'datetime:H:i d.m.Y',
+    ];
+
     protected $table = "personal_documents";
 
     protected $fillable = [
@@ -34,5 +38,6 @@ class PersonalDocument extends Model
         'path',
         'year',
         'comment',
+        'control_name',
     ];
 }

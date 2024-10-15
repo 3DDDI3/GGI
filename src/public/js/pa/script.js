@@ -209,12 +209,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   yesBtn.addEventListener("click", () => {
-    alert("Вы вышли из аккаунта");
-    popup.classList.remove("visible");
+    axios.post('/api/auth/logout')
+      .then(response => {
+        window.location.href = `${window.location.origin}`;
+      });
   });
 
   noBtn.addEventListener("click", () => {
-    alert("Вы не вышли из аккаунта");
+    // alert("Вы не вышли из аккаунта");
     popup.classList.remove("visible");
   });
 });
@@ -347,6 +349,7 @@ $(function () {
       });
       formData.append("document", `${$(this).attr('aria-label')}`);
       formData.append("page", $(this).data("page"));
+      formData.append("control", $(this).attr("id"));
     } else {
       Array.from(this.files).forEach(file => {
         formData.append($(this).prop("name"), file);
@@ -357,10 +360,10 @@ $(function () {
       console.log(response);
       if (response.data.documents != undefined)
         Array.from(response.data.documents).forEach(el => {
-          $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${el.path}</span><a class='input-file-list-remove'>x</a></li>`);
+          $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${el.path}</span></li>`);
         })
       else {
-        $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span><a class='input-file-list-remove'>x</a></li>`);
+        $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span></li>`);
       }
     });
   });
@@ -375,13 +378,11 @@ $(function () {
 
     formData.append("document", `${$(this).attr('aria-label')}`);
     formData.append("page", "Персональные данные");
-    // formData.append("year", $("#date-select").val());
+    formData.append("control", $(this).attr("id"));
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
-      console.log(response);
-      // $(this).parents(".inner-title").find(".input-file-list li").remove();
       response.data.documents.forEach(element => {
-        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`);
+        $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`);
       });
     });
 
@@ -432,12 +433,10 @@ $(function () {
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       $(".header__btn.user-btn img").attr("src", `/storage/${response.data.image}`);
+      console.log($(this));
+      $(this).parents(".image-container").find("img").attr("src", `/storage/${response.data.image}`);
     });
   });
-
-  // $(".achievement-item__input span.btn-more").on("click", function () {
-  //   $("form.achievement")[0].reset();
-  // });
 
   $(".achievement-item__input input[type='file']").on("change", function () {
     let clasName = $(this).parents("form").attr("class").replace(/main__form /, '');
@@ -449,6 +448,7 @@ $(function () {
     });
 
     formData.append("document", `${$(this).attr('aria-label')}`);
+    formData.append("control", $(this).attr("id"));
 
     switch (clasName) {
       case "achievement":
@@ -460,10 +460,12 @@ $(function () {
         break;
     }
 
+
+
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       $(this).parents(".achievement-item__input").find(".input-file-list .input-file-list-item").remove();
       response.data.documents.forEach(element => {
-        $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span><a class='input-file-list-remove'>x</a></li>`)
+        $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`)
       });
     });
 

@@ -71,14 +71,19 @@ class PersonalAcountController extends Controller
                 'birthday' => date('Y-m-d H:i:s', strtotime($request->birthday)),
                 'specialty' => $request->specialty,
                 'study_place' => $request->study_place,
-                'snils_comment' => $request->snils_comment,
-                'passport_comment' => $request->passport_comment,
-                'inn_comment' => $request->inn_comment,
+                'snils_comment' =>  $request->snils_comment == null ? null : $request->snils_comment . "||" . date('Y-m-d H:i:s', strtotime(now())),
+                'passport_comment' => $request->passport_comment == null ? null : $request->passport_comment . "||" . date('Y-m-d H:i:s', strtotime(now())),
+                'inn_comment' => $request->inn_comment == null ? null : $request->inn_comment . "||" . date('Y-m-d H:i:s', strtotime(now())),
                 'admission_year' => $request->admission_year > 0 ? $request->admission_year : null,
             ]);
 
-            if ($request->class > 0)
+            if ($request->class > 0) {
+
                 $object->acount_type_id = $request->class;
+            }
+
+            if ($request->class == 2)
+                $object->admission_year = null;
 
             $object->save();
 
@@ -102,8 +107,6 @@ class PersonalAcountController extends Controller
                 'scientific_degree' => $request->scientific_degree,
             ]);
 
-
-
             foreach (
                 PersonalDocument::query()->where([
                     'acount_id' => $object->id,
@@ -114,15 +117,26 @@ class PersonalAcountController extends Controller
                 $doc->fill(['comment' => $request->diplom1_comment])->save();
             }
 
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 2,
+                    'personal_page_id' => 2
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->report1_comment])->save();
+            }
 
             foreach (
                 PersonalDocument::query()->where([
                     'acount_id' => $object->id,
                     'personal_document_type_id' => 2,
-                    'personal_page_id' => 1
+                    'personal_page_id' => 2,
+                    'control_name' => 'report',
                 ])->get() as $doc
             ) {
-                $doc->fill(['comment' => $request->report1_comment])->save();
+                $doc->fill(['comment' => $request->report2_comment])->save();
+                dd($doc);
             }
 
             foreach (
@@ -134,6 +148,8 @@ class PersonalAcountController extends Controller
             ) {
                 $doc->fill(['comment' => $request->individual_plan_comment])->save();
             }
+
+
 
             foreach (
                 PersonalDocument::query()->where([
@@ -252,7 +268,6 @@ class PersonalAcountController extends Controller
             ) {
                 $doc->fill(['comment' => $request->report_comment])->save();
             }
-
 
             foreach (
                 PersonalDocument::query()->where([

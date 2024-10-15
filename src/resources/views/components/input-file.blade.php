@@ -95,7 +95,7 @@
             @endphp
 
             <div class="file">
-                <a href="{{ $attributes->get('path') }}" class="file__name">{{ $file->$field }}</a>
+                <a href="/storage/{{ $file->path }}" class="file__name">{{ $file->$field }}</a>
                 <div class="file__action">
                     {{-- <button data-id="{{ $file->id }}" class="file__edit">
                         <svg width="64px" height="64px" viewBox="0 -0.5 25 25" fill="none"

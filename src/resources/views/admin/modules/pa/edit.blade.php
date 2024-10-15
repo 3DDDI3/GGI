@@ -264,8 +264,8 @@
                         $years[] = (object) ['id' => $i, 'name' => $i];
                     }
                 @endphp
-                <div class="column-items column-items2" style="padding-top: 20px">
-                    <div class="column-item">
+                <div class="column-items column-items2" style="padding-top: 20px;">
+                    <div class="column-item" style="{{ $object->acount_type_id == 2 ? 'display:none' : 'display:block' }}">
                         @include('admin.includes.select', [
                             'label' => 'Год поступления:',
                             'name' => 'admission_year',
@@ -317,7 +317,7 @@
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'passport_comment',
-                            'value' => $object->passport_comment,
+                            'value' => explode('||', $object->passport_comment)[0],
                         ])
                     </div>
 
@@ -328,7 +328,7 @@
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'snils_comment',
-                            'value' => $object->snils_comment,
+                            'value' => explode('||', $object->snils_comment)[0],
                         ])
                     </div>
 
@@ -339,7 +339,7 @@
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'inn_comment',
-                            'value' => $object->inn_comment,
+                            'value' => explode('||', $object->inn_comment)[0],
                         ])
                     </div>
 
@@ -350,21 +350,21 @@
                             'label' => 'Комментарий:',
                             'name' => 'diplom1_comment',
                             'value' =>
-                                $object->certainDocument('Диплом', $object->id, 1)->count() > 0
-                                    ? $object->certainDocument('Диплом', $object->id, 1)[0]->comment
+                                $object->certainDocument('Диплом', $object->id, 1, 'diploma')->count() > 0
+                                    ? $object->certainDocument('Диплом', $object->id, 1, 'diploma')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Реферат', $object->id)" title="Реферат" name="report" path="/storage/pa/" field="path"
+                        <x-input-file :files="$object->certainDocument('Реферат', $object->id, 1, 'reportAsp')" title="Реферат" name="report" path="/storage/pa/" field="path"
                             page="Персональные данные" document="Реферат" isMultiple=true />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
-                            'name' => 'report1_comment',
+                            'name' => 'report2_comment',
                             'value' =>
-                                $object->certainDocument('Реферат', $object->id, 1)->count() > 0
-                                    ? $object->certainDocument('Реферат', $object->id, 1)[0]->comment
+                                $object->certainDocument('Реферат', $object->id, 1, 'reportAsp')->count() > 0
+                                    ? $object->certainDocument('Реферат', $object->id, 1, 'reportAsp')[0]->comment
                                     : '',
                         ])
                     </div>
@@ -420,14 +420,14 @@
                 <fieldset class="documents-2" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
                     <legend>Документы</legend>
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('Реферат', $object->id)" title="Реферат" name="workReport" path="/storage/pa/" field="path"
+                        <x-input-file :files="$object->certainDocument('Реферат', $object->id, 1, 'report')" title="Реферат" name="workReport" path="/storage/pa/" field="path"
                             page="Персональные данные" document="Реферат" isMultiple=true />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'report1_comment',
                             'value' =>
-                                $object->certainDocument('Реферат', $object->id, 1)->count() > 0
-                                    ? $object->certainDocument('Реферат', $object->id, 1)[0]->comment
+                                $object->certainDocument('Реферат', $object->id, 1, 'report')->count() > 0
+                                    ? $object->certainDocument('Реферат', $object->id, 1, 'report')[0]->comment
                                     : '',
                         ])
                     </div>
@@ -436,6 +436,8 @@
                         <x-input-file :files="$object->certainDocument(
                             'Индивидуальный план научной деятельности по годам/семестрам',
                             $object->id,
+                            1,
+                            'individualPlan',
                         )"
                             title="Индивидуальный план<br> научной деятельности<br> по годам/семестрам"
                             name="individualPlan" path="/storage/pa/" field="path" page="Персональные данные"
@@ -447,75 +449,117 @@
                                 $object->certainDocument(
                                         'Индивидуальный план научной деятельности по годам/семестрам',
                                         $object->id,
-                                        1)->count() > 0
+                                        1,
+                                        'individualPlan')->count() > 0
                                     ? $object->certainDocument(
                                         'Индивидуальный план научной деятельности по годам/семестрам',
                                         $object->id,
-                                        1)[0]->comment
+                                        1,
+                                        'individualPlan')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('План научной деятельности по годам', $object->id)" title="План научной деятельности<br> по годам" name="yearPlan"
+                        <x-input-file :files="$object->certainDocument('План научной деятельности по годам', $object->id, 1)" title="План научной деятельности<br> по годам" name="yearPlan"
                             path="/storage/pa/" field="path" page="Персональные данные"
                             document="План научной деятельности по годам" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'scientific_plan_comment',
                             'value' =>
-                                $object->certainDocument('План научной деятельности по годам', $object->id, 1)->count() > 0
+                                $object->certainDocument(
+                                        'План научной деятельности по годам',
+                                        $object->id,
+                                        1,
+                                        'annualPlan')->count() > 0
                                     ? $object->certainDocument(
                                         'План научной деятельности по годам',
                                         $object->id,
-                                        1)[0]->comment
+                                        1,
+                                        'annualPlan')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('Отзыв научного руководителя', $object->id)" title="Отзыв научного<br> руководителя" name="review"
+                        <x-input-file :files="$object->certainDocument(
+                            'Отзыв научного руководителя',
+                            $object->id,
+                            1,
+                            'supervisorReview',
+                        )" title="Отзыв научного<br> руководителя" name="review"
                             path="/storage/pa/" field="path" page="Персональные данные"
                             document="Отзыв научного руководителя" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'review_comment',
                             'value' =>
-                                $object->certainDocument('Отзыв научного руководителя', $object->id, 1)->count() >
-                                0
-                                    ? $object->certainDocument('Отзыв научного руководителя', $object->id, 1)[0]->comment
+                                $object->certainDocument(
+                                        'Отзыв научного руководителя',
+                                        $object->id,
+                                        1,
+                                        'supervisorReview')->count() > 0
+                                    ? $object->certainDocument(
+                                        'Отзыв научного руководителя',
+                                        $object->id,
+                                        1,
+                                        'supervisorReview')[0]->comment
                                     : '',
                         ])
                     </div>
 
 
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('Выписка из протокола семинара', $object->id)" title="Выписка из протокола<br> семинара" name="extract"
+                        <x-input-file :files="$object->certainDocument(
+                            'Выписка из протокола семинара',
+                            $object->id,
+                            1,
+                            'seminarProtocol',
+                        )" title="Выписка из протокола<br> семинара" name="extract"
                             path="/storage/pa/" field="path" page="Персональные данные"
                             document="Выписка из протокола семинара" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'vipiska_comment',
                             'value' =>
-                                $object->certainDocument('Выписка из протокола семинара', $object->id, 1)->count() > 0
-                                    ? $object->certainDocument('Выписка из протокола семинара', $object->id, 1)[0]->comment
+                                $object->certainDocument(
+                                        'Выписка из протокола семинара',
+                                        $object->id,
+                                        1,
+                                        'seminarProtocol')->count() > 0
+                                    ? $object->certainDocument(
+                                        'Выписка из протокола семинара',
+                                        $object->id,
+                                        1,
+                                        'seminarProtocol')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('Протокол отчета на Ученом совете', $object->id)" title="Протокол отчета<br> на Ученом совете" name="protocol"
+                        <x-input-file :files="$object->certainDocument(
+                            'Протокол отчета на Ученом совете',
+                            $object->id,
+                            1,
+                            'councilReport',
+                        )" title="Протокол отчета<br> на Ученом совете" name="protocol"
                             path="/storage/pa/" field="path" page="Персональные данные"
                             document="Протокол отчета на Ученом совете" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'protokol_comment',
                             'value' =>
-                                $object->certainDocument('Протокол отчета на Ученом совете', $object->id, 1)->count() > 0
+                                $object->certainDocument(
+                                        'Протокол отчета на Ученом совете',
+                                        $object->id,
+                                        1,
+                                        'councilReport')->count() > 0
                                     ? $object->certainDocument(
                                         'Протокол отчета на Ученом совете',
                                         $object->id,
-                                        1)[0]->comment
+                                        1,
+                                        'councilReport')[0]->comment
                                     : '',
                         ])
                     </div>
@@ -527,60 +571,68 @@
                     <legend>Публикации</legend>
 
                     <div class="field" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Материалы конференций', $object->id)" title="Материалы конференций" name="materials"
+                        <x-input-file :files="$object->certainDocument('Материалы конференций', $object->id, 2, 'materialConf')" title="Материалы конференций" name="materials"
                             path="/storage/pa/" field="path" page="Индивидуальные достижения"
                             document="Материалы конференций" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'materials_comment',
                             'value' =>
-                                $object->certainComment('Материалы конференций', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Материалы конференций', $object->id, 2)[0]->comment
+                                $object->certainComment('Материалы конференций', $object->id, 2, 'materialConf')->count() > 0
+                                    ? $object->certainComment(
+                                        'Материалы конференций',
+                                        $object->id,
+                                        2,
+                                        'materialConf')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Тезисы докладов', $object->id)" title="Тезисы докладов" name="thesis" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Тезисы докладов', $object->id, 2, 'thesisReport')" title="Тезисы докладов" name="thesis" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Тезисы докладов" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'thesis_comment',
                             'value' =>
-                                $object->certainComment('Тезисы докладов', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Тезисы докладов', $object->id, 2)[0]->comment
+                                $object->certainComment('Тезисы докладов', $object->id, 2, 'thesisReport')->count() > 0
+                                    ? $object->certainComment(
+                                        'Тезисы докладов',
+                                        $object->id,
+                                        2,
+                                        'thesisReport')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Статьи', $object->id)" title="Статьи" name="article" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Статьи', $object->id, 2, 'article')" title="Статьи" name="article" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Статьи" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'article_comment',
                             'value' =>
-                                $object->certainComment('Статьи', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Статьи', $object->id, 2)[0]->comment
+                                $object->certainComment('Статьи', $object->id, 2, 'article')->count() > 0
+                                    ? $object->certainComment('Статьи', $object->id, 2, 'article')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('РИД', $object->id)" title="РИД" name="rid" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('РИД', $object->id, 2, 'pid')" title="РИД" name="rid" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="РИД" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'rid_comment',
                             'value' =>
-                                $object->certainComment('РИД', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('РИД', $object->id, 2)[0]->comment
+                                $object->certainComment('РИД', $object->id, 2, 'pid')->count() > 0
+                                    ? $object->certainComment('РИД', $object->id, 2, 'pid')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field">
-                        <x-input-file :files="$object->certainDocument('Другое', $object->id)" title="Другое" name="other" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Другое', $object->id, 2)" title="Другое" name="other" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Другое" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
@@ -593,41 +645,58 @@
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Отчет аспиранта', $object->id)" title="Отчет аспиранта" name="aspirantReport"
+                        <x-input-file :files="$object->certainDocument('Отчет аспиранта', $object->id, 2, 'reportStudent')" title="Отчет аспиранта" name="aspirantReport"
                             path="/storage/pa/" field="path" page="Индивидуальные достижения"
                             document="Отчет аспиранта" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'aspirant_report_comment',
                             'value' =>
-                                $object->certainComment('Отчет аспиранта', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Отчет аспиранта', $object->id, 2)[0]->comment
+                                $object->certainComment('Отчет аспиранта', $object->id, 2, 'reportStudent')->count() > 0
+                                    ? $object->certainComment(
+                                        'Отчет аспиранта',
+                                        $object->id,
+                                        2,
+                                        'reportStudent')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Реферат', $object->id)" title="Реферат" name="report" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Реферат', $object->id, 2, 'reportAsp')" title="Реферат" name="report" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Реферат" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'report_comment',
                             'value' =>
-                                $object->certainComment('Реферат', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Реферат', $object->id, 2)[0]->comment
+                                $object->certainComment('Реферат', $object->id, 2, 'reportAsp')->count() > 0
+                                    ? $object->certainComment('Реферат', $object->id, 2, 'reportAsp')[0]->comment
                                     : '',
                         ])
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Диплом', $object->id)" title="Диплом" name="diploma" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Диплом', $object->id, 2, 'diplomaApp')" title="Диплом" name="diploma" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Диплом" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'diploma_comment',
                             'value' =>
-                                $object->certainComment('Диплом', $object->id, 2)->count() > 0
-                                    ? $object->certainComment('Диплом', $object->id, 2)[0]->comment
+                                $object->certainComment('Диплом', $object->id, 2, 'diplomaApp')->count() > 0
+                                    ? $object->certainComment('Диплом', $object->id, 2, 'diplomaApp')[0]->comment
+                                    : '',
+                        ])
+                    </div>
+
+                    <div class="field" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
+                        <x-input-file :files="$object->certainDocument('Другое', $object->id, 2, 'anotherPg')" title="Другое" name="diploma" path="/storage/pa/"
+                            field="path" page="Индивидуальные достижения" document="Другое" />
+                        @include('admin.includes.textarea', [
+                            'label' => 'Комментарий:',
+                            'name' => 'diploma_comment',
+                            'value' =>
+                                $object->certainComment('Другое', $object->id, 2, 'anotherPg')->count() > 0
+                                    ? $object->certainComment('Другое', $object->id, 2, 'anotherPg')[0]->comment
                                     : '',
                         ])
                     </div>
@@ -637,40 +706,40 @@
             <fieldset class="exams" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
                 <legend>Экзаменационная ведомость</legend>
                 <div class="field">
-                    <x-input-file :files="$object->certainDocument('Философия', $object->id)" title="Философия" name="philosophy" path="/storage/pa/"
+                    <x-input-file :files="$object->certainDocument('Философия', $object->id, 3, 'Philosophy')" title="Философия" name="philosophy" path="/storage/pa/"
                         field="path" page="Экзаменационная ведомость" document="Философия" />
                     @include('admin.includes.textarea', [
                         'label' => 'Комментарий:',
                         'name' => 'philosophy_comment',
                         'value' =>
-                            $object->certainComment('Философия', $object->id, 3)->count() > 0
-                                ? $object->certainComment('Философия', $object->id, 3)[0]->comment
+                            $object->certainComment('Философия', $object->id, 3, 'Philosophy')->count() > 0
+                                ? $object->certainComment('Философия', $object->id, 3, 'Philosophy')[0]->comment
                                 : '',
                     ])
                 </div>
 
                 <div class="field">
-                    <x-input-file :files="$object->certainDocument('Английский язык', $object->id)" title="Английский язык" name="english" path="/storage/pa/"
+                    <x-input-file :files="$object->certainDocument('Английский язык', $object->id, 3, 'English')" title="Английский язык" name="english" path="/storage/pa/"
                         field="path" page="Экзаменационная ведомость" document="Английский язык" />
                     @include('admin.includes.textarea', [
                         'label' => 'Комментарий:',
                         'name' => 'english_comment',
                         'value' =>
-                            $object->certainComment('Английский язык', $object->id, 3)->count() > 0
-                                ? $object->certainComment('Английский язык', $object->id, 3)[0]->comment
+                            $object->certainComment('Английский язык', $object->id, 3, 'English')->count() > 0
+                                ? $object->certainComment('Английский язык', $object->id, 3, 'English')[0]->comment
                                 : '',
                     ])
                 </div>
 
                 <div class="field">
-                    <x-input-file :files="$object->certainDocument('Специальность', $object->id)" title="Специальность" name="specialtyDoc" path="/storage/pa/"
+                    <x-input-file :files="$object->certainDocument('Специальность', $object->id, 3, 'specialty')" title="Специальность" name="specialtyDoc" path="/storage/pa/"
                         field="path" page="Экзаменационная ведомость" document="Специальность" />
                     @include('admin.includes.textarea', [
                         'label' => 'Комментарий:',
                         'name' => 'specialty_comment',
                         'value' =>
-                            $object->certainComment('Специальность', $object->id, 3)->count() > 0
-                                ? $object->certainComment('Специальность', $object->id, 3)[0]->comment
+                            $object->certainComment('Специальность', $object->id, 3, 'specialty')->count() > 0
+                                ? $object->certainComment('Специальность', $object->id, 3, 'specialty')[0]->comment
                                 : '',
                     ])
                 </div>

@@ -58,6 +58,7 @@ class FileUpload extends Controller
                 'acount_id' => $user,
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
+                'control_name' => $request->control,
                 'path' => $path,
                 'year' => $request->year,
             ]);
@@ -69,8 +70,6 @@ class FileUpload extends Controller
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
             ])->get();
-
-        // dd($documents);
 
         return response(['documents' => $documents], 200);
     }
