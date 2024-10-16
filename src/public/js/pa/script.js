@@ -43,6 +43,11 @@ for (let year = new Date().getFullYear(); year >= 1910; year--) {
   select.appendChild(option);
 }
 
+Array.from($(select).find("option")).forEach(el => {
+  if ($(el).val() == $(select).data("year"))
+    $(select).prop("selectedIndex", $(el).index());
+})
+
 const choices = new Choices(select, {
   searchEnabled: false,
   itemSelectText: "",
@@ -327,7 +332,7 @@ $(function () {
       const handleError = function (error) {
         focusedBlock = undefined
         Swal.fire({
-          icon: "error",
+          type: "error",
           title: error.response.data.message,
         });
       }.bind(focusedBlock);
@@ -381,6 +386,8 @@ $(function () {
     formData.append("control", $(this).attr("id"));
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
+      $(this).parents(".inner-title").find(".tooltip-icon").addClass("hidden");
+      $(this).parents(".inner-title").find(".input-file-list li").remove();
       response.data.documents.forEach(element => {
         $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`);
       });
@@ -405,7 +412,7 @@ $(function () {
     axios.delete("/api/pa/users/files/delete", { data: data })
       .then(response => {
         Swal.fire({
-          icon: "success",
+          type: "success",
           title: response.data.message,
         });
 
@@ -433,7 +440,6 @@ $(function () {
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       $(".header__btn.user-btn img").attr("src", `/storage/${response.data.image}`);
-      console.log($(this));
       $(this).parents(".image-container").find("img").attr("src", `/storage/${response.data.image}`);
     });
   });
@@ -459,8 +465,6 @@ $(function () {
         formData.append("page", "Экзаменационная ведомость")
         break;
     }
-
-
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
       $(this).parents(".achievement-item__input").find(".input-file-list .input-file-list-item").remove();

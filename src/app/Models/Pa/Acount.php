@@ -105,6 +105,8 @@ class Acount extends Authenticatable
             ->whereNotNull('comment')
             ->get();
 
+        // dd($result->dump());
+
         return $result;
     }
 }

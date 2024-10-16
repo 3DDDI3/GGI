@@ -314,7 +314,7 @@ $(document).ready(function () {
             document: $(this).parents(".file-loader-wrapper").find(".file-loader input[type='file']").data("document"),
             page: $(this).parents(".file-loader-wrapper").find(".file-loader input[type='file']").data("page"),
             user: location.pathname.match(/\d+$/)[0],
-            comment: $(this).parents(".comment-popup").find("textarea").val(),
+            // comment: $(this).parents(".comment-popup").find("textarea").val(),
         }
 
         axios.post("/api/pa/users/files/upload", data).then(response => {
@@ -375,6 +375,8 @@ $(document).ready(function () {
 
         formData.append("document", $(this).data("document"));
         formData.append("page", $(this).data("page"));
+        formData.append("control", $(this).attr("name"));
+
 
         axios.post("/api/pa/users/files/upload", formData).then(response => {
             response.data.documents.forEach(element => {
@@ -390,27 +392,31 @@ $(document).ready(function () {
     });
 
     $("select[name='class']").on("change", function () {
+        console.log($(this).val());
         if ($(this).val() == 2) {
             /** Абитуриент */
             $(".works").css("display", "none");
-            $(".documents input[name='diploma']").parents(".field").css("display", "block");
-            $(".documents input[name='report']").parents(".field").css("display", "block");
+            $(".documents input[name='diploma']").parents(".field").css("display", "flex");
+            $(".documents input[name='report']").parents(".field").css("display", "flex");
             $(".documents-2").css("display", "none");
             $("select[name='admission_year']").parents(".column-item").css("display", "none");
-            $(".exams").css("display", "block")
+            $(".exams").css("display", "block");
 
             let visibleDocs = [
-                "diploma",
                 "report",
-                "other",
+                "diplomaApp",
+                "anotherApp"
             ];
 
+            $(".achievments input[type='file']").parents(".field").css("display", "none");
+
             Array.from($(".achievments input[type='file']")).forEach(el => {
-                console.log($(el).attr("name"));
-                if (!visibleDocs.includes($(el).attr("name"))) $(el).parents(".file-loader-wrapper").css("display", "none");
-                else $(el).parents(".file-loader-wrapper").css("display", "flex");
+                if (visibleDocs.includes($(el).attr("name")))
+                    $(el).parents(".field").css("display", "flex")
             });
-        } else {
+        }
+
+        if ($(this).val() == 1) {
             /** Аспирант */
             $(".works").css("display", "block");
             $(".documents input[name='diploma']").parents(".field").css("display", "none");
@@ -420,17 +426,19 @@ $(document).ready(function () {
             $(".documents-2").css("display", "block");
 
             let visibleDocs = [
-                "materials",
-                "thesis",
+                "materialConf",
+                "thesisReport",
                 "article",
-                'rid',
-                'aspirantReport',
+                "pid",
+                "another_as",
+                "reportStudent"
             ];
 
+            $(".achievments input[type='file']").parents(".field").css("display", "none");
+
             Array.from($(".achievments input[type='file']")).forEach(el => {
-                console.log($(el).attr("name"));
-                if (!visibleDocs.includes($(el).attr("name"))) $(el).parents(".file-loader-wrapper").css("display", "none")
-                else $(el).parents(".file-loader-wrapper").css("display", "flex");
+                if (visibleDocs.includes($(el).attr("name")))
+                    $(el).parents(".field").css("display", "flex")
             });
         }
     });
@@ -443,7 +451,6 @@ $(document).ready(function () {
         });
 
         axios.post("/api/pa/users/files/upload", formData).then(response => {
-            console.log($(this));
             $(this).parents("label").find("img").attr("src", `/storage/${response.data.image}`);
         });
     });

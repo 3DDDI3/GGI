@@ -1023,7 +1023,7 @@ class="input-file-list-remove">x</a>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src='/private/src/js/swal.js?v={{ sha1_file(public_path('/private/src/js/swal.js')) }}'></script>
 <script src="{{ asset('/lib/jquery.min.js') }}"></script>
 <script defer src="{{ asset('js/pa/script.js') }}"></script>
 @endsection

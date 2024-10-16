@@ -110,40 +110,9 @@ class PersonalAcountController extends Controller
             foreach (
                 PersonalDocument::query()->where([
                     'acount_id' => $object->id,
-                    'personal_document_type_id' => 1,
-                    'personal_page_id' => 1
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->diplom1_comment])->save();
-            }
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 2,
-                    'personal_page_id' => 2
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->report1_comment])->save();
-            }
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 2,
-                    'personal_page_id' => 2,
-                    'control_name' => 'report',
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->report2_comment])->save();
-                dd($doc);
-            }
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
                     'personal_document_type_id' => 12,
-                    'personal_page_id' => 1
+                    'personal_page_id' => 1,
+                    'control_name' => 'individualPlan',
                 ])->get() as $doc
             ) {
                 $doc->fill(['comment' => $request->individual_plan_comment])->save();
@@ -237,48 +206,6 @@ class PersonalAcountController extends Controller
             }
 
 
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 3,
-                    'personal_page_id' => 2
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->other_comment])->save();
-            }
-
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 11,
-                    'personal_page_id' => 2
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->aspirant_report_comment])->save();
-            }
-
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 2,
-                    'personal_page_id' => 2
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->report_comment])->save();
-            }
-
-            foreach (
-                PersonalDocument::query()->where([
-                    'acount_id' => $object->id,
-                    'personal_document_type_id' => 1,
-                    'personal_page_id' => 2
-                ])->get() as $doc
-            ) {
-                $doc->fill(['comment' => $request->diploma_comment])->save();
-            }
-
 
             foreach (
                 PersonalDocument::query()->where([
@@ -294,7 +221,8 @@ class PersonalAcountController extends Controller
                 PersonalDocument::query()->where([
                     'acount_id' => $object->id,
                     'personal_document_type_id' => 5,
-                    'personal_page_id' => 3
+                    'personal_page_id' => 3,
+                    'control_name' => 'English',
                 ])->get() as $doc
             ) {
                 $doc->fill(['comment' => $request->english_comment])->save();
@@ -307,7 +235,96 @@ class PersonalAcountController extends Controller
                     'personal_page_id' => 3
                 ])->get() as $doc
             ) {
-                $doc->fill(['comment' => $request->english_comment])->save();
+                $doc->fill(['comment' => $request->specialty_comment])->save();
+            }
+
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 1,
+                    'personal_page_id' => 1,
+                    'control_name' => 'diploma',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->diploma_ab_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 2,
+                    'personal_page_id' => 1,
+                    'control_name' => 'reportAsp',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->report_ab_report])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 2,
+                    'personal_page_id' => 1,
+                    'control_name' => 'report',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->report_ab_publ_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 3,
+                    'personal_page_id' => 2,
+                    'control_name' => 'another_as',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->other_asp_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 11,
+                    'personal_page_id' => 2,
+                    'control_name' => 'reportStudent',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->report_asp_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 1,
+                    'personal_page_id' => 2,
+                    'control_name' => 'diplomaApp',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->diplom_ab_ind_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 2,
+                    'personal_page_id' => 2,
+                    'control_name' => 'reportAsp',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->report_ab_ind_comment])->save();
+            }
+
+            foreach (
+                PersonalDocument::query()->where([
+                    'acount_id' => $object->id,
+                    'personal_document_type_id' => 3,
+                    'personal_page_id' => 2,
+                    'control_name' => 'anotherApp',
+                ])->get() as $doc
+            ) {
+                $doc->fill(['comment' => $request->other_ab_comment])->save();
             }
 
             if ($request->file("snils"))

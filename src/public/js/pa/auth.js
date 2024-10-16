@@ -43,7 +43,7 @@ $(function () {
 
     if (!$("#agree").prop("checked")) {
       Swal.fire({
-        icon: "error",
+        type: "error",
         title: "Подтвердите согласие на обработку данных",
       });
       return;
@@ -90,7 +90,7 @@ $(function () {
             })
             .catch(response => {
               Swal.fire({
-                icon: "error",
+                type: "error",
                 title: response.response.data.message,
               });
             });
@@ -99,7 +99,7 @@ $(function () {
       },
       error: function (response) {
         Swal.fire({
-          icon: 'error',
+          type: 'error',
           title: response.responseJSON.message,
           confirmButtonText: 'Ok',
         });
@@ -126,7 +126,7 @@ $(function () {
         })
         .catch(response => {
           Swal.fire({
-            icon: "error",
+            type: "error",
             title: response.response.data.message,
           });
         });

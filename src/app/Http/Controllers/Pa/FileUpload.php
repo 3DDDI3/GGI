@@ -69,6 +69,7 @@ class FileUpload extends Controller
                 'acount_id' => $request->user('pa')->id,
                 'personal_document_type_id' => $documentType->id,
                 'personal_page_id' => $page->id,
+                'control_name' => $request->control,
             ])->get();
 
         return response(['documents' => $documents], 200);

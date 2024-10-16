@@ -80,7 +80,8 @@
                             <li class="auth__item">
                                 <label tabindex="0" class="auth__label bd required">
                                     <input id="birthdateInput" type="date" name="birthday" class="auth__input"
-                                        placeholder="" required />
+                                        placeholder="" required
+                                        max="{{ \Carbon\Carbon::now()->addYears(50)->format('Y-m-d') }}" />
                                     <span class="label-text" id="spanDate">Дата Рождения<span
                                             class="red-asterisk">*</span></span>
                                 </label>

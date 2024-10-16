@@ -197,9 +197,9 @@
                                         <h3 class="main__subtitle achievement__subtitle">
                                             Диплом
                                             <div
-                                                class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                                class="tooltip-icon {{ $acount->certainComment('Диплом', $acount->id, 1, 'diploma')->count() > 0 ? '' : ' hidden' }}">
                                                 <div class="tooltip__container">
-                                                    @foreach ($acount->certainComment('Диплом', $acount->id, 1) as $comment)
+                                                    @foreach ($acount->certainComment('Диплом', $acount->id, 1, 'diploma') as $comment)
                                                         <div class="tooltip__status">
                                                             <p class="toolltip__name"></p>
                                                             <p class="tooltip__date">
@@ -226,7 +226,8 @@
                                             @if (
                                                 $document->document->type == 'Диплом' &&
                                                     $document->agent->acount_type_id == 2 &&
-                                                    $document->page->page == 'Персональные данные')
+                                                    $document->page->page == 'Персональные данные' &&
+                                                    $document->control_name == 'diploma')
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div>
                                                     <span class="input-file-list-name">{{ $document->path }}</span>
@@ -242,8 +243,8 @@
                                     <h3 class="main__subtitle achievement__subtitle">
                                         Реферат
                                         <div
-                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
-                                            @foreach ($acount->certainComment('Реферат', $acount->id, 1) as $comment)
+                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1, 'report')->count() > 0 ? '' : ' hidden' }}">
+                                            @foreach ($acount->certainComment('Реферат', $acount->id, 1, 'report') as $comment)
                                                 <div class="tooltip__container">
                                                     <div class="tooltip__status">
                                                         <p class="toolltip__name"></p>
@@ -271,7 +272,8 @@
                                         @if (
                                             $document->document->type == 'Реферат' &&
                                                 $document->agent->acount_type_id == 2 &&
-                                                $document->page->page == 'Персональные данные')
+                                                $document->page->page == 'Персональные данные' &&
+                                                $document->control_name == 'report')
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div>
                                                 <span class="input-file-list-name">{{ $document->path }}</span>
@@ -497,8 +499,8 @@
                                     <h3 class="main__subtitle">
                                         Реферат
                                         <div
-                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
-                                            @foreach ($acount->certainComment('Диплом', $acount->id, 1) as $comment)
+                                            class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 1, 'reportAsp')->count() > 0 ? '' : ' hidden' }}">
+                                            @foreach ($acount->certainComment('Реферат', $acount->id, 1, 'reportAsp') as $comment)
                                                 <div class="tooltip__container">
                                                     <div class="tooltip__status">
                                                         <p class="toolltip__name"></p>
@@ -521,12 +523,15 @@
                                 </label>
                                 <ul id="passport-files" class="input-file-list">
                                     @foreach ($documents as $document)
-                                        @if ($document->document->type == 'Реферат' && $document->agent->acount_type_id == 1)
+                                        @if (
+                                            $document->document->type == 'Реферат' &&
+                                                $document->agent->acount_type_id == 1 &&
+                                                $document->control_name == 'reportAsp')
                                             <li class="input-file-list-item">
                                                 <div class="input-file-svg"></div>
                                                 <span
                                                     class="input-file-list-name">{{ $document->path }}</span>
-                                                @if ($acount->certainComment('Реферат', $acount->id, 1, 'reportAsp')->count() > 0)
+                                                @if ($acount->certainDocument('Реферат', $acount->id, 1, 'reportAsp')->count() > 0)
                                                     <a class="input-file-list-remove">x</a>
                                                 @endif
                                             </li>
@@ -541,10 +546,10 @@
                                     Индивидуальный план научной деятельности по
                                     годам/семестрам
                                     <div
-                                        class="tooltip-icon {{ $acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
+                                        class="tooltip-icon {{ $acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1, 'individualPlan')->count() > 0 ? '' : ' hidden' }}">
 
                                         <div class="tooltip__container">
-                                            @foreach ($acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1) as $comment)
+                                            @foreach ($acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1, 'individualPlan') as $comment)
                                                 <div class="tooltip__status">
 
                                                     <p class="toolltip__name"></p>
@@ -570,12 +575,18 @@
                                 @foreach ($documents as $document)
                                     @if (
                                         $document->document->type == 'Индивидуальный план научной деятельности по годам/семестрам' &&
-                                            $document->agent->acount_type_id == 1)
+                                            $document->agent->acount_type_id == 1 &&
+                                            ($document->control_name = 'individualPlan'))
                                         <li class="input-file-list-item">
                                             <div class="input-file-svg"></div>
                                             <span
                                                 class="input-file-list-name">{{ $document->path }}</span>
-                                            @if ($acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1)->count() > 0)
+                                            @if (
+                                                $acount->certainComment(
+                                                        'Индивидуальный план научной деятельности по годам/семестрам',
+                                                        $acount->id,
+                                                        1,
+                                                        'individualPlan')->count() > 0)
                                                 <a class="input-file-list-remove">x</a>
                                             @endif
                                         </li>
@@ -589,8 +600,8 @@
                             <h3 class="main__subtitle">
                                 План научной деятельности по годам
                                 <div
-                                    class="tooltip-icon {{ $acount->certainComment('План научной деятельности по годам', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
-                                    @foreach ($acount->certainComment('План научной деятельности по годам', $acount->id, 1) as $comment)
+                                    class="tooltip-icon {{ $acount->certainComment('План научной деятельности по годам', $acount->id, 1, 'annualPlan')->count() > 0 ? '' : ' hidden' }}">
+                                    @foreach ($acount->certainComment('План научной деятельности по годам', $acount->id, 1, 'annualPlan') as $comment)
                                         <div class="tooltip__container">
                                             <div class="tooltip__status">
                                                 <p class="toolltip__name"></p>
@@ -613,12 +624,15 @@
                         </label>
                         <ul id="annualPlan-files" class="input-file-list">
                             @foreach ($documents as $document)
-                                @if ($document->document->type == 'План научной деятельности по годам' && $document->agent->acount_type_id == 1)
+                                @if (
+                                    $document->document->type == 'План научной деятельности по годам' &&
+                                        $document->agent->acount_type_id == 1 &&
+                                        $document->control_name == 'annualPlan')
                                     <li class="input-file-list-item">
                                         <div class="input-file-svg"></div>
                                         <span
                                             class="input-file-list-name">{{ $document->path }}</span>
-                                        @if ($acount->certainComment('План научной деятельности по годам', $acount->id, 1)->count() > 0)
+                                        @if ($acount->certainComment('План научной деятельности по годам', $acount->id, 1, 'annualPlan')->count() > 0)
                                             <a class="input-file-list-remove">x</a>
                                         @endif
                                     </li>
@@ -632,8 +646,8 @@
                         <h3 class="main__subtitle">
                             Отзыв научного руководителя
                             <div
-                                class="tooltip-icon {{ $acount->certainComment('Отзыв научного руководителя', $acount->id, 1)->count() > 0 ? '' : ' hidden' }}">
-                                @foreach ($acount->certainComment('Отзыв научного руководителя', $acount->id, 1) as $comment)
+                                class="tooltip-icon {{ $acount->certainComment('Отзыв научного руководителя', $acount->id, 1, 'supervisorReview')->count() > 0 ? '' : ' hidden' }}">
+                                @foreach ($acount->certainComment('Отзыв научного руководителя', $acount->id, 1, 'supervisorReview') as $comment)
                                     <div class="tooltip__container">
                                         <div class="tooltip__status">
                                             <p class="toolltip__name"></p>
@@ -657,12 +671,15 @@
                     </label>
                     <ul id="supervisorReview-files" class="input-file-list">
                         @foreach ($documents as $document)
-                            @if ($document->document->type == 'Отзыв научного руководителя' && $document->agent->acount_type_id == 1)
+                            @if (
+                                $document->document->type == 'Отзыв научного руководителя' &&
+                                    $document->agent->acount_type_id == 1 &&
+                                    $document->control_name == 'supervisorReview')
                                 <li class="input-file-list-item">
                                     <div class="input-file-svg"></div>
                                     <span
                                         class="input-file-list-name">{{ $document->path }}</span>
-                                    @if ($acount->certainComment('Отзыв научного руководителя', $acount->id, 1)->count() > 0)
+                                    @if ($acount->certainComment('Отзыв научного руководителя', $acount->id, 1, 'supervisorReview')->count() > 0)
                                         <a class="input-file-list-remove">x</a>
                                     @endif
                                 </li>
@@ -676,8 +693,8 @@
                     <h3 class="main__subtitle">
                         Выписка из протокола семинара
                         <div
-                            class="tooltip-icon {{ $acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'supervisorReview')->count() > 0 ? '' : ' hidden' }}">
-                            @foreach ($acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'supervisorReview') as $comment)
+                            class="tooltip-icon {{ $acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0 ? '' : ' hidden' }}">
+                            @foreach ($acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol') as $comment)
                                 <div class="tooltip__container">
                                     <div class="tooltip__status">
                                         <p class="toolltip__name"></p>
@@ -700,12 +717,15 @@
                 </label>
                 <ul id="seminarProtocol-files" class="input-file-list">
                     @foreach ($documents as $document)
-                        @if ($document->document->type == 'Выписка из протокола семинара' && $document->agent->acount_type_id == 1)
+                        @if (
+                            $document->document->type == 'Выписка из протокола семинара' &&
+                                $document->agent->acount_type_id == 1 &&
+                                $document->control_name == 'seminarProtocol')
                             <li class="input-file-list-item">
                                 <div class="input-file-svg"></div>
                                 <span
                                     class="input-file-list-name">{{ $document->path }}</span>
-                                @if ($acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0)
+                                @if ($acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0)
                                     <a class="input-file-list-remove">x</a>
                                 @endif
                             </li>
@@ -719,8 +739,8 @@
                 <h3 class="main__subtitle">
                     Протокол отчета на Ученом совете
                     <div
-                        class="tooltip-icon {{ $acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1, 'seminarProtocol')->count() > 0 ? '' : ' hidden' }}">
-                        @foreach ($acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1) as $comment)
+                        class="tooltip-icon {{ $acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1, 'councilReport')->count() > 0 ? '' : ' hidden' }}">
+                        @foreach ($acount->certainComment('Протокол отчета на Ученом совете', $acount->id, 1, 'councilReport') as $comment)
                             <div class="tooltip__container">
                                 <div class="tooltip__status">
                                     <p class="toolltip__name"></p>
@@ -743,7 +763,10 @@
             </label>
             <ul id="councilReport-files" class="input-file-list">
                 @foreach ($documents as $document)
-                    @if ($document->document->type == 'Протокол отчета на Ученом совете' && $document->agent->acount_type_id == 1)
+                    @if (
+                        $document->document->type == 'Протокол отчета на Ученом совете' &&
+                            $document->agent->acount_type_id == 1 &&
+                            $document->control_name == 'councilReport')
                         <li class="input-file-list-item">
                             <div class="input-file-svg"></div>
                             <span
@@ -801,7 +824,8 @@
         @if (
             $document->document->type == 'Диплом' &&
                 $document->page->page == 'Индивидуальные достижения' &&
-                $document->agent->acount_type_id == 2)
+                $document->agent->acount_type_id == 2 &&
+                $document->control_name == 'diplomaApp')
             <li class="input-file-list-item">
                 <div class="input-file-svg"></div>
                 <span class="input-file-list-name">{{ $document->path }}</span>
@@ -817,8 +841,8 @@
 <h3 class="achievement__subtitle">
     Реферат
     <div
-        class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 2, 'reportApp')->count() > 0 ? '' : ' hidden' }}">
-        @foreach ($acount->certainComment('Реферат', $acount->id, 2, 'reportApp') as $comment)
+        class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 2, 'reportAsp')->count() > 0 ? '' : ' hidden' }}">
+        @foreach ($acount->certainComment('Реферат', $acount->id, 2, 'reportAsp') as $comment)
             <div class="tooltip__container">
                 <div class="tooltip__status">
                     <p class="toolltip__name"></p>
@@ -828,14 +852,14 @@
                     <p class="tooltip__time">{{ $comment->updated_at->format('H:i') }}
                     </p>
                 </div>
-                <p class="tooltip__alert">Измените название файла</p>
+                <p class="tooltip__alert">{{ $comment->comment }}</p>
             </div>
         @break
     @endforeach
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="reportApp" name="reportApp" multiple
+<input type="file" id="reportAsp" name="reportAsp" multiple
     aria-label="Реферат" />
 <span>Выбрать файл</span>
 </label>
@@ -844,11 +868,12 @@
     @if (
         $document->document->type == 'Реферат' &&
             $document->page->page == 'Индивидуальные достижения' &&
-            $document->agent->acount_type_id == 2)
+            $document->agent->acount_type_id == 2 &&
+            $document->control_name == 'reportAsp')
         <li class="input-file-list-item">
             <div class="input-file-svg"></div>
             <span class="input-file-list-name">{{ $document->path }}</span>
-            @if ($acount->certainComment('Реферат', $acount->id, 2, 'reportApp')->count() > 0)
+            @if ($acount->certainComment('Реферат', $acount->id, 2, 'reportAsp')->count() > 0)
                 <a class="input-file-list-remove">x</a>
             @endif
         </li>
@@ -860,8 +885,8 @@
 <h3 class="achievement__subtitle">
 Другое
 <div
-    class="tooltip-icon {{ $acount->certainComment('Другое', $acount->id, 2, 'anotherApp')->count() > 0 ? '' : ' hidden' }}">
-    @foreach ($acount->certainComment('Другое', $acount->id, 2, 'anotherApp') as $comment)
+    class="tooltip-icon {{ $acount->certainComment('Другое', $acount->id, 2, 'another_as')->count() > 0 ? '' : ' hidden' }}">
+    @foreach ($acount->certainComment('Другое', $acount->id, 2, 'another_as') as $comment)
         <div class="tooltip__container">
             <div class="tooltip__status">
                 <p class="toolltip__name"></p>
@@ -878,7 +903,7 @@
 </div>
 </h3>
 <label class="input-file">
-<input type="file" id="anotherApp" name="articleApp" multiple
+<input type="file" id="another_as" name="articleApp" multiple
 aria-label="Другое" />
 <span>Выбрать файл</span>
 </label>
@@ -887,11 +912,12 @@ aria-label="Другое" />
 @if (
     $document->document->type == 'Другое' &&
         $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 2)
+        $document->agent->acount_type_id == 2 &&
+        $document->control_name == 'another_as')
     <li class="input-file-list-item">
         <div class="input-file-svg"></div>
         <span class="input-file-list-name">{{ $document->path }}</span>
-        @if ($acount->certainComment('Другое', $acount->id, 2, 'anotherApp')->count() > 0)
+        @if ($acount->certainComment('Другое', $acount->id, 2, 'another_as')->count() > 0)
             <a class="input-file-list-remove">x</a>
         @endif
     </li>
@@ -1078,7 +1104,7 @@ class="tooltip-icon {{ $acount->certainComment('Другое', $acount->id, 2, '
 {{ $comment->updated_at->format('H:i') }}
 </p>
 </div>
-<p class="tooltip__alert">Измените название файла</p>
+<p class="tooltip__alert">{{ $comment->comment }}</p>
 </div>
 @break
 @endforeach
@@ -1093,7 +1119,8 @@ aria-label="Другое" />
 @if (
     $document->document->type == 'Другое' &&
         $document->page->page == 'Индивидуальные достижения' &&
-        $document->agent->acount_type_id == 1)
+        $document->agent->acount_type_id == 1 &&
+        $document->control_name == 'anotherPg')
 <li class="input-file-list-item">
 <div class="input-file-svg"></div><span
 class="input-file-list-name">{{ $document->path }}</span><a
@@ -1293,7 +1320,7 @@ aria-label="Специальность" />
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src='/private/src/js/swal.js?v={{ sha1_file(public_path('/private/src/js/swal.js')) }}'></script>
 <script src="{{ asset('/lib/jquery.min.js') }}"></script>
 <script defer src="{{ asset('js/pa/script.js') }}"></script>
 @endsection

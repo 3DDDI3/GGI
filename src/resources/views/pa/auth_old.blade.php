@@ -134,5 +134,4 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('/lib/jquery.min.js') }}"></script>
     <script defer src="{{ asset('js/pa/auth.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
