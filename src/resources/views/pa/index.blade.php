@@ -207,7 +207,6 @@
                                                             <p class="tooltip__time">
                                                                 {{ $comment->updated_at->format('H:i') }}</p>
                                                         </div>
-
                                                         <p class="tooltip__alert">
                                                             {{ $comment->comment }}
                                                         </p>
@@ -216,7 +215,9 @@
                                             @endforeach
                                         </div>
                                     </h3>
-                                    <label class="input-file">
+
+                                    <label class="input-file"
+                                        style="display:{{ $acount->certainDocument('Диплом', $acount->id, 1, 'diploma')->count() > 0 ? 'none' : 'block' }}">
                                         <input type="file" id="diploma" data-page="Персональные данные" multiple
                                             aria-label="Диплом" data-send="1" name="diploma" />
                                         <span>Выбрать файл</span>
@@ -231,7 +232,7 @@
                                                 <li class="input-file-list-item">
                                                     <div class="input-file-svg"></div>
                                                     <span class="input-file-list-name">{{ $document->path }}</span>
-                                                    @if ($acount->certainComment('Диплом', $acount->id, 1)->count() > 0)
+                                                    @if ($acount->certainComment('Диплом', $acount->id, 1, 'diploma')->count() > 0)
                                                         <a class="input-file-list-remove">x</a>
                                                     @endif
                                                 </li>
@@ -262,7 +263,8 @@
                                         @endforeach
                                     </div>
                                 </h3>
-                                <label class="input-file">
+                                <label class="input-file"
+                                    style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 'report')->count() > 0 ? 'none' : 'block' }}">
                                     <input type="file" id="report" multiple aria-label="Реферат"
                                         name="report" data-send="1" data-page="Персональные данные" />
                                     <span>Выбрать файл</span>
@@ -312,8 +314,9 @@
                                         @endif
                                     </div>
                                 </h3>
-                                <label class="input-file">
-                                    <input type="file" id="passport" name="passport" multiple
+                                <label class="input-file"
+                                    style="display:{{ $acount->passport != null ? 'none' : 'block' }}">
+                                    <input type="file" id="passport" name="passport"
                                         aria-label="Выбрать файл паспорта" />
                                     <span>Выбрать файл</span>
                                 </label>
@@ -352,7 +355,8 @@
                                         </div>
                                     </div>
                                 </h3>
-                                <label class="input-file">
+                                <label class="input-file"
+                                    style="display:{{ $acount->snils != null ? 'none' : 'block' }}">
                                     <input type="file" id="snils" name="snils" multiple
                                         aria-label="Выбрать файл СНИЛС" />
                                     <span>Выбрать файл</span>
@@ -391,8 +395,9 @@
                                         @endif
                                     </div>
                                 </h3>
-                                <label class="input-file">
-                                    <input type="file" id="inn" name="inn" multiple
+                                <label class="input-file"
+                                    style="display:{{ $acount->inn != null ? 'none' : 'block' }}">
+                                    <input type="file" id="inn" name="inn"
                                         aria-label="Выбрать файл ИНН" />
                                     <span>Выбрать файл</span>
                                 </label>
@@ -516,8 +521,9 @@
                                         @endforeach
                                     </div>
                                 </h3>
-                                <label class="input-file">
-                                    <input type="file" id="reportAsp" multiple name="personalFiles"
+                                <label class="input-file"
+                                    style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 'reportAsp')->count() > 0 ? 'none' : 'block' }}">
+                                    <input type="file" id="reportAsp" name="personalFiles"
                                         aria-label="Реферат" />
                                     <span>Выбрать файл</span>
                                 </label>
@@ -547,7 +553,6 @@
                                     годам/семестрам
                                     <div
                                         class="tooltip-icon {{ $acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1, 'individualPlan')->count() > 0 ? '' : ' hidden' }}">
-
                                         <div class="tooltip__container">
                                             @foreach ($acount->certainComment('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1, 'individualPlan') as $comment)
                                                 <div class="tooltip__status">
@@ -566,8 +571,9 @@
 
                                 </div>
                             </h3>
-                            <label class="input-file">
-                                <input type="file" id="individualPlan" multiple name="personalFiles"
+                            <label class="input-file"
+                                style="display:{{ $acount->certainDocument('Индивидуальный план научной деятельности по годам/семестрам', $acount->id, 1, 'individualPlan')->count() > 0 ? 'none' : 'block' }}">
+                                <input type="file" id="individualPlan" name="personalFiles"
                                     aria-label="Индивидуальный план научной деятельности по годам/семестрам" />
                                 <span>Выбрать файл</span>
                             </label>
@@ -617,8 +623,9 @@
                                 @endforeach
                             </div>
                         </h3>
-                        <label class="input-file">
-                            <input type="file" id="annualPlan" multiple name="personalFiles"
+                        <label class="input-file"
+                            style="display:{{ $acount->certainDocument('План научной деятельности по годам', $acount->id, 1, 'annualPlan')->count() > 0 ? 'none' : 'block' }}">
+                            <input type="file" id="annualPlan" name="personalFiles"
                                 aria-label="План научной деятельности по годам" />
                             <span>Выбрать файл</span>
                         </label>
@@ -664,8 +671,9 @@
 
                         </div>
                     </h3>
-                    <label class="input-file">
-                        <input type="file" id="supervisorReview" multiple name="personalFiles"
+                    <label class="input-file"
+                        style="display:{{ $acount->certainDocument('Отзыв научного руководителя', $acount->id, 1, 'supervisorReview')->count() > 0 ? 'none' : 'block' }}">
+                        <input type="file" id="supervisorReview" name="personalFiles"
                             aria-label="Отзыв научного руководителя" />
                         <span>Выбрать файл</span>
                     </label>
@@ -710,7 +718,8 @@
                         @endforeach
                     </div>
                 </h3>
-                <label class="input-file">
+                <label class="input-file"
+                    style="display:{{ $acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0 ? 'none' : 'block' }}">
                     <input type="file" id="seminarProtocol" multiple name="personalFiles"
                         aria-label="Выписка из протокола семинара" />
                     <span>Выбрать файл</span>
@@ -756,8 +765,9 @@
                     @endforeach
                 </div>
             </h3>
-            <label class="input-file">
-                <input type="file" id="councilReport" multiple name="personalFiles"
+            <label class="input-file"
+                style="display:{{ $acount->certainDocument('Протокол отчета на Ученом совете', $acount->id, 1, 'councilReport')->count() > 0 ? 'none' : 'block' }}">
+                <input type="file" id="councilReport" name="personalFiles"
                     aria-label="Протокол отчета на Ученом совете" />
                 <span>Выбрать файл</span>
             </label>
@@ -814,9 +824,9 @@
         @endforeach
     </div>
 </h3>
-<label class="input-file">
-    <input type="file" id="diplomaApp" name="diplomaApp" multiple
-        aria-label="Диплом" />
+<label class="input-file"
+    style="display:{{ $acount->certainDocument('Диплом', $acount->id, 1, 'diplomaApp')->count() > 0 ? 'none' : 'block' }}">
+    <input type="file" id="diplomaApp" name="diplomaApp" aria-label="Диплом" />
     <span>Выбрать файл</span>
 </label>
 <ul id="diplomaApp-files" class="input-file-list">
@@ -858,9 +868,9 @@
     @endforeach
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="reportAsp" name="reportAsp" multiple
-    aria-label="Реферат" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 'reportAsp')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="reportAsp" name="reportAsp" aria-label="Реферат" />
 <span>Выбрать файл</span>
 </label>
 <ul id="reportApp-files" class="input-file-list">
@@ -893,7 +903,8 @@
                 <p class="tooltip__date">
                     {{ $comment->updated_at->format('d.m.Y') }}
                 </p>
-                <p class="tooltip__time">{{ $comment->updated_at->format('H:i') }}
+                <p class="tooltip__time">
+                    {{ $comment->updated_at->format('H:i') }}
                 </p>
             </div>
             <p class="tooltip__alert">{{ $comment->comment }}</p>
@@ -902,9 +913,9 @@
 @endforeach
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="another_as" name="articleApp" multiple
-aria-label="Другое" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Другое', $acount->id, 1, 'articleApp')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="another_as" name="articleApp" aria-label="Другое" />
 <span>Выбрать файл</span>
 </label>
 <ul id="articleApp-files" class="input-file-list">
@@ -941,7 +952,8 @@ class="tooltip-icon {{ $acount->certainComment('Материалы конфер�
             <p class="tooltip__date">
                 {{ $comment->updated_at->format('d.m.Y') }}
             </p>
-            <p class="tooltip__time">{{ $comment->updated_at->format('H:i') }}
+            <p class="tooltip__time">
+                {{ $comment->updated_at->format('H:i') }}
             </p>
         </div>
         <p class="tooltip__alert">Измените название файла</p>
@@ -950,8 +962,9 @@ class="tooltip-icon {{ $acount->certainComment('Материалы конфер�
 @endforeach
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="materialConf" name="materialConf" multiple
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Материалы конференций', $acount->id, 1, 'materialConf')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="materialConf" name="materialConf"
 aria-label="Материалы конференций" />
 <span>Выбрать файл</span>
 </label>
@@ -990,8 +1003,9 @@ class="tooltip-icon {{ $acount->certainComment('Тезисы докладов', 
 @break
 @endforeach
 </h3>
-<label class="input-file">
-<input type="file" id="thesisReport" name="thesisReport" multiple
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Тезисы докладов', $acount->id, 1, 'thesisReport')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="thesisReport" name="thesisReport"
 aria-label="Тезисы докладов" />
 <span>Выбрать файл</span>
 </label>
@@ -1030,9 +1044,9 @@ class="tooltip-icon {{ $acount->certainComment('Статьи', $acount->id, 2, '
 @break
 @endforeach
 </h3>
-<label class="input-file">
-<input type="file" id="article" name="article" multiple
-aria-label="Статьи" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Статьи', $acount->id, 1, 'article')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="article" name="article" aria-label="Статьи" />
 <span>Выбрать файл</span>
 </label>
 <ul id="article" class="input-file-list">
@@ -1070,7 +1084,8 @@ class="tooltip-icon {{ $acount->certainComment('РИД', $acount->id, 2, 'pid')-
 @break
 @endforeach
 </h3>
-<label class="input-file">
+<label class="input-file"
+style="display:{{ $acount->certainDocument('РИД', $acount->id, 1, 'pid')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="pid" name="pid" multiple aria-label="РИД" />
 <span>Выбрать файл</span>
 </label>
@@ -1109,7 +1124,8 @@ class="tooltip-icon {{ $acount->certainComment('Другое', $acount->id, 2, '
 @break
 @endforeach
 </h3>
-<label class="input-file">
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Другое', $acount->id, 1, 'anotherPg')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="anotherPg" name="anotherPg" multiple
 aria-label="Другое" />
 <span>Выбрать файл</span>
@@ -1150,8 +1166,9 @@ class="tooltip-icon {{ $acount->certainComment('Отчет аспиранта', 
 @break
 @endforeach
 </h3>
-<label class="input-file">
-<input type="file" id="reportStudent" name="reportStudent" multiple
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Отчет аспиранта', $acount->id, 1, 'reportStudent')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="reportStudent" name="reportStudent"
 aria-label="Отчет аспиранта" />
 <span>Выбрать файл</span>
 </label>
@@ -1201,9 +1218,9 @@ class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id
 @endforeach
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="Philosophy" name="materialConf" multiple
-aria-label="Философия" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Философия', $acount->id, 1, 'reportStudent')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="Philosophy" name="Philosophy" aria-label="Философия" />
 <span>Выбрать файл</span>
 </label>
 <ul id="materialConf" class="input-file-list">
@@ -1244,9 +1261,9 @@ class="tooltip-icon {{ $acount->certainComment('Английский язык', 
 
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="English" name="thesisReport" multiple
-aria-label="Английский язык" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Английский язык', $acount->id, 1, 'English')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="English" name="English" aria-label="Английский язык" />
 <span>Выбрать файл</span>
 </label>
 <ul id="thesisReport" class="input-file-list">
@@ -1286,9 +1303,9 @@ class="tooltip-icon {{ $acount->certainComment('Специальность', $ac
 @endforeach
 </div>
 </h3>
-<label class="input-file">
-<input type="file" id="specialty" name="article" multiple
-aria-label="Специальность" />
+<label class="input-file"
+style="display:{{ $acount->certainDocument('Специальность', $acount->id, 1, 'specialty')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="specialty" name="specialty" aria-label="Специальность" />
 <span>Выбрать файл</span>
 </label>
 <ul id="article" class="input-file-list">

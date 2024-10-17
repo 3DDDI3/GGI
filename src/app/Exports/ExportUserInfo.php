@@ -40,10 +40,15 @@ class ExportUserInfo implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                 'specialty',
             ]);
 
-        $acount->first()->type = AcountType::query()
-            ->where(['id' => $this->acount_type])
-            ->first()
-            ->type;
+        $acount->first()->type = "asd";
+
+        // $acount->first()->type = AcountType::query()
+        //     ->where(['id' => $this->acount_type])
+        //     ->first()
+        //     ->type;
+
+
+        dd($acount);
 
         return $acount;
     }
@@ -58,7 +63,7 @@ class ExportUserInfo implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'Email',
             'Дата рождения',
             'Место обучения',
-            'Должность',
+            'Научный руководитель',
             'Тип пользователя'
         ];
     }

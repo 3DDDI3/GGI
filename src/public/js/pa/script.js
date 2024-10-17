@@ -362,11 +362,16 @@ $(function () {
     }
 
     axios.post("/api/pa/users/files/upload", formData).then(response => {
-      console.log(response);
-      if (response.data.documents != undefined)
+      if (response.data.documents != undefined) {
+
+        $(this).parents(".main__item-files").find(".input-file-list-item").remove();
+
         Array.from(response.data.documents).forEach(el => {
           $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${el.path}</span></li>`);
-        })
+        });
+
+        $(this).parents(".input-file").css("display", "none");
+      }
       else {
         $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span></li>`);
       }
@@ -419,12 +424,13 @@ $(function () {
         if (!$(this).parents(".input-file-list").parent("li").find("h3 div").hasClass("hidden"))
           $(this).parents(".input-file-list").parent("li").find("h3 div").addClass("hidden");
 
-        console.log($(this).parents(".input-file-list").find(".input-file-list-item"));
-
         if ($(this).parents(".input-file-list").find(".input-file-list-item").length == 1) {
           $(this).parents(".input-file-list").parents("li").find("span.btn-more").text("Выбрать файл");
           $(this).parents(".input-file-list").parents("li").find("span.btn-more").removeClass("btn-more");
         }
+
+        if ($(this).parents(".input-file-list-item").length >= 1)
+          $(this).parents(".input-file-list").parents("li").find(".input-file").css("display", "block");
 
         $(this).parents(".input-file-list-item").remove();
       })
