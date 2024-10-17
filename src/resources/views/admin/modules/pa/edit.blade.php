@@ -753,44 +753,4 @@
 
         </form>
     </div>
-
-    <script src="/lib/jquery.min.js"></script>
-
-    <script>
-        // $(".file_delete").on("click", function(e) {
-        //     e.stopImmediatePropagation();
-
-        //     Swal.fire({
-        //         title: 'Вы действительно хотите удалить?',
-        //         text: 'Отменить это действие будет невозможно',
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Удалить',
-        //         cancelButtonText: 'Отмена',
-        //     }).then((response) => {
-
-        //         $.ajax({
-        //             type: "delete",
-        //             url: "/api/pa/files/delete",
-        //             data: {
-        //                 id: $(this).data("id"),
-        //                 field: $(this).parents(".field").find("input[type='file']").attr("name"),
-        //                 path: $(this).parents(".admin_file_container").find("a").text()
-        //             },
-        //             dataType: "json",
-        //             success: function(response) {
-        //                 $(this).parents(".field-wrapper").find(".input_block textarea").val("");
-        //                 $(this).parents(".admin_file_container").remove();
-
-        //                 Swal.fire({
-        //                     icon: 'success',
-        //                     title: 'Удалено',
-        //                     timer: 1000,
-        //                 });
-        //             }.bind(this)
-        //         });
-        //     });
-
-        // });
-    </script>
 @endsection

@@ -13,10 +13,11 @@
                                             class="navigation__item js-navigation__item @if (!$page->children->isEmpty()) navigation__item_with_group @endif">
                                             <div class="navigation__link-wrapper">
                                                 @if ($page->url == 'contacts')
-                                                <a href="{{ route('page', ['url' => $page->url]) }}"
-                                                    class="navigation__link js-navigation__link">{{ $page->{___('name')} }}</a>
+                                                    <a href="{{ route('page', ['url' => $page->url]) }}"
+                                                        class="navigation__link js-navigation__link">{{ $page->{___('name')} }}</a>
                                                 @else
-                                                <a class="navigation__link js-navigation__link">{{ $page->{___('name')} }}</a>
+                                                    <a
+                                                        class="navigation__link js-navigation__link">{{ $page->{___('name')} }}</a>
                                                 @endif
                                                 @if (!$page->children->isEmpty())
                                                     <svg class="navigation__arrow" xmlns="http://www.w3.org/2000/svg"
@@ -93,13 +94,26 @@
                             </div>
                         </div>
 
-
                         <div class="header__language">
                             <a href="{{ (\Request::path() != '/' ? '/' . \Request::path() : '/') . '?language=ru' }}"
                                 class="header__language-link {{ session()->get('language') == 'ru' || !session()->get('language') ? 'header__language-link_active' : '' }}">RU</a>
                             <a href="{{ (\Request::path() != '/' ? '/' . \Request::path() : '/') . '?language=en' }}"
                                 class="header__language-link {{ session()->get('language') == 'en' ? 'header__language-link_active' : '' }}">EN</a>
                         </div>
+
+                        <a href="/pa" class="header__pa">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11 10.7708C13.4047 10.7708 15.3541 8.82141 15.3541 6.41667C15.3541 4.01193 13.4047 2.0625 11 2.0625C8.59524 2.0625 6.64581 4.01193 6.64581 6.41667C6.64581 8.82141 8.59524 10.7708 11 10.7708Z"
+                                    fill="white" />
+                                <path
+                                    d="M18.7641 15.8767L18.645 15.5834C18.2445 14.5773 17.5559 13.7117 16.6656 13.0953C15.7752 12.4789 14.7227 12.1391 13.64 12.1184H8.36914C7.28643 12.1391 6.23392 12.4789 5.34356 13.0953C4.4532 13.7117 3.76462 14.5773 3.36414 15.5834L3.23581 15.8676C3.0359 16.3264 2.95223 16.8274 2.99221 17.3263C3.03218 17.8251 3.19456 18.3065 3.46498 18.7276C3.68517 19.0872 3.99358 19.3845 4.36096 19.5915C4.72834 19.7984 5.14249 19.9081 5.56414 19.9101H16.4266C16.8495 19.9079 17.2649 19.7983 17.6337 19.5914C18.0025 19.3846 18.3127 19.0873 18.535 18.7276C18.8031 18.3072 18.9642 17.8276 19.0041 17.3307C19.0441 16.8337 18.9617 16.3345 18.7641 15.8767Z"
+                                    fill="white" />
+                            </svg>
+                            <div class="pa__wrapper">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -111,4 +125,5 @@
             <div class="header__blue-blur blue-blur"></div>
         @endif
     </div>
+    </script>
 </header>
