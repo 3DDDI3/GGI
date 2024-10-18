@@ -417,7 +417,7 @@
                         </fieldset>
                     </fieldset>
                 </div>
-                <fieldset class="documents-2" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
+                <fieldset class="documents-2" style="{{ $object->acountType->id == 2 ? 'display:none' : '' }}">
                     <legend>Документы</legend>
                     <div class="field">
                         <x-input-file :files="$object->certainDocument('Реферат', $object->id, 1, 'ReportAsp')" title="Реферат" name="ReportAsp" path="/storage/pa/" field="path"
@@ -667,14 +667,14 @@
                     </div>
 
                     <div class="field" style="{{ $object->acountType->id == 1 ? 'display:none' : '' }}">
-                        <x-input-file :files="$object->certainDocument('Реферат', $object->id, 2, 'report')" title="Реферат" name="report" path="/storage/pa/"
+                        <x-input-file :files="$object->certainDocument('Реферат', $object->id, 2, 'reportAb')" title="Реферат" name="reportAb" path="/storage/pa/"
                             field="path" page="Индивидуальные достижения" document="Реферат" />
                         @include('admin.includes.textarea', [
                             'label' => 'Комментарий:',
                             'name' => 'report_ab_ind_comment',
                             'value' =>
-                                $object->certainComment('Реферат', $object->id, 2, 'report')->count() > 0
-                                    ? $object->certainComment('Реферат', $object->id, 2, 'report')[0]->comment
+                                $object->certainComment('Реферат', $object->id, 2, 'reportAb')->count() > 0
+                                    ? $object->certainComment('Реферат', $object->id, 2, 'reportAb')[0]->comment
                                     : '',
                         ])
                     </div>

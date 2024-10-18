@@ -537,7 +537,7 @@
                                                 <div class="input-file-svg"></div>
                                                 <span
                                                     class="input-file-list-name">{{ $document->path }}</span>
-                                                @if ($acount->certainDocument('Реферат', $acount->id, 1, 'reportAsp')->count() > 0)
+                                                @if ($acount->certainComment('Реферат', $acount->id, 1, 'reportAsp')->count() > 0)
                                                     <a class="input-file-list-remove">x</a>
                                                 @endif
                                             </li>
@@ -701,8 +701,8 @@
                     <h3 class="main__subtitle">
                         Выписка из протокола семинара
                         <div
-                            class="tooltip-icon {{ $acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0 ? '' : ' hidden' }}">
-                            @foreach ($acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol') as $comment)
+                            class="tooltip-icon {{ $acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0 ? '' : ' hidden' }}">
+                            @foreach ($acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol') as $comment)
                                 <div class="tooltip__container">
                                     <div class="tooltip__status">
                                         <p class="toolltip__name"></p>
@@ -734,7 +734,7 @@
                                 <div class="input-file-svg"></div>
                                 <span
                                     class="input-file-list-name">{{ $document->path }}</span>
-                                @if ($acount->certainDocument('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0)
+                                @if ($acount->certainComment('Выписка из протокола семинара', $acount->id, 1, 'seminarProtocol')->count() > 0)
                                     <a class="input-file-list-remove">x</a>
                                 @endif
                             </li>
@@ -825,7 +825,7 @@
     </div>
 </h3>
 <label class="input-file"
-    style="display:{{ $acount->certainDocument('Диплом', $acount->id, 1, 'diplomaApp')->count() > 0 ? 'none' : 'block' }}">
+    style="display:{{ $acount->certainDocument('Диплом', $acount->id, 2, 'diplomaApp')->count() > 0 ? 'none' : 'block' }}">
     <input type="file" id="diplomaApp" name="diplomaApp" aria-label="Диплом" />
     <span>Выбрать файл</span>
 </label>
@@ -851,8 +851,8 @@
 <h3 class="achievement__subtitle">
     Реферат
     <div
-        class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 2, 'reportAsp')->count() > 0 ? '' : ' hidden' }}">
-        @foreach ($acount->certainComment('Реферат', $acount->id, 2, 'reportAsp') as $comment)
+        class="tooltip-icon {{ $acount->certainComment('Реферат', $acount->id, 2, 'reportAb')->count() > 0 ? '' : ' hidden' }}">
+        @foreach ($acount->certainComment('Реферат', $acount->id, 2, 'reportAb') as $comment)
             <div class="tooltip__container">
                 <div class="tooltip__status">
                     <p class="toolltip__name"></p>
@@ -869,8 +869,8 @@
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 'reportAsp')->count() > 0 ? 'none' : 'block' }}">
-<input type="file" id="reportAsp" name="reportAsp" aria-label="Реферат" />
+style="display:{{ $acount->certainDocument('Реферат', $acount->id, 2, 'reportAb')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="reportAb" name="reportAb" aria-label="Реферат" />
 <span>Выбрать файл</span>
 </label>
 <ul id="reportApp-files" class="input-file-list">
@@ -879,11 +879,11 @@ style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 're
         $document->document->type == 'Реферат' &&
             $document->page->page == 'Индивидуальные достижения' &&
             $document->agent->acount_type_id == 2 &&
-            $document->control_name == 'reportAsp')
+            $document->control_name == 'reportAb')
         <li class="input-file-list-item">
             <div class="input-file-svg"></div>
             <span class="input-file-list-name">{{ $document->path }}</span>
-            @if ($acount->certainComment('Реферат', $acount->id, 2, 'reportAsp')->count() > 0)
+            @if ($acount->certainComment('Реферат', $acount->id, 2, 'reportAb')->count() > 0)
                 <a class="input-file-list-remove">x</a>
             @endif
         </li>
@@ -914,8 +914,8 @@ style="display:{{ $acount->certainDocument('Реферат', $acount->id, 1, 're
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Другое', $acount->id, 1, 'articleApp')->count() > 0 ? 'none' : 'block' }}">
-<input type="file" id="another_as" name="articleApp" aria-label="Другое" />
+style="display:{{ $acount->certainDocument('Другое', $acount->id, 2, 'another_as')->count() > 0 ? 'none' : 'block' }}">
+<input type="file" id="another_as" name="another_as" aria-label="Другое" />
 <span>Выбрать файл</span>
 </label>
 <ul id="articleApp-files" class="input-file-list">
@@ -956,14 +956,14 @@ class="tooltip-icon {{ $acount->certainComment('Материалы конфер�
                 {{ $comment->updated_at->format('H:i') }}
             </p>
         </div>
-        <p class="tooltip__alert">Измените название файла</p>
+        <p class="tooltip__alert">{{ $comment->comment }}</p>
     </div>
 @break
 @endforeach
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Материалы конференций', $acount->id, 1, 'materialConf')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Материалы конференций', $acount->id, 2, 'materialConf')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="materialConf" name="materialConf"
 aria-label="Материалы конференций" />
 <span>Выбрать файл</span>
@@ -975,9 +975,11 @@ aria-label="Материалы конференций" />
         $document->page->page == 'Индивидуальные достижения' &&
         $document->agent->acount_type_id == 1)
 <li class="input-file-list-item">
-    <div class="input-file-svg"></div><span
-        class="input-file-list-name">{{ $document->path }}</span><a
-        class="input-file-list-remove">x</a>
+    <div class="input-file-svg"></div>
+    <span class="input-file-list-name">{{ $document->path }}</span>
+    @if ($acount->certainComment('Материалы конференций', $acount->id, 2, 'materialConf')->count() > 0)
+        <a class="input-file-list-remove">x</a>
+    @endif
 </li>
 @endif
 @endforeach
@@ -998,13 +1000,12 @@ class="tooltip-icon {{ $acount->certainComment('Тезисы докладов', 
             {{ $comment->updated_at->format('H:i') }}
         </p>
     </div>
-    <p class="tooltip__alert">Измените название файла</p>
-</div>
+    <p class="tooltip__alert">{{ $comment->comment }}</p>
 @break
 @endforeach
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Тезисы докладов', $acount->id, 1, 'thesisReport')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Тезисы докладов', $acount->id, 2, 'thesisReport')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="thesisReport" name="thesisReport"
 aria-label="Тезисы докладов" />
 <span>Выбрать файл</span>
@@ -1016,9 +1017,11 @@ aria-label="Тезисы докладов" />
         $document->page->page == 'Индивидуальные достижения' &&
         $document->agent->acount_type_id == 1)
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-    class="input-file-list-name">{{ $document->path }}</span><a
-    class="input-file-list-remove">x</a>
+<div class="input-file-svg"></div>
+<span class="input-file-list-name">{{ $document->path }}</span>
+@if ($acount->certainComment('Тезисы докладов', $acount->id, 2, 'materialConf')->count() > 0)
+    <a class="input-file-list-remove">x</a>
+@endif
 </li>
 @endif
 @endforeach
@@ -1039,13 +1042,13 @@ class="tooltip-icon {{ $acount->certainComment('Статьи', $acount->id, 2, '
         {{ $comment->updated_at->format('H:i') }}
     </p>
 </div>
-<p class="tooltip__alert">Измените название файла</p>
+<p class="tooltip__alert">{{ $comment->comment }}</p>
 </div>
 @break
 @endforeach
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Статьи', $acount->id, 1, 'article')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Статьи', $acount->id, 2, 'article')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="article" name="article" aria-label="Статьи" />
 <span>Выбрать файл</span>
 </label>
@@ -1056,9 +1059,11 @@ style="display:{{ $acount->certainDocument('Статьи', $acount->id, 1, 'arti
         $document->page->page == 'Индивидуальные достижения' &&
         $document->agent->acount_type_id == 1)
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+<div class="input-file-svg"></div>
+<span class="input-file-list-name">{{ $document->path }}</span>
+@if ($acount->certainComment('Статьи', $acount->id, 2, 'article')->count() > 0)
+<a class="input-file-list-remove">x</a>
+@endif
 </li>
 @endif
 @endforeach
@@ -1079,13 +1084,13 @@ class="tooltip-icon {{ $acount->certainComment('РИД', $acount->id, 2, 'pid')-
     {{ $comment->updated_at->format('H:i') }}
 </p>
 </div>
-<p class="tooltip__alert">Измените название файла</p>
+<p class="tooltip__alert">{{ $comment->comment }}</p>
 </div>
 @break
 @endforeach
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('РИД', $acount->id, 1, 'pid')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('РИД', $acount->id, 2, 'pid')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="pid" name="pid" multiple aria-label="РИД" />
 <span>Выбрать файл</span>
 </label>
@@ -1096,9 +1101,11 @@ style="display:{{ $acount->certainDocument('РИД', $acount->id, 1, 'pid')->cou
         $document->page->page == 'Индивидуальные достижения' &&
         $document->agent->acount_type_id == 1)
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+<div class="input-file-svg"></div>
+<span class="input-file-list-name">{{ $document->path }}</span>
+@if ($acount->certainComment('РИД', $acount->id, 2, 'pid')->count() > 0)
+<a class="input-file-list-remove">x</a>
+@endif
 </li>
 @endif
 @endforeach
@@ -1125,7 +1132,7 @@ class="tooltip-icon {{ $acount->certainComment('Другое', $acount->id, 2, '
 @endforeach
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Другое', $acount->id, 1, 'anotherPg')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Другое', $acount->id, 2, 'anotherPg')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="anotherPg" name="anotherPg" multiple
 aria-label="Другое" />
 <span>Выбрать файл</span>
@@ -1138,9 +1145,11 @@ aria-label="Другое" />
         $document->agent->acount_type_id == 1 &&
         $document->control_name == 'anotherPg')
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+<div class="input-file-svg"></div>
+<span class="input-file-list-name">{{ $document->path }}</span>
+@if ($acount->certainComment('Другое', $acount->id, 2, 'anotherPg')->count() > 0)
+<a class="input-file-list-remove">x</a>
+@endif
 </li>
 @endif
 @endforeach
@@ -1161,13 +1170,13 @@ class="tooltip-icon {{ $acount->certainComment('Отчет аспиранта', 
 {{ $comment->updated_at->format('H:i') }}
 </p>
 </div>
-<p class="tooltip__alert">Измените название файла</p>
+<p class="tooltip__alert">{{ $comment->comment }}</p>
 </div>
 @break
 @endforeach
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Отчет аспиранта', $acount->id, 1, 'reportStudent')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Отчет аспиранта', $acount->id, 2, 'reportStudent')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="reportStudent" name="reportStudent"
 aria-label="Отчет аспиранта" />
 <span>Выбрать файл</span>
@@ -1179,9 +1188,11 @@ aria-label="Отчет аспиранта" />
         $document->page->page == 'Индивидуальные достижения' &&
         $document->agent->acount_type_id == 1)
 <li class="input-file-list-item">
-<div class="input-file-svg"></div><span
-class="input-file-list-name">{{ $document->path }}</span><a
-class="input-file-list-remove">x</a>
+<div class="input-file-svg"></div>
+<span class="input-file-list-name">{{ $document->path }}</span>
+@if ($acount->certainComment('Отчет аспиранта', $acount->id, 2, 'reportStudent')->count() > 0)
+<a class="input-file-list-remove">x</a>
+@endif
 </li>
 @endif
 @endforeach
@@ -1219,7 +1230,7 @@ class="tooltip-icon {{ $acount->certainComment('Философия', $acount->id
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Философия', $acount->id, 1, 'reportStudent')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Философия', $acount->id, 3, 'Philosophy')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="Philosophy" name="Philosophy" aria-label="Философия" />
 <span>Выбрать файл</span>
 </label>
@@ -1262,7 +1273,7 @@ class="tooltip-icon {{ $acount->certainComment('Английский язык', 
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Английский язык', $acount->id, 1, 'English')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Английский язык', $acount->id, 3, 'English')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="English" name="English" aria-label="Английский язык" />
 <span>Выбрать файл</span>
 </label>
@@ -1304,7 +1315,7 @@ class="tooltip-icon {{ $acount->certainComment('Специальность', $ac
 </div>
 </h3>
 <label class="input-file"
-style="display:{{ $acount->certainDocument('Специальность', $acount->id, 1, 'specialty')->count() > 0 ? 'none' : 'block' }}">
+style="display:{{ $acount->certainDocument('Специальность', $acount->id, 3, 'specialty')->count() > 0 ? 'none' : 'block' }}">
 <input type="file" id="specialty" name="specialty" aria-label="Специальность" />
 <span>Выбрать файл</span>
 </label>

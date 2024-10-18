@@ -310,7 +310,7 @@ class PersonalAcountController extends Controller
                     'acount_id' => $object->id,
                     'personal_document_type_id' => 2,
                     'personal_page_id' => 2,
-                    'control_name' => 'reportAsp',
+                    'control_name' => 'reportAb',
                 ])->get() as $doc
             ) {
                 $doc->fill(['comment' => $request->report_ab_ind_comment])->save();

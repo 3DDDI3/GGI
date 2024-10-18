@@ -278,7 +278,6 @@ $(function () {
 
 
   $(document).on("mouseup", function (e) {
-    console.log($(focusedBlock));
     // data, focusedBlock = undefined;
 
     if (focusedBlock != undefined && $(focusedBlock).has(e.target).length === 0
@@ -312,8 +311,6 @@ $(function () {
             post: $("input[name='positionScientist']").val(),
             scientific_degree: $("input[name='scientificDegree']").val(),
           }
-          // console.log(url);
-          // return;
           break;
 
         case "main__item diploma":
@@ -325,7 +322,7 @@ $(function () {
           break;
       }
 
-      // if (url == undefined) return;
+      if (url == undefined) return;
 
       axios.defaults.withXSRFToken = true;
 
@@ -365,15 +362,14 @@ $(function () {
       if (response.data.documents != undefined) {
 
         $(this).parents(".main__item-files").find(".input-file-list-item").remove();
-
         Array.from(response.data.documents).forEach(el => {
           $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${el.path}</span></li>`);
         });
-
         $(this).parents(".input-file").css("display", "none");
       }
       else {
         $(this).parents(".main__item-files").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${response.data.image}</span></li>`);
+        $(this).parents(".input-file").css("display", "none");
       }
     });
   });
@@ -396,6 +392,7 @@ $(function () {
       response.data.documents.forEach(element => {
         $(this).parents(".inner-title").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`);
       });
+      $(this).parents(".input-file").css("display", "none");
     });
 
   });
@@ -472,12 +469,14 @@ $(function () {
         break;
     }
 
-    axios.post("/api/pa/users/files/upload", formData).then(response => {
-      $(this).parents(".achievement-item__input").find(".input-file-list .input-file-list-item").remove();
-      response.data.documents.forEach(element => {
-        $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`)
+    axios.post("/api/pa/users/files/upload", formData)
+      .then(response => {
+        $(this).parents(".achievement-item__input").find(".input-file-list .input-file-list-item").remove();
+        response.data.documents.forEach(element => {
+          $(this).parents(".achievement-item__input").find(".input-file-list").append(`<li class='input-file-list-item'><div class='input-file-svg'></div><span class='input-file-list-name'>${element.path}</span></li>`)
+        });
+        $(this).parents(".input-file").css("display", "none");
       });
-    });
 
   });
 

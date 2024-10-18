@@ -403,9 +403,9 @@ $(document).ready(function () {
             $(".exams").css("display", "block");
 
             let visibleDocs = [
-                "report",
+                "reportAb",
                 "diplomaApp",
-                "anotherApp"
+                "another_as"
             ];
 
             $(".achievments input[type='file']").parents(".field").css("display", "none");

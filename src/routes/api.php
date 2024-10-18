@@ -95,20 +95,68 @@ Route::prefix("pa/files")
 
                         $acount = Acount::query()->find($id);
 
-                        // dd($acount->acountType);
-
                         Excel::store(new ExportUserInfo($acount->id, $acount->acount_type_id), "pa/{$acount->lastName}.xlsx");
 
                         $zip = Zip::create("storage/pa/{$acount->lastName}.zip");
 
+                        if ($acount->acount_type_id == 2)
+                                $control_names = [
+                                        'report',
+                                        'diploma',
+                                        'diplomaApp',
+                                        'reportAb',
+                                        'articleApp',
+                                        'Philosophy',
+                                        'English',
+                                        'specialty'
+                                ];
+                        else
+                                $control_names = [
+                                        'reportAsp',
+                                        'individualPlan',
+                                        'annualPlan',
+                                        'supervisorReview',
+                                        'seminarProtocol',
+                                        'councilReport',
+                                        'materialConf',
+                                        'thesisReport',
+                                        'article',
+                                        'pid',
+                                        'anotherPg',
+                                        'reportStudent',
+                                ];
+
                         foreach ($acount->documents as $document) {
-                                $content = file_get_contents("storage/{$document->path}");
-                                preg_match("/.([a-zA-Z]+)$/", $document->path, $extensions);
-                                $name = preg_replace("/[^a-zA-Zа-яА-Я0-9\s+]/u", " ", $document->document->type);
-                                $zip->addFromString($name . $extensions[0], $content);
+                                if (in_array($document->control_name, $control_names)) {
+                                        $content = file_get_contents("storage/{$document->path}");
+                                        preg_match("/.([a-zA-Z]+)$/", $document->path, $extensions);
+                                        $name = preg_replace("/[^a-zA-Zа-яА-Я0-9\s+]/u", " ", $document->document->type);
+                                        $zip->addFromString($name . $extensions[0], $content);
+                                }
                         }
 
                         $zip->add("storage/pa/{$acount->lastName}.xlsx");
+
+                        if (!empty($acount->inn)) {
+                                $content = file_get_contents("storage/{$acount->inn}");
+                                preg_match("/.([a-zA-Z]+)$/", $acount->inn, $extensions);
+                                $name = "inn";
+                                $zip->addFromString($name . $extensions[0], $content);
+                        }
+
+                        if (!empty($acount->passport)) {
+                                $content = file_get_contents("storage/{$acount->passport}");
+                                preg_match("/.([a-zA-Z]+)$/", $acount->passport, $extensions);
+                                $name = "passport";
+                                $zip->addFromString($name . $extensions[0], $content);
+                        }
+
+                        if (!empty($acount->snils)) {
+                                $content = file_get_contents("storage/{$acount->snils}");
+                                preg_match("/.([a-zA-Z]+)$/", $acount->snils, $extensions);
+                                $name = "snils";
+                                $zip->addFromString($name . $extensions[0], $content);
+                        }
 
                         $zip->close();
                         return response()->download("storage/pa/{$acount->lastName}.zip")->deleteFileAfterSend();

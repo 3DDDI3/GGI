@@ -68,10 +68,11 @@ class UserController extends Controller
         if (!$personalWork) (new PersonalWork())
             ->create([
                 'topic' => $request->topic,
-                'acount_id' => $request->user('pa')->id
+                'acount_id' => $request->user('pa')->id,
+                'year' => $request->year
             ]);
         else $personalWork
-            ->fill($request->only(['topic']))
+            ->fill($request->only(['topic', 'year']))
             ->save();
 
         return response([], 200);

@@ -214,6 +214,13 @@ button {
   opacity: 1;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  background-color: red;
+}
+
+
 .visible {
   opacity: 0;
 }
@@ -368,5 +375,12 @@ button {
     position: relative;
     top: 0;
     left: 0;
+  }
+}
+
+@media (min-height:500px) and (max-height:1080px) and (min-width: 891px) {
+
+  .logIn {
+    overflow-y: hidden;
   }
 }

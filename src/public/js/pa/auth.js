@@ -24,6 +24,9 @@ btnChange2.addEventListener("click", (e) => {
   }, 1000);
 });
 
+
+console.log($("#formSignIn input[type='password']").css("background-color"));
+
 document.querySelectorAll(".auth__input").forEach((input) => {
   input.addEventListener("input", function () {
     const span = this.nextElementSibling;
@@ -36,6 +39,12 @@ document.querySelectorAll(".auth__input").forEach((input) => {
     }
   });
 });
+
+// console.log($("#formSignIn input[type='email']").val());
+
+// $(".auth__input").on("input", function () {
+//   console.log($(this).val());
+// });
 
 $(function () {
   $("#formSignIn").on("submit", function (e) {

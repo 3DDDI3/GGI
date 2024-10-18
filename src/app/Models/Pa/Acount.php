@@ -38,7 +38,7 @@ class Acount extends Authenticatable
     ];
 
     protected $casts = [
-        'birthday' => 'datetime:H:i d.m.Y',
+        'birthday' => 'datetime:d.m.Y',
     ];
 
     public function acountType(): HasOne

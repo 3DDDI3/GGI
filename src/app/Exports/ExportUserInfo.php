@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Pa\Acount;
 use App\Models\Pa\AcountType;
+use App\Models\Pa\PersonalWork;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -38,34 +39,59 @@ class ExportUserInfo implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                 'birthday',
                 'study_place',
                 'specialty',
+                'acount_type_id'
             ]);
 
-        $acount->first()->type = "asd";
+        if ($acount->first()->acount_type_id == 1) {
+            /**
+             * Абитуриент
+             */
 
-        // $acount->first()->type = AcountType::query()
-        //     ->where(['id' => $this->acount_type])
-        //     ->first()
-        //     ->type;
+            $personalWork = PersonalWork::query()
+                ->where(['acount_id' => $this->id])
+                ->first(['year', 'topic', 'scientific_head', 'scientific_degree', 'post']);
 
+            if ($personalWork) {
+                $year = empty($personalWork->year) ? "" : "{$personalWork->year} г.";
+                $separate = !empty($personalWork->post) && !empty($personalWork->scientific_degree) ? "," : "";
 
-        dd($acount);
+                $acount->first()->scientific_head = "{$personalWork->scientific_head} ({$personalWork->post}{$separate}{$personalWork->scientific_degree})";
+                $acount->first()->scientific_work = "{$personalWork->topic}{$year}";
+            }
+        }
 
+        $acount->first()->acount_type_id = $acount->first()->acountType->type;
         return $acount;
     }
 
     public function headings(): array
     {
-        return [
-            'Фамилия',
-            'Имя',
-            'Отчество',
-            'Дата поступления',
-            'Email',
-            'Дата рождения',
-            'Место обучения',
-            'Научный руководитель',
-            'Тип пользователя'
-        ];
+        if ($this->acount_type == 1)
+            return [
+                'Фамилия',
+                'Имя',
+                'Отчество',
+                'Дата поступления',
+                'Email',
+                'Дата рождения',
+                'Место обучения',
+                'Специальнось',
+                'Тип пользователя',
+                'Научный руководитель',
+                'Научная работа'
+            ];
+        else
+            return [
+                'Фамилия',
+                'Имя',
+                'Отчество',
+                'Дата поступления',
+                'Email',
+                'Дата рождения',
+                'Место обучения',
+                'Специальнось',
+                'Тип пользователя',
+            ];
     }
 
     public function columnWidths(): array
@@ -78,26 +104,27 @@ class ExportUserInfo implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'E' => 30,
             'F' => 30,
             'G' => 30,
+            'H' => 30,
+            'I' => 30,
+            'J' => 30,
+            'K' => 30,
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
         return [
-            // Style the first row as bold text.
             'A1' => ['font' => ['bold' => true, 'size' => 14]],
-
-            // Styling a specific cell by coordinate.
             'B1' => ['font' => ['bold' => true, 'size' => 14]],
-
-            // Styling an entire column.
-            'C1'  => ['font' => ['bold' => true, 'size' => 14]],
-
-            'D1'  => ['font' => ['bold' => true, 'size' => 14]],
-
-            'E1'  => ['font' => ['bold' => true, 'size' => 14]],
-
-            'F1'  => ['font' => ['bold' => true, 'size' => 14]],
+            'C1' => ['font' => ['bold' => true, 'size' => 14]],
+            'D1' => ['font' => ['bold' => true, 'size' => 14]],
+            'E1' => ['font' => ['bold' => true, 'size' => 14]],
+            'F1' => ['font' => ['bold' => true, 'size' => 14]],
+            'G1' => ['font' => ['bold' => true, 'size' => 14]],
+            'H1' => ['font' => ['bold' => true, 'size' => 14]],
+            'I1' => ['font' => ['bold' => true, 'size' => 14]],
+            'J1' => ['font' => ['bold' => true, 'size' => 14]],
+            'K1' => ['font' => ['bold' => true, 'size' => 14]],
         ];
     }
 }
